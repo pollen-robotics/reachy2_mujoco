@@ -1,6 +1,7 @@
 from components import ComponentsHolder
 from parts import PartsHolder
 from utils import parse_reachy_config
+import time
 
 
 class MujocoBridgeNode:
@@ -61,6 +62,11 @@ class MujocoBridgeNode:
             self.components.add_component(name)
 
         self.parts = PartsHolder(self.config, self.components)
+
+    def get_clock(self):
+        t_seconds = time.time()
+        t_nanoseconds = t_seconds * 1e9
+        return t_nanoseconds
 
 
 if __name__ == "__main__":

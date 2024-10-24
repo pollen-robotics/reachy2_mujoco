@@ -2,6 +2,7 @@ import reachy2_sdk_api.reachy_pb2_grpc as reachy_pb2_grpc
 from reachy2_sdk_api.reachy_pb2 import Reachy, ReachyId, ReachyState, ReachyStatus
 from google.protobuf.timestamp_pb2 import Timestamp
 import time
+from reachy2_sdk_api.part_pb2 import PartId
 
 
 def endless_timer_get_stream_works(func, request, context, period):
@@ -56,6 +57,24 @@ class ReachyServicer(reachy_pb2_grpc.ReachyServiceServicer):
             "timestamp": Timestamp(),
             "id": ReachyId(id=1, name="reachy"),
         }
+
+        for p in self.bridge_node.parts:
+            if p.type == "arm":
+                params[f"{p.name}_state"] = self.arm_servicer.GetState(
+                    PartId(id=p.id), context
+                )
+            elif p.type == "head":
+                params[f"{p.name}_state"] = self.head_servicer.GetState(
+                    PartId(id=p.id), context
+                )
+            elif p.type == "hand":
+                params[f"{p.name}_state"] = self.hand_servicer.GetState(
+                    PartId(id=p.id), context
+                )
+
+        params["mobile_base_state"] = self.mobile_base_servicer.GetState(
+            PartId(id=100), context
+        )
         return ReachyState(**params)
 
     def Audit(self, request, context) -> ReachyStatus:

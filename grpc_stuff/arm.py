@@ -5,6 +5,11 @@ from reachy2_sdk_api.part_pb2 import PartId
 from parts import Part
 from orbita2d import Orbita2dServicer
 from orbita3d import Orbita3dServicer
+from utils import get_current_timestamp
+from reachy2_sdk_api.arm_pb2 import ArmState
+from orbita2d import Orbita2dStateRequest
+from orbita3d import Orbita3dStateRequest
+from reachy2_sdk_api.component_pb2 import ComponentId
 
 
 class ArmServicer(arm_pb2_grpc.ArmServiceServicer):
@@ -14,10 +19,6 @@ class ArmServicer(arm_pb2_grpc.ArmServiceServicer):
         self.orbita3d_servicer = orbita3d_servicer
 
         self.arms = self.bridge_node.parts.get_by_type("arm")
-
-    def GetAllArms(self, request, context):
-        # TODO
-        return super().GetAllArms(request, context)
 
     # TODO
     def get_arm(self, arm: Part, context: grpc.ServicerContext) -> Arm:
@@ -35,3 +36,53 @@ class ArmServicer(arm_pb2_grpc.ArmServiceServicer):
                 ),
             ),
         )
+
+    def get_arm_part_by_part_id(
+        self, part_id: PartId, context: grpc.ServicerContext
+    ) -> Part:
+        part = self.bridge_node.parts.get_by_part_id(part_id)
+
+        if part is None:
+            context.abort(grpc.StatusCode.NOT_FOUND, f"Part not found (id={part_id}).")
+
+        if part.type != "arm":
+            context.abort(
+                grpc.StatusCode.INVALID_ARGUMENT,
+                f"Part '{part_id}' is not an arm.",
+            )
+        return part
+
+    def GetAllArms(self, request, context):
+        # TODO
+        return super().GetAllArms(request, context)
+
+    def GetState(self, request, context):
+        arm = self.get_arm_part_by_part_id(request, context)
+        arm_state = ArmState(
+            timestamp=get_current_timestamp(self.bridge_node),
+            id=request,
+            activated=True,
+            shoulder_state=self.orbita2d_servicer.GetState(
+                Orbita2dStateRequest(
+                    fields=self.orbita2d_servicer.default_fields,
+                    id=ComponentId(id=arm.components[0].id),
+                ),
+                context,
+            ),
+            elbow_state=self.orbita2d_servicer.GetState(
+                Orbita2dStateRequest(
+                    fields=self.orbita2d_servicer.default_fields,
+                    id=ComponentId(id=arm.components[1].id),
+                ),
+                context,
+            ),
+            wrist_state=self.orbita3d_servicer.GetState(
+                Orbita3dStateRequest(
+                    fields=self.orbita3d_servicer.default_fields,
+                    id=ComponentId(id=arm.components[2].id),
+                ),
+                context,
+            ),
+            reachability=self.get_reachability_state(arm.name),
+        )
+        return arm_state

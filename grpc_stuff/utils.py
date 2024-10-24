@@ -1,5 +1,6 @@
 import yaml
 import reachy2_sdk_api.orbita2d_pb2 as orbita2d_pb2
+from google.protobuf.timestamp_pb2 import Timestamp
 
 
 def parse_reachy_config(reachy_config_path: str) -> dict:
@@ -17,3 +18,10 @@ def axis_from_str(name: str) -> orbita2d_pb2.Axis:
         return orbita2d_pb2.Axis.YAW
     else:
         raise ValueError(f"Unknown axis '{name}'.")
+
+
+def get_current_timestamp(bridge_node) -> Timestamp:
+    t = Timestamp()
+    t.FromNanoseconds(bridge_node.get_clock())
+
+    return t
