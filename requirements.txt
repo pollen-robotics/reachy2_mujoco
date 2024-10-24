@@ -3,3 +3,4 @@ mujoco-python-viewer==0.1.4
 grpcio-tools
 reachy2-sdk-api
 # reachy2_sdk_server (install from source)
+rclpy
