@@ -13,6 +13,8 @@ from orbita3d import Orbita3dServicer
 from head import HeadServicer
 from hand import HandServicer
 
+joint_server_port = 50051
+
 
 def serve():
     mujoco_bridge_node = MujocoBridgeNode("reachy.yaml")
@@ -33,8 +35,9 @@ def serve():
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     reachy_pb2_grpc.add_ReachyServiceServicer_to_server(reachy_servicer, server)
-    server.add_insecure_port("[::]:50051")
+    server.add_insecure_port(f"[::]:{joint_server_port}")
     server.start()
+    print(f"waiting on {joint_server_port}...")
     server.wait_for_termination()
 
 
