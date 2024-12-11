@@ -17,7 +17,7 @@ joint_server_port = 50051
 
 
 def serve():
-    mujoco_bridge_node = MujocoBridgeNode("reachy.yaml")
+    mujoco_bridge_node = MujocoBridgeNode("../reachy.yaml")
     orbita2d_servicer = Orbita2dServicer(mujoco_bridge_node)
     orbita3d_servicer = Orbita3dServicer(mujoco_bridge_node)
     arm_servicer = ArmServicer(mujoco_bridge_node, orbita2d_servicer, orbita3d_servicer)

@@ -7,9 +7,12 @@ from orbita2d import Orbita2dServicer
 from orbita3d import Orbita3dServicer
 from utils import get_current_timestamp
 from reachy2_sdk_api.arm_pb2 import ArmState
-from orbita2d import Orbita2dStateRequest
-from orbita3d import Orbita3dStateRequest
+
+# from orbita2d import Orbita2dStateRequest
+# from orbita3d import Orbita3dStateRequest
 from reachy2_sdk_api.component_pb2 import ComponentId
+from reachy2_sdk_api.orbita2d_pb2 import Orbita2dStateRequest
+from reachy2_sdk_api.orbita3d_pb2 import Orbita3dStateRequest
 
 
 class ArmServicer(arm_pb2_grpc.ArmServiceServicer):

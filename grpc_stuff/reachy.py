@@ -1,3 +1,4 @@
+from enum import Enum
 import reachy2_sdk_api.reachy_pb2_grpc as reachy_pb2_grpc
 from reachy2_sdk_api.reachy_pb2 import Reachy, ReachyId, ReachyState, ReachyStatus
 from google.protobuf.timestamp_pb2 import Timestamp
@@ -60,9 +61,13 @@ class ReachyServicer(reachy_pb2_grpc.ReachyServiceServicer):
 
         for p in self.bridge_node.parts:
             if p.type == "arm":
-                params[f"{p.name}_state"] = self.arm_servicer.GetState(
-                    PartId(id=p.id), context
-                )
+                try:
+                    params[f"{p.name}_state"] = self.arm_servicer.GetState(
+                        PartId(id=p.id), context
+                    )
+                except Exception as e:
+                    print(e)
+                    exit()
             elif p.type == "head":
                 params[f"{p.name}_state"] = self.head_servicer.GetState(
                     PartId(id=p.id), context
@@ -75,6 +80,10 @@ class ReachyServicer(reachy_pb2_grpc.ReachyServiceServicer):
         params["mobile_base_state"] = self.mobile_base_servicer.GetState(
             PartId(id=100), context
         )
+        print("===")
+        print("===")
+        print("===")
+        print("===")
         return ReachyState(**params)
 
     def Audit(self, request, context) -> ReachyStatus:
