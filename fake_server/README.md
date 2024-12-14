@@ -8,4 +8,7 @@ run `client.py`
 
 # TODO
 - make cameras work
-- match the reachy sdk client api
+- Make it a package that can be easilly installed
+  - just pop a reachy mujoco server
+  - then you can import the equivalent of `from reachy2_sdk import ReachySDK` from anywhere etc -> should be `from reachy2_mujoco import ReachySDK`
+  - Should be as transparent as possible

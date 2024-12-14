@@ -1,5 +1,5 @@
 import mujoco
-import rpyc
+import pyquaternion
 
 # import cv2
 import threading
@@ -10,7 +10,9 @@ import numpy as np
 # import os
 # os.environ['MUJOCO_GL'] = 'egl'
 
-# TODO mobile base
+# with freejoint
+# qpos = [x, y, z, qw, qx, qy, qz]
+# qvel = [vx, vy, vz, ωx, ωy, ωz]
 
 
 def get_actuator_name(model, index: int) -> str:
@@ -31,7 +33,7 @@ class Joint:
         self.goal_position = 0
 
     @property
-    @rpyc.exposed
+    # @rpyc.exposed
     def present_position(self):
         return self._data.qpos[self._index]
 
@@ -43,7 +45,7 @@ class Gripper(Joint):
     def __init__(self, model, data, prefix="l_"):
         super().__init__(model, data, name=f"{prefix}gripper")
 
-    @rpyc.exposed
+    # @rpyc.exposed
     def set_opening(self, percentage):
         print("Not implemented")
         pass
@@ -126,6 +128,39 @@ class Camera:
         return self._rgb_array
 
 
+class MobileBase:
+    def __init__(self, model, data):
+        self._model = model
+        self._data = data
+        self._target_position = np.zeros(3)
+        self._pos_offset = np.zeros(3)
+
+        self.position = np.zeros(3)  # x, y, theta
+
+    def _update_position(self):
+        self.position[:2] = self._data.qpos[:2] - self._pos_offset[:2]
+
+        quat = self._data.qpos[3:7]
+        yaw = pyquaternion.Quaternion(quat).yaw_pitch_roll[0]
+
+        self.position[2] = yaw - self._pos_offset[2]
+
+    def _update(self):
+        self._update_position()
+
+        vector_2d = np.array(self._target_position[:2]) - self.position[:2]
+        self._data.qvel[:2] = vector_2d
+
+        # theta
+        self._data.qvel[5] = self._target_position[2] - self.position[2]
+
+    def reset_odometry(self):
+        self._pos_offset = self.position
+
+    def goto(self, x, y, theta):
+        self._target_position = np.array([x, y, theta])
+
+
 class ReachyMujoco:
     def __init__(self):
         self._model = mujoco.MjModel.from_xml_path("mjcf/scene.xml")
@@ -136,6 +171,7 @@ class ReachyMujoco:
         self.l_arm = Arm(self._model, self._data, prefix="l_")
         self.r_arm = Arm(self._model, self._data, prefix="r_")
         self.head = Head(self._model, self._data)
+        self.mobile_base = MobileBase(self._model, self._data)
 
         # for i in range(20):
         #     name = get_actuator_name(self._model, i)
@@ -143,16 +179,26 @@ class ReachyMujoco:
 
         self.thread = threading.Thread(target=self._run)
         self.thread.start()
-        self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
+
+        # self._data.qvel[0] = 0.5
+        # self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
 
     def _update(self):
+        self.mobile_base._update()
+        # self._data.qvel[0] = 0.5
+
+        # force robot to stay upright
+        # self._data.qpos[0] = 0
+
         # im = self.camera.get_image()
         # cv2.imshow("image", im)
         # cv2.waitKey(1)
         pass
 
     def _run(self):
-        with mujoco.viewer.launch_passive(self._model, self._data) as viewer:
+        with mujoco.viewer.launch_passive(
+            self._model, self._data, show_left_ui=False, show_right_ui=False
+        ) as viewer:
             i = 0
             while True:
                 mujoco.mj_step(self._model, self._data, 7)  # 4 seems good
@@ -161,7 +207,6 @@ class ReachyMujoco:
                 time.sleep(1 / 60)
                 i += 1
 
-    # @rpyc.exposed
     def send_goal_positions(self, check_positions=False):
         self.l_arm._update()
         self.r_arm._update()
