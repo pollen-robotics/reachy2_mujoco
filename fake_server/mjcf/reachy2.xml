@@ -49,6 +49,7 @@
             <joint name="neck_yaw" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-1000 1000"/>
             <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="head_visual"/>
             <!-- <geom type="mesh" mesh="head_collider"/> -->
+            <camera name="left_teleop_cam"  pos="0 0 0" euler="0 0 0"/>
             </body>
         </body>
         </body>
@@ -190,13 +191,6 @@
     <position name="neck_roll" joint="neck_roll" gear="1" inheritrange="1"  />
     <position name="neck_pitch" joint="neck_pitch" gear="1" inheritrange="1"  />
     <position name="neck_yaw" joint="neck_yaw" gear="1" inheritrange="1"  />
-    <position name="r_shoulder_pitch" joint="r_shoulder_pitch" gear="1" inheritrange="1"  />
-    <position name="r_shoulder_roll" joint="r_shoulder_roll" gear="1" inheritrange="1"  />
-    <position name="r_elbow_yaw" joint="r_elbow_yaw" gear="1" inheritrange="1"  />
-    <position name="r_elbow_pitch" joint="r_elbow_pitch" gear="1" inheritrange="1"  />
-    <position name="r_wrist_roll" joint="r_wrist_roll" gear="1" inheritrange="1"  />
-    <position name="r_wrist_pitch" joint="r_wrist_pitch" gear="1" inheritrange="1"  />
-    <position name="r_wrist_yaw" joint="r_wrist_yaw" gear="1" inheritrange="1"  />
     <position name="l_shoulder_pitch" joint="l_shoulder_pitch" gear="1" inheritrange="1"  />
     <position name="l_shoulder_roll" joint="l_shoulder_roll" gear="1" inheritrange="1"  />
     <position name="l_elbow_yaw" joint="l_elbow_yaw" gear="1" inheritrange="1"  />
@@ -204,7 +198,14 @@
     <position name="l_wrist_roll" joint="l_wrist_roll" gear="1" inheritrange="1"  />
     <position name="l_wrist_pitch" joint="l_wrist_pitch" gear="1" inheritrange="1"  />
     <position name="l_wrist_yaw" joint="l_wrist_yaw" gear="1" inheritrange="1"  />
-    <position name="r_hand_finger" joint="r_hand_finger" gear="1" inheritrange="1"  />
+    <position name="r_shoulder_pitch" joint="r_shoulder_pitch" gear="1" inheritrange="1"  />
+    <position name="r_shoulder_roll" joint="r_shoulder_roll" gear="1" inheritrange="1"  />
+    <position name="r_elbow_yaw" joint="r_elbow_yaw" gear="1" inheritrange="1"  />
+    <position name="r_elbow_pitch" joint="r_elbow_pitch" gear="1" inheritrange="1"  />
+    <position name="r_wrist_roll" joint="r_wrist_roll" gear="1" inheritrange="1"  />
+    <position name="r_wrist_pitch" joint="r_wrist_pitch" gear="1" inheritrange="1"  />
+    <position name="r_wrist_yaw" joint="r_wrist_yaw" gear="1" inheritrange="1"  />
+    <!-- <position name="r_hand_finger" joint="r_hand_finger" gear="1" inheritrange="1"  />
     <position name="r_hand_finger_proximal" joint="r_hand_finger_proximal" gear="1" inheritrange="1"  />
     <position name="r_hand_finger_distal" joint="r_hand_finger_distal" gear="1" inheritrange="1"  />
     <position name="l_hand_finger" joint="l_hand_finger" gear="1" inheritrange="1"  />
@@ -213,6 +214,6 @@
     <position name="r_hand_finger_proximal_mimic" joint="r_hand_finger_proximal_mimic" gear="1" inheritrange="1"  />
     <position name="r_hand_finger_distal_mimic" joint="r_hand_finger_distal_mimic" gear="1" inheritrange="1"  />
     <position name="l_hand_finger_proximal_mimic" joint="l_hand_finger_proximal_mimic" gear="1" inheritrange="1"  />
-    <position name="l_hand_finger_distal_mimic" joint="l_hand_finger_distal_mimic" gear="1" inheritrange="1"  />
+    <position name="l_hand_finger_distal_mimic" joint="l_hand_finger_distal_mimic" gear="1" inheritrange="1"  /> -->
   </actuator>
 </mujoco>
