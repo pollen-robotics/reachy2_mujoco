@@ -1,10 +1,14 @@
 import mujoco
-import cv2
+import rpyc
+
+# import cv2
 import threading
 import mujoco.viewer
 import time
 import numpy as np
 
+# import os
+# os.environ['MUJOCO_GL'] = 'egl'
 
 # TODO mobile base
 
@@ -19,123 +23,146 @@ def get_actuator_index(model, name: str) -> int:
 
 class Joint:
     def __init__(self, model, data, name):
-        self.model = model
-        self.data = data
-        self.name = name
-        self.index = get_actuator_index(self.model, self.name)
+        self._model = model
+        self._data = data
+        self._name = name
+        self._index = get_actuator_index(self._model, self._name)
+
+        self.goal_position = 0
 
     @property
-    def exposed_present_position(self):
-        return self.data.qpos[self.index]
+    @rpyc.exposed
+    def present_position(self):
+        return self._data.qpos[self._index]
 
-    @property
-    def exposed_goal_position(self):
-        return self.data.ctrl[self.index]
-
-    def exposed_set_goal_position(self, position):
-        self.data.ctrl[self.index] = position
+    def _update(self):
+        self._data.ctrl[self._index] = self.goal_position
 
 
 class Gripper(Joint):
     def __init__(self, model, data, prefix="l_"):
         super().__init__(model, data, name=f"{prefix}gripper")
 
-    def exposed_set_opening(self, percentage):
+    @rpyc.exposed
+    def set_opening(self, percentage):
         print("Not implemented")
         pass
 
 
 class Arm:
     def __init__(self, model, data, prefix="l_"):
-        self.model = model
-        self.data = data
-        self.exposed_shoulder_pitch = Joint(
-            self.model, self.data, f"{prefix}shoulder_pitch"
-        )
-        self.exposed_shoulder_roll = Joint(
-            self.model, self.data, f"{prefix}shoulder_roll"
-        )
-        self.exposed_elbow_yaw = Joint(self.model, self.data, f"{prefix}elbow_yaw")
-        self.exposed_elbow_pitch = Joint(self.model, self.data, f"{prefix}elbow_pitch")
-        self.exposed_wrist_roll = Joint(self.model, self.data, f"{prefix}wrist_roll")
-        self.exposed_wrist_pitch = Joint(self.model, self.data, f"{prefix}wrist_pitch")
-        self.exposed_wrist_yaw = Joint(self.model, self.data, f"{prefix}wrist_yaw")
-        self.exposed_gripper = Gripper(self.model, self.data, prefix=prefix)
+        self._model = model
+        self._data = data
+
+        self.shoulder_pitch = Joint(self._model, self._data, f"{prefix}shoulder_pitch")
+        self.shoulder_roll = Joint(self._model, self._data, f"{prefix}shoulder_roll")
+        self.elbow_yaw = Joint(self._model, self._data, f"{prefix}elbow_yaw")
+        self.elbow_pitch = Joint(self._model, self._data, f"{prefix}elbow_pitch")
+        self.wrist_roll = Joint(self._model, self._data, f"{prefix}wrist_roll")
+        self.wrist_pitch = Joint(self._model, self._data, f"{prefix}wrist_pitch")
+        self.wrist_yaw = Joint(self._model, self._data, f"{prefix}wrist_yaw")
+        self.gripper = Gripper(self._model, self._data, prefix=prefix)
+
+    def _update(self):
+        self.shoulder_pitch._update()
+        self.shoulder_roll._update()
+        self.elbow_yaw._update()
+        self.elbow_pitch._update()
+        self.wrist_roll._update()
+        self.wrist_pitch._update()
+        self.wrist_yaw._update()
+        self.gripper._update()
 
 
 class Neck:
     def __init__(self, model, data):
-        self.model = model
-        self.data = data
-        self.exposed_roll = Joint(self.model, self.data, "neck_roll")
-        self.exposed_pitch = Joint(self.model, self.data, "neck_pitch")
-        self.exposed_yaw = Joint(self.model, self.data, "neck_yaw")
+        self._model = model
+        self._data = data
+
+        self.roll = Joint(self._model, self._data, "neck_roll")
+        self.pitch = Joint(self._model, self._data, "neck_pitch")
+        self.yaw = Joint(self._model, self._data, "neck_yaw")
+
+    def _update(self):
+        self.roll._update()
+        self.pitch._update()
+        self.yaw._update()
 
 
 class Head:
     def __init__(self, model, data):
-        self.model = model
-        self.data = data
-        self.exposed_neck = Neck(self.model, self.data)
+        self._model = model
+        self._data = data
+
+        self.neck = Neck(self._model, self._data)
+
+    def _update(self):
+        self.neck._update()
 
 
 class Camera:
     def __init__(self, model, data, cam_name, width, height):
-        self.model = model
-        self.data = data
-        self.cam_name = cam_name
-        self.width = width
-        self.height = height
-        self.camera_id = mujoco.mj_name2id(
-            self.model, mujoco.mjtObj.mjOBJ_CAMERA, self.cam_name
+        self._model = model
+        self._data = data
+        self._cam_name = cam_name
+        self._width = width
+        self._height = height
+        self._camera_id = mujoco.mj_name2id(
+            self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name
         )
-        self.offscreen = mujoco.MjrContext(self.model, mujoco.mjtFontScale.mjFONTSCALE_150)
-        self.rgb_array = np.zeros((self.height, self.width, 3), dtype=np.uint8)
+        self._offscreen = mujoco.MjrContext(
+            self._model, mujoco.mjtFontScale.mjFONTSCALE_150
+        )
+        self._rgb_array = np.zeros((self._height, self._width, 3), dtype=np.uint8)
 
     def get_image(self):
-        mujoco.mjv_updateScene(self.model, self.data, self.data.scn, self.data.cam)
+        mujoco.mjv_updateScene(self._model, self._data, self._data.scn, self._data.cam)
         mujoco.mjr_render(
-            mujoco.MjrRect(0, 0, self.width, self.height), self.data.scn, self.offscreen
+            mujoco.MjrRect(0, 0, self._width, self._height),
+            self._data.scn,
+            self._offscreen,
         )
-        mujoco.mjr_readPixels(self.rgb_array, None, self.offscreen)
-        return self.rgb_array
+        mujoco.mjr_readPixels(self._rgb_array, None, self._offscreen)
+        return self._rgb_array
 
 
 class ReachyMujoco:
     def __init__(self):
-        self.model = mujoco.MjModel.from_xml_path("mjcf/scene.xml")
-        self.model.opt.timestep = 0.001
-        self.data = mujoco.MjData(self.model)
-        mujoco.mj_step(self.model, self.data)
+        self._model = mujoco.MjModel.from_xml_path("mjcf/scene.xml")
+        self._model.opt.timestep = 0.001
+        self._data = mujoco.MjData(self._model)
+        mujoco.mj_step(self._model, self._data)
 
-        self.exposed_l_arm = Arm(self.model, self.data, prefix="l_")
-        self.exposed_r_arm = Arm(self.model, self.data, prefix="r_")
-        self.exposed_head = Head(self.model, self.data)
+        self.l_arm = Arm(self._model, self._data, prefix="l_")
+        self.r_arm = Arm(self._model, self._data, prefix="r_")
+        self.head = Head(self._model, self._data)
 
         # for i in range(20):
-        #     name = get_actuator_name(self.model, i)
+        #     name = get_actuator_name(self._model, i)
         #     print(i, name)
 
-        # self.camera = Camera(self.model, self.data, "left_teleop_cam", 640, 480)
-
-        self.thread = threading.Thread(target=self.run)
+        self.thread = threading.Thread(target=self._run)
         self.thread.start()
+        self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
 
-    def update(self):
+    def _update(self):
         # im = self.camera.get_image()
         # cv2.imshow("image", im)
         # cv2.waitKey(1)
         pass
 
-    def run(self):
-        with mujoco.viewer.launch_passive(self.model, self.data) as viewer:
+    def _run(self):
+        with mujoco.viewer.launch_passive(self._model, self._data) as viewer:
             i = 0
             while True:
-                mujoco.mj_step(self.model, self.data, 7)  # 4 seems good
-                self.update()
+                mujoco.mj_step(self._model, self._data, 7)  # 4 seems good
+                self._update()
                 viewer.sync()
                 time.sleep(1 / 60)
                 i += 1
 
-    def get_actuator_index(self, name: str) -> int:
-        return mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_ACTUATOR, name)
+    # @rpyc.exposed
+    def send_goal_positions(self, check_positions=False):
+        self.l_arm._update()
+        self.r_arm._update()
+        self.head._update()

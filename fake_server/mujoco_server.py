@@ -16,5 +16,13 @@ class ReachyMujocoService(rpyc.Service):
 
 if __name__ == "__main__":
 
-    t = ThreadedServer(ReachyMujocoService, port=18861)
+    t = ThreadedServer(
+        ReachyMujocoService,
+        port=18861,
+        protocol_config={
+            "allow_all_attrs": True,
+            "allow_setattr": True,
+            # "allow_delattr": True,
+        }
+    )
     t.start()
