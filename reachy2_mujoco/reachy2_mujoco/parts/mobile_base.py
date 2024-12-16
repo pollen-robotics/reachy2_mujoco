@@ -34,8 +34,11 @@ class MobileBase:
         # theta
         self._data.qvel[5] = self._target_position[2] - self.position[2] * self._pid[0]
 
+    # TODO not working
     def reset_odometry(self):
-        self._pos_offset = self.position
+        # self._pos_offset = self.position
+        print("Not implemented")
+        pass
 
     # TODO implement better (with PID ?)
     def goto(self, x, y, theta):

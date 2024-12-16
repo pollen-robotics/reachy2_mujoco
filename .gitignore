@@ -1,2 +1,3 @@
 __pycache__/
 reachy2_mujoco/reachy2_mujoco.egg-info/
+*.TXT
