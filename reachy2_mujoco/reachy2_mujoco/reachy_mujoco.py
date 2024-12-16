@@ -19,7 +19,7 @@ from reachy2_mujoco.parts.cameras import CameraView
 
 class ReachyMujoco:
     def __init__(self):
-        scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/scene.xml"
+        scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/table_scene.xml"
 
         self._model = mujoco.MjModel.from_xml_path(scene_path)
         self._model.opt.timestep = 0.001
@@ -70,10 +70,10 @@ class ReachyMujoco:
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
             i = 0
             while True:
-                mujoco.mj_step(self._model, self._data, 7)  # 4 seems good
+                mujoco.mj_step(self._model, self._data, 20)  # 4 seems good
                 self._update()
                 viewer.sync()
-                time.sleep(1 / 60)
+                time.sleep(1 / 500)
                 i += 1
 
     def send_goal_positions(self, check_positions=False):
