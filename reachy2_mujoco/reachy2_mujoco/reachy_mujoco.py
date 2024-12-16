@@ -56,7 +56,7 @@ class ReachyMujoco:
     def _update(self):
         self.mobile_base._update()
         if self.camera is None:
-            self.camera = Camera(self._model, self._data, "left_teleop_cam", 320, 240)
+            self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
         else:
             self.camera._update()
         # else:
