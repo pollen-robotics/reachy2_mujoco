@@ -7,7 +7,6 @@ import mujoco
 import mujoco.viewer
 
 from reachy2_mujoco.parts import Arm, Cameras, Head, MobileBase
-from reachy2_mujoco.utils import get_actuator_name
 from reachy2_mujoco.parts.cameras import CameraView
 
 # import os
@@ -35,24 +34,25 @@ class ReachyMujoco:
         self.thread = threading.Thread(target=self._run)
         self.thread.start()
 
-        # self._list_actuators()
-        # exit()
-
         self.cameras = None  # must be initialized after the viewer
 
     def turn_on(self):
+        """
+        Does nothing, is here just to match the real Reachy API.
+        """
         pass
 
     def turn_off(self):
+        """
+        Does nothing, is here just to match the real Reachy API.
+        """
         pass
 
     def turn_off_smoothly(self):
+        """
+        Does nothing, is here just to match the real Reachy API.
+        """
         pass
-
-    def _list_actuators(self):
-        for i in range(20):
-            name = get_actuator_name(self._model, i)
-            print(i, name)
 
     def _update(self):
         self.mobile_base._update()
@@ -60,11 +60,11 @@ class ReachyMujoco:
             self.cameras = Cameras(self._model, self._data, 640, 480)
         else:
             self.cameras._update()
-            left = self.cameras.teleop.get_frame(view=CameraView.LEFT)
-            right = self.cameras.teleop.get_frame(view=CameraView.DEPTH)
-            cv2.imshow("left", left)
-            cv2.imshow("right", right)
-            cv2.waitKey(1)
+            # left = self.cameras.teleop.get_frame(view=CameraView.LEFT)
+            # right = self.cameras.teleop.get_frame(view=CameraView.DEPTH)
+            # cv2.imshow("left", left)
+            # cv2.imshow("right", right)
+            # cv2.waitKey(1)
 
     def _run(self):
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
