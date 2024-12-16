@@ -28,21 +28,13 @@ class ArmServicer(arm_pb2_grpc.ArmServiceServicer):
         return Arm(
             part_id=PartId(name=arm.name, id=arm.id),
             description=ArmDescription(
-                shoulder=Orbita2dServicer.get_info(
-                    self.bridge_node.components.get_by_name(arm.components[0].name)
-                ),
-                elbow=Orbita2dServicer.get_info(
-                    self.bridge_node.components.get_by_name(arm.components[1].name)
-                ),
-                wrist=Orbita3dServicer.get_info(
-                    self.bridge_node.components.get_by_name(arm.components[2].name)
-                ),
+                shoulder=Orbita2dServicer.get_info(self.bridge_node.components.get_by_name(arm.components[0].name)),
+                elbow=Orbita2dServicer.get_info(self.bridge_node.components.get_by_name(arm.components[1].name)),
+                wrist=Orbita3dServicer.get_info(self.bridge_node.components.get_by_name(arm.components[2].name)),
             ),
         )
 
-    def get_arm_part_by_part_id(
-        self, part_id: PartId, context: grpc.ServicerContext
-    ) -> Part:
+    def get_arm_part_by_part_id(self, part_id: PartId, context: grpc.ServicerContext) -> Part:
         part = self.bridge_node.parts.get_by_part_id(part_id)
 
         if part is None:

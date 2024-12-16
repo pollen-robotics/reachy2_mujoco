@@ -31,10 +31,7 @@ class PartsHolder:
                     name=part,
                     id=part_id,
                     type=self.guess_part_type(part, part_config),
-                    components=[
-                        components.get_by_name(actuator["name"])
-                        for actuator in part_config.values()
-                    ],
+                    components=[components.get_by_name(actuator["name"]) for actuator in part_config.values()],
                 )
 
                 self.parts[part] = p

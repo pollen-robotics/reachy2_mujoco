@@ -47,9 +47,7 @@ class ReachyGRPCJointSDKServicer:
         hand_servicer = HandServicer(self.bridge_node, self.logger)
         head_servicer = HeadServicer(self.bridge_node, self.logger, orbita3d_servicer)
         goto_servicer = GoToServicer(self.bridge_node, self.logger)
-        mobile_base_servicer = MobileBaseServicer(
-            self.bridge_node, self.logger, reachy_config_path
-        )
+        mobile_base_servicer = MobileBaseServicer(self.bridge_node, self.logger, reachy_config_path)
         reachy_servicer = ReachyServicer(
             self.bridge_node,
             self.logger,
@@ -82,9 +80,7 @@ class ReachyGRPCJointSDKServicer:
 
     def spin_asyncio_sanity(self) -> None:
         asyncio.set_event_loop(self.asyncio_loop_sanity)
-        self.asyncio_loop_sanity.run_until_complete(
-            self.spinning_sanity(self.bridge_node)
-        )
+        self.asyncio_loop_sanity.run_until_complete(self.spinning_sanity(self.bridge_node))
 
     async def spinning_sanity(self, node):
         with node.sum_spin_sanity.time():
@@ -111,9 +107,7 @@ def main_singleprocess(_=1):
     port = f"{args.port}{_}"
     print(f"Starting grpc server at {port}")
 
-    servicer = ReachyGRPCJointSDKServicer(
-        reachy_config_path=args.reachy_config, port=port
-    )
+    servicer = ReachyGRPCJointSDKServicer(reachy_config_path=args.reachy_config, port=port)
     server = grpc.server(
         futures.ThreadPoolExecutor(max_workers=args.max_workers),
         # interceptors=[Interceptor()],

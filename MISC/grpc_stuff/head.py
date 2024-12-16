@@ -20,9 +20,7 @@ class HeadServicer(head_pb2_grpc.HeadServiceServicer):
         return Head(
             part_id=PartId(name=head.name, id=head.id),
             description=HeadDescription(
-                neck=Orbita3dServicer.get_info(
-                    self.bridge_node.components.get_by_name(head.components[0].name)
-                ),
+                neck=Orbita3dServicer.get_info(self.bridge_node.components.get_by_name(head.components[0].name)),
                 # l_antenna=DynamixelMotor.get_info(
                 #     self.bridge_node.components.get_by_name(head.components[1].name)
                 # ),

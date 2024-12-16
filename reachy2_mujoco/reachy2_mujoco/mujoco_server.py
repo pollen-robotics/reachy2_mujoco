@@ -4,7 +4,6 @@ from reachy2_mujoco import ReachyMujoco
 
 
 class ReachyMujocoService(rpyc.Service):
-
     exposed_reachy = ReachyMujoco()
 
     def on_connect(self, conn):

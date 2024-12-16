@@ -31,7 +31,7 @@ class Joint:
         self._name = name
         self._index = get_actuator_index(self._model, self._name)
 
-        self.goal_position = 0
+        self.goal_position = 0  # expects degrees ?
 
     @property
     # @rpyc.exposed
@@ -115,12 +115,8 @@ class Camera:
         self._cam_name = cam_name
         self._width = width
         self._height = height
-        self._camera_id = mujoco.mj_name2id(
-            self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name
-        )
-        self._offscreen = mujoco.MjrContext(
-            self._model, mujoco.mjtFontScale.mjFONTSCALE_150
-        )
+        self._camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name)
+        self._offscreen = mujoco.MjrContext(self._model, mujoco.mjtFontScale.mjFONTSCALE_150)
         self._rgb_array = np.zeros((self._height, self._width, 3), dtype=np.uint8)
 
     def get_image(self):
@@ -215,9 +211,7 @@ class ReachyMujoco:
         pass
 
     def _run(self):
-        with mujoco.viewer.launch_passive(
-            self._model, self._data, show_left_ui=False, show_right_ui=False
-        ) as viewer:
+        with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
             i = 0
             while True:
                 mujoco.mj_step(self._model, self._data, 7)  # 4 seems good

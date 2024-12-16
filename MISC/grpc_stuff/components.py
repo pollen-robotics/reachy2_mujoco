@@ -7,9 +7,7 @@ from reachy2_sdk_api.component_pb2 import ComponentId
 
 # Should have at least "name", "id" and "type" keys.
 class Component:
-    def __init__(
-        self, name: str, id: int, type: str, extra: dict, state: dict = {}
-    ) -> None:
+    def __init__(self, name: str, id: int, type: str, extra: dict, state: dict = {}) -> None:
         self.name = name
         self.id = id
         self.type = type

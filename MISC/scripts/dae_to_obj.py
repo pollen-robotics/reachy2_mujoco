@@ -22,8 +22,6 @@ args = parser.parse_args()
 os.makedirs(args.output, exist_ok=True)
 for dae_file in glob(os.path.join(args.input, "*.dae")):
     print(f"Converting {dae_file}...")
-    out_file = os.path.join(
-        args.output, os.path.basename(dae_file).replace(".dae", ".obj")
-    )
+    out_file = os.path.join(args.output, os.path.basename(dae_file).replace(".dae", ".obj"))
     os.system(f"meshlabserver -i {dae_file} -o {out_file} -m vn")
     print(f"Saved to {out_file}.")

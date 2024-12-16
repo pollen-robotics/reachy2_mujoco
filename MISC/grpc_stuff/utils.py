@@ -35,9 +35,7 @@ def cleanup_fields(FieldEnum, fields):
         cleanup_fields.remove("ALL")
         cleanup_fields.remove("NONE")
     else:
-        cleanup_fields = [
-            FieldEnum.DESCRIPTOR.values_by_number[field].name for field in fields
-        ]
+        cleanup_fields = [FieldEnum.DESCRIPTOR.values_by_number[field].name for field in fields]
 
     cleanup_fields = [f.lower() for f in cleanup_fields]
 
