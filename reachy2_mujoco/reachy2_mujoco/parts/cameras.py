@@ -1,5 +1,6 @@
 import mujoco
 import numpy as np
+import cv2
 
 
 # TODO implement reachy.cameras.teleop.get_frame(left/right)
@@ -21,4 +22,4 @@ class Camera:
         self._offscreen.render(out=self._rgb_array)
 
     def get_image(self):
-        return self._rgb_array
+        return cv2.cvtColor(self._rgb_array, cv2.COLOR_RGB2BGR)

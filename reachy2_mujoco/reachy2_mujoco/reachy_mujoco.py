@@ -1,4 +1,5 @@
 import os
+import cv2
 import threading
 import time
 
@@ -59,9 +60,9 @@ class ReachyMujoco:
         else:
             self.camera._update()
         # else:
-        #     im = self.camera.get_image()
-        #     cv2.imshow("image", im)
-        #     cv2.waitKey(1)
+            # im = self.camera.get_image()
+            # cv2.imshow("image", im)
+            # cv2.waitKey(1)
 
     def _run(self):
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
