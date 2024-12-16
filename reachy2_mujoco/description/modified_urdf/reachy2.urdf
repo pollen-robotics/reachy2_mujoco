@@ -8,7 +8,8 @@
     <compiler
         meshdir="./obj_meshes"
         balanceinertia="true"
-        discardvisual="false" />
+        discardvisual="false"
+        fusestatic="false" />
     </mujoco>
   <!-- convergence angle (rad) of the cameras. 0=parallel-->
   <!-- URDF definition is so stupid we have to do that... -->
