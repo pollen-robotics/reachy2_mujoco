@@ -35,10 +35,48 @@ class Joint:
 
     @property
     def present_position(self):
-        return self._data.qpos[self._index]
+        return np.rad2deg(self._data.qpos[self._index])
 
     def _update(self):
-        self._data.ctrl[self._index] = self.goal_position
+        self._data.ctrl[self._index] = np.deg2rad(self.goal_position)
+
+
+class Shoulder:
+    def __init__(self, model, data, prefix="l_"):
+        self._model = model
+        self._data = data
+        self.pitch = Joint(self._model, self._data, f"{prefix}shoulder_pitch")
+        self.roll = Joint(self._model, self._data, f"{prefix}shoulder_roll")
+
+    def _update(self):
+        self.pitch._update()
+        self.roll._update()
+
+
+class Elbow:
+    def __init__(self, model, data, prefix="l_"):
+        self._model = model
+        self._data = data
+        self.yaw = Joint(self._model, self._data, f"{prefix}elbow_yaw")
+        self.pitch = Joint(self._model, self._data, f"{prefix}elbow_pitch")
+
+    def _update(self):
+        self.yaw._update()
+        self.pitch._update()
+
+
+class Wrist:
+    def __init__(self, model, data, prefix="l_"):
+        self._model = model
+        self._data = data
+        self.roll = Joint(self._model, self._data, f"{prefix}wrist_roll")
+        self.pitch = Joint(self._model, self._data, f"{prefix}wrist_pitch")
+        self.yaw = Joint(self._model, self._data, f"{prefix}wrist_yaw")
+
+    def _update(self):
+        self.roll._update()
+        self.pitch._update()
+        self.yaw._update()
 
 
 class Gripper(Joint):
@@ -55,23 +93,16 @@ class Arm:
         self._model = model
         self._data = data
 
-        self.shoulder_pitch = Joint(self._model, self._data, f"{prefix}shoulder_pitch")
-        self.shoulder_roll = Joint(self._model, self._data, f"{prefix}shoulder_roll")
-        self.elbow_yaw = Joint(self._model, self._data, f"{prefix}elbow_yaw")
-        self.elbow_pitch = Joint(self._model, self._data, f"{prefix}elbow_pitch")
-        self.wrist_roll = Joint(self._model, self._data, f"{prefix}wrist_roll")
-        self.wrist_pitch = Joint(self._model, self._data, f"{prefix}wrist_pitch")
-        self.wrist_yaw = Joint(self._model, self._data, f"{prefix}wrist_yaw")
+        self.shoulder = Shoulder(self._model, self._data, prefix=prefix)
+        self.elbow = Elbow(self._model, self._data, prefix=prefix)
+        self.wrist = Wrist(self._model, self._data, prefix=prefix)
+
         self.gripper = Gripper(self._model, self._data, prefix=prefix)
 
     def _update(self):
-        self.shoulder_pitch._update()
-        self.shoulder_roll._update()
-        self.elbow_yaw._update()
-        self.elbow_pitch._update()
-        self.wrist_roll._update()
-        self.wrist_pitch._update()
-        self.wrist_yaw._update()
+        self.shoulder._update()
+        self.elbow._update()
+        self.wrist._update()
         self.gripper._update()
 
     # TODO implement
@@ -184,6 +215,15 @@ class ReachyMujoco:
         self.thread.start()
 
         self.camera = None  # must be initialized after the viewer
+
+    def turn_on(self):
+        pass
+
+    def turn_off(self):
+        pass
+
+    def turn_off_smoothly(self):
+        pass
 
     def _list_actuators(self):
         for i in range(20):
