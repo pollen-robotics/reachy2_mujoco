@@ -3,6 +3,7 @@ import pyquaternion
 
 # import cv2
 import threading
+import os
 import mujoco.viewer
 import time
 import numpy as np
@@ -75,6 +76,11 @@ class Arm:
         self.wrist_yaw._update()
         self.gripper._update()
 
+    # TODO implement
+    def goto(self):
+        print("Not implemented")
+        pass
+
 
 class Neck:
     def __init__(self, model, data):
@@ -129,6 +135,10 @@ class Camera:
 
 
 class MobileBase:
+    #     self.reachy.mobile_base.set_goal_speed(action[19], action[20], action[21])
+    # self.reachy.mobile_base.send_speed_command()
+    # self.reachy.mobile_base.last_cmd_vel
+    # self.reachy.mobile_base.odometry
     def __init__(self, model, data):
         self._model = model
         self._data = data
@@ -157,13 +167,22 @@ class MobileBase:
     def reset_odometry(self):
         self._pos_offset = self.position
 
+    # TODO implement better (with PID ?)
     def goto(self, x, y, theta):
         self._target_position = np.array([x, y, theta])
+
+    # TODO match real behvior (command for only 200ms ? )
+    def set_goal_speed(self, vx, vy, vtheta):
+        self._data.qvel[:3] = [vx, vy, vtheta]
 
 
 class ReachyMujoco:
     def __init__(self):
-        self._model = mujoco.MjModel.from_xml_path("mjcf/scene.xml")
+        scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/scene.xml"
+        # print(scene_path)
+        # exit()
+
+        self._model = mujoco.MjModel.from_xml_path(scene_path)
         self._model.opt.timestep = 0.001
         self._data = mujoco.MjData(self._model)
         mujoco.mj_step(self._model, self._data)

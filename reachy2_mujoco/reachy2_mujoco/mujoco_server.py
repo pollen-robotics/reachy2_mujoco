@@ -1,6 +1,6 @@
 import rpyc
 from rpyc.utils.server import ThreadedServer
-from reachy_mujoco import ReachyMujoco
+from reachy2_mujoco import ReachyMujoco
 
 
 class ReachyMujocoService(rpyc.Service):
@@ -14,8 +14,7 @@ class ReachyMujocoService(rpyc.Service):
         pass
 
 
-if __name__ == "__main__":
-
+def main():
     t = ThreadedServer(
         ReachyMujocoService,
         port=18861,
@@ -23,6 +22,10 @@ if __name__ == "__main__":
             "allow_all_attrs": True,
             "allow_setattr": True,
             # "allow_delattr": True,
-        }
+        },
     )
     t.start()
+
+
+if __name__ == "__main__":
+    main()
