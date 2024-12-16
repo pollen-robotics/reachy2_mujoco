@@ -31,14 +31,14 @@ class Joint:
         self._name = name
         self._index = get_actuator_index(self._model, self._name)
 
-        self.goal_position = 0  # expects degrees ?
+        self.goal_position = 0  # expects degrees
 
     @property
     def present_position(self):
         return np.rad2deg(self._data.qpos[self._index])
 
     def _update(self):
-        self._data.ctrl[self._index] = np.deg2rad(self.goal_position)
+        self._data.ctrl[self._index] = self.goal_position * np.pi / 180
 
 
 class Shoulder:
@@ -138,19 +138,23 @@ class Head:
 
 
 class Camera:
-    def __init__(self, model, data, cam_name, width, height):
+    def __init__(self, model, data, cam_name, width, height, fps=30):
         self._model = model
         self._data = data
         self._cam_name = cam_name
         self._width = width
         self._height = height
+        self._fps = fps
+
         self._camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name)
         self._offscreen = mujoco.Renderer(self._model)
         self._rgb_array = np.zeros((self._height, self._width, 3), dtype=np.uint8)
 
-    def get_image(self):
+    def _update(self):
         self._offscreen.update_scene(self._data, self._camera_id)
         self._offscreen.render(out=self._rgb_array)
+
+    def get_image(self):
         return self._rgb_array
 
 
@@ -235,9 +239,11 @@ class ReachyMujoco:
         if self.camera is None:
             self.camera = Camera(self._model, self._data, "left_teleop_cam", 320, 240)
         else:
-            im = self.camera.get_image()
-            cv2.imshow("image", im)
-            cv2.waitKey(1)
+            self.camera._update()
+        # else:
+        #     im = self.camera.get_image()
+        #     cv2.imshow("image", im)
+        #     cv2.waitKey(1)
 
     def _run(self):
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:

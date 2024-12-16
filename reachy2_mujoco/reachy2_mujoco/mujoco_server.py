@@ -20,6 +20,7 @@ def main():
         protocol_config={
             "allow_all_attrs": True,
             "allow_setattr": True,
+            "allow_pickle": True
             # "allow_delattr": True,
         },
     )
