@@ -13,6 +13,7 @@ class MobileBase:
         self._data = data
         self._target_position = np.zeros(3)
         self._pos_offset = np.zeros(3)
+        self._pid = [2, 0, 0]
 
         self.position = np.zeros(3)  # x, y, theta
 
@@ -27,11 +28,11 @@ class MobileBase:
     def _update(self):
         self._update_position()
 
-        vector_2d = np.array(self._target_position[:2]) - self.position[:2]
+        vector_2d = np.array(self._target_position[:2]) - self.position[:2] * self._pid[0]
         self._data.qvel[:2] = vector_2d
 
         # theta
-        self._data.qvel[5] = self._target_position[2] - self.position[2]
+        self._data.qvel[5] = self._target_position[2] - self.position[2] * self._pid[0]
 
     def reset_odometry(self):
         self._pos_offset = self.position
