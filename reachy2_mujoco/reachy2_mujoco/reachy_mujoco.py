@@ -34,7 +34,6 @@ class Joint:
         self.goal_position = 0  # expects degrees ?
 
     @property
-    # @rpyc.exposed
     def present_position(self):
         return self._data.qpos[self._index]
 
@@ -46,7 +45,6 @@ class Gripper(Joint):
     def __init__(self, model, data, prefix="l_"):
         super().__init__(model, data, name=f"{prefix}gripper")
 
-    # @rpyc.exposed
     def set_opening(self, percentage):
         print("Not implemented")
         pass
@@ -131,7 +129,8 @@ class Camera:
 
 
 class MobileBase:
-    #     self.reachy.mobile_base.set_goal_speed(action[19], action[20], action[21])
+    # TODO implement
+    # self.reachy.mobile_base.set_goal_speed(action[19], action[20], action[21])
     # self.reachy.mobile_base.send_speed_command()
     # self.reachy.mobile_base.last_cmd_vel
     # self.reachy.mobile_base.odometry
@@ -175,8 +174,6 @@ class MobileBase:
 class ReachyMujoco:
     def __init__(self):
         scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/scene.xml"
-        # print(scene_path)
-        # exit()
 
         self._model = mujoco.MjModel.from_xml_path(scene_path)
         self._model.opt.timestep = 0.001
@@ -188,22 +185,18 @@ class ReachyMujoco:
         self.head = Head(self._model, self._data)
         self.mobile_base = MobileBase(self._model, self._data)
 
-        # for i in range(20):
-        #     name = get_actuator_name(self._model, i)
-        #     print(i, name)
-
         self.thread = threading.Thread(target=self._run)
         self.thread.start()
 
-        # self._data.qvel[0] = 0.5
         # self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
+
+    def _list_actuators(self):
+        for i in range(20):
+            name = get_actuator_name(self._model, i)
+            print(i, name)
 
     def _update(self):
         self.mobile_base._update()
-        # self._data.qvel[0] = 0.5
-
-        # force robot to stay upright
-        # self._data.qpos[0] = 0
 
         # im = self.camera.get_image()
         # cv2.imshow("image", im)
