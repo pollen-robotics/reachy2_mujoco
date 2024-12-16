@@ -21,8 +21,8 @@
     <mesh name="pincette_left_visual" file="pincette_left_visual.obj"/>
   </asset>
   <default>
-    <joint damping="1" frictionloss="10"/>
-    <position kp="100"/>
+    <joint damping="7" frictionloss="1"/>
+    <position kp="50" kv="1.5"/>
   </default>
   <worldbody>
     <body name="trunk">
