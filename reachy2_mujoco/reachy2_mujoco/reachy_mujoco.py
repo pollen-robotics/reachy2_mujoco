@@ -1,7 +1,7 @@
 import mujoco
 import pyquaternion
 
-# import cv2
+import cv2
 import threading
 import os
 import mujoco.viewer
@@ -114,17 +114,12 @@ class Camera:
         self._width = width
         self._height = height
         self._camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name)
-        self._offscreen = mujoco.MjrContext(self._model, mujoco.mjtFontScale.mjFONTSCALE_150)
+        self._offscreen = mujoco.Renderer(self._model)
         self._rgb_array = np.zeros((self._height, self._width, 3), dtype=np.uint8)
 
     def get_image(self):
-        mujoco.mjv_updateScene(self._model, self._data, self._data.scn, self._data.cam)
-        mujoco.mjr_render(
-            mujoco.MjrRect(0, 0, self._width, self._height),
-            self._data.scn,
-            self._offscreen,
-        )
-        mujoco.mjr_readPixels(self._rgb_array, None, self._offscreen)
+        self._offscreen.update_scene(self._data, self._camera_id)
+        self._offscreen.render(out=self._rgb_array)
         return self._rgb_array
 
 
@@ -188,7 +183,7 @@ class ReachyMujoco:
         self.thread = threading.Thread(target=self._run)
         self.thread.start()
 
-        # self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
+        self.camera = None  # must be initialized after the viewer
 
     def _list_actuators(self):
         for i in range(20):
@@ -197,11 +192,12 @@ class ReachyMujoco:
 
     def _update(self):
         self.mobile_base._update()
-
-        # im = self.camera.get_image()
-        # cv2.imshow("image", im)
-        # cv2.waitKey(1)
-        pass
+        if self.camera is None:
+            self.camera = Camera(self._model, self._data, "left_teleop_cam", 320, 240)
+        else:
+            im = self.camera.get_image()
+            cv2.imshow("image", im)
+            cv2.waitKey(1)
 
     def _run(self):
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
