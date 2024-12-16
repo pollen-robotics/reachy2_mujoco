@@ -16,7 +16,7 @@ from reachy2_mujoco.parts import Arm, Head, MobileBase, Camera
 
 class ReachyMujoco:
     def __init__(self):
-        scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/scene.xml"
+        scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/new_mjcf/scene.xml"
 
         self._model = mujoco.MjModel.from_xml_path(scene_path)
         self._model.opt.timestep = 0.001
@@ -30,6 +30,9 @@ class ReachyMujoco:
 
         self.thread = threading.Thread(target=self._run)
         self.thread.start()
+
+        # self._list_actuators()
+        # exit()
 
         self.camera = None  # must be initialized after the viewer
 
