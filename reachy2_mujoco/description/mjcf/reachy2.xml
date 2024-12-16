@@ -20,7 +20,6 @@
     <mesh name="pincette_left_collider" file="pincette_left_collider.obj"/>
     <mesh name="pincette_left_visual" file="pincette_left_visual.obj"/>
   </asset>
-
   <default>
     <joint damping="1" frictionloss="10"/>
     <position kp="100"/>
@@ -47,22 +46,19 @@
           <body name="neck_link">
             <inertial pos="0.00474964 -4.81305e-05 0.0094431" quat="0.997531 0.000139363 0.0697058 -0.00852459" mass="0.82002" diaginertia="0.00259236 0.00237343 0.00120077"/>
             <joint name="neck_yaw" pos="0 0 0" axis="0 0 1" range="-1.57 1.57" actuatorfrcrange="-1000 1000"/>
-	    <body name="head_link">
+            <body name="head_link">
               <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="head_visual"/>
               <!-- <geom type="mesh" mesh="head_collider"/> -->
-	      <body name="left_camera" pos="0.03531 0.0325 0.056">
-		<body name="left_camera_optical" pos="0 0 0" quat="-0.5 -0.5 0.5 0.5">
-		  <camera name="left_teleop_cam"  pos="0 0 0" euler="0 0 0"/>
-		</body>
-	      </body>
-
-	      <body name="right_camera" pos="0.03531 -0.0325 0.056">
-		<body name="right_camera_optical" pos="0 0 0" quat="-0.5 -0.5 0.5 0.5">
-		  <camera name="right_teleop_cam"  pos="0 0 0" euler="0 0 0"/>
-		</body>
-	      </body>
-
-
+              <body name="left_camera" pos="0.03531 0.0325 0.056">
+                <body name="left_camera_optical" pos="0 0 0" quat="-0.5 -0.5 0.5 0.5">
+                  <camera name="left_teleop_cam"  pos="0 0 0" euler="0 0 0"/>
+                </body>
+              </body>
+              <body name="right_camera" pos="0.03531 -0.0325 0.056">
+                <body name="right_camera_optical" pos="0 0 0" quat="-0.5 -0.5 0.5 0.5">
+                  <camera name="right_teleop_cam"  pos="0 0 0" euler="0 0 0"/>
+                </body>
+              </body>
             </body>
           </body>
         </body>

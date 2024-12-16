@@ -6,8 +6,9 @@ import time
 import mujoco
 import mujoco.viewer
 
-from reachy2_mujoco.parts import Arm, Camera, Head, MobileBase
+from reachy2_mujoco.parts import Arm, Cameras, Head, MobileBase
 from reachy2_mujoco.utils import get_actuator_name
+from reachy2_mujoco.parts.cameras import CameraView
 
 # import os
 # os.environ['MUJOCO_GL'] = 'egl'
@@ -37,7 +38,7 @@ class ReachyMujoco:
         # self._list_actuators()
         # exit()
 
-        self.camera = None  # must be initialized after the viewer
+        self.cameras = None  # must be initialized after the viewer
 
     def turn_on(self):
         pass
@@ -55,14 +56,15 @@ class ReachyMujoco:
 
     def _update(self):
         self.mobile_base._update()
-        if self.camera is None:
-            self.camera = Camera(self._model, self._data, "left_teleop_cam", 640, 480)
+        if self.cameras is None:
+            self.cameras = Cameras(self._model, self._data, 640, 480)
         else:
-            self.camera._update()
-        # else:
-            # im = self.camera.get_image()
-            # cv2.imshow("image", im)
-            # cv2.waitKey(1)
+            self.cameras._update()
+            left = self.cameras.teleop.get_frame(view=CameraView.LEFT)
+            right = self.cameras.teleop.get_frame(view=CameraView.DEPTH)
+            cv2.imshow("left", left)
+            cv2.imshow("right", right)
+            cv2.waitKey(1)
 
     def _run(self):
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
