@@ -4,13 +4,13 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="reachy2">
-    <mujoco>
+  <mujoco>
     <compiler
         meshdir="./obj_meshes"
         balanceinertia="true"
         discardvisual="false"
         fusestatic="false" />
-    </mujoco>
+  </mujoco>
   <!-- convergence angle (rad) of the cameras. 0=parallel-->
   <!-- URDF definition is so stupid we have to do that... -->
   <!-- <material name="gripperblack"> -->

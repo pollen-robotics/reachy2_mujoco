@@ -29,5 +29,4 @@ reachy.send_goal_positions()
 ```
 
 ## TODO
-- make cameras work
-- Improve mobile base behavior
+- match mobile base behavior with real one
