@@ -1,5 +1,6 @@
 import rpyc
 from rpyc.utils.server import ThreadedServer
+
 from reachy2_mujoco import ReachyMujoco
 
 

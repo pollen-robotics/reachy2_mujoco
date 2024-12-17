@@ -96,31 +96,37 @@
                     <geom quat="3.26795e-07 1 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_right_visual"/>
                     <body name="r_hand_virtual_gripper_link" pos="0 -4.57696e-08 -0.070028" quat="3.26795e-07 1 0 0">
                       <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
-                      <joint name="r_hand_finger" pos="0 0 0" axis="1 0 0" range="0 2.27" actuatorfrcrange="-100 100"/>
+                      <!-- <joint name="r_hand_finger" pos="0 0 0" axis="1 0 0" range="0 2.27" actuatorfrcrange="-100 100"/> -->
+                      <joint name="r_hand_finger" pos="0 0 0" axis="1 0 0" range="0 2.27" actuatorfrcrange="-100 100" armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
+
                     </body>
                     <body name="r_hand_proximal_link" pos="-0.010196 -0.03792 -0.070028" quat="3.26795e-07 1 0 0">
                       <inertial pos="4.101e-05 0.002756 0.019654" quat="0.707941 0.00659338 -0.00992804 0.706171" mass="0.0392639" diaginertia="2.00384e-05 1.93703e-05 4.62126e-06"/>
-                      <joint name="r_hand_finger_proximal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"/>
+                      <joint name="r_hand_finger_proximal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
+
                       <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_proximal_visual"/>
                       <body name="r_hand_distal_link" pos="0 0 0.049997">
                         <inertial pos="6.95e-06 -6.402e-05 0.0177268" quat="0.700477 0.096599 -0.096599 0.700477" mass="0.0282109" diaginertia="7.31707e-06 6.83e-06 2.44293e-06"/>
-                        <joint name="r_hand_finger_distal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"/>
+                        <joint name="r_hand_finger_distal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
+                        <!-- <joint name="r_hand_finger_distal" pos="0 0 0" axis="1 0 0"/> -->
                         <geom type="mesh" mesh="pincette_distal_collider"/>
                         <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_distal"/>
                       </body>
                     </body>
                     <body name="r_hand_proximal_mimic_link" pos="-0.010196 0.03792 -0.070028" quat="0 3.26795e-07 -1 3.26795e-07">
                       <inertial pos="4.101e-05 0.002756 0.019654" quat="0.707941 0.00659338 -0.00992804 0.706171" mass="0.0392639" diaginertia="2.00384e-05 1.93703e-05 4.62126e-06"/>
-                      <joint name="r_hand_finger_proximal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"/>
+                      <joint name="r_hand_finger_proximal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                       <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_proximal_visual"/>
                       <body name="r_hand_distal_mimic_link" pos="0 0 0.049997">
                         <inertial pos="6.95e-06 -6.402e-05 0.0177268" quat="0.700477 0.096599 -0.096599 0.700477" mass="0.0282109" diaginertia="7.31707e-06 6.83e-06 2.44293e-06"/>
-                        <joint name="r_hand_finger_distal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" damping="0.1" frictionloss="0.1"/>
+                        <joint name="r_hand_finger_distal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                         <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
                         <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_distal"/>
                       </body>
+		    <!-- </body> -->
+
                     </body>
                   </body>
                 </body>
@@ -162,28 +168,28 @@
                     <geom quat="3.26795e-07 1 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_left_visual"/>
                     <body name="l_hand_virtual_gripper_link" pos="0 -4.57696e-08 -0.070028" quat="3.26795e-07 1 0 0">
                       <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
-                      <joint name="l_hand_finger" pos="0 0 0" axis="1 0 0" range="0 2.27" actuatorfrcrange="-100 100"/>
+                      <joint name="l_hand_finger" pos="0 0 0" axis="1 0 0" range="0 2.27" actuatorfrcrange="-100 100"  armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                     </body>
                     <body name="l_hand_proximal_link" pos="-0.010196 -0.03792 -0.070028" quat="3.26795e-07 1 0 0">
                       <inertial pos="4.101e-05 0.002756 0.019654" quat="0.707941 0.00659338 -0.00992804 0.706171" mass="0.0392639" diaginertia="2.00384e-05 1.93703e-05 4.62126e-06"/>
-                      <joint name="l_hand_finger_proximal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"/>
+                      <joint name="l_hand_finger_proximal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"  armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                       <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_proximal_visual"/>
                       <body name="l_hand_distal_link" pos="0 0 0.049997">
                         <inertial pos="6.95e-06 -6.402e-05 0.0177268" quat="0.700477 0.096599 -0.096599 0.700477" mass="0.0282109" diaginertia="7.31707e-06 6.83e-06 2.44293e-06"/>
-                        <joint name="l_hand_finger_distal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"/>
+                        <joint name="l_hand_finger_distal" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"  armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                         <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
                         <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_distal"/>
                       </body>
                     </body>
                     <body name="l_hand_proximal_mimic_link" pos="-0.010196 0.03792 -0.070028" quat="0 3.26795e-07 -1 3.26795e-07">
                       <inertial pos="4.101e-05 0.002756 0.019654" quat="0.707941 0.00659338 -0.00992804 0.706171" mass="0.0392639" diaginertia="2.00384e-05 1.93703e-05 4.62126e-06"/>
-                      <joint name="l_hand_finger_proximal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"/>
+                      <joint name="l_hand_finger_proximal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100"  armature="0.005" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                       <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_proximal_visual"/>
                       <body name="l_hand_distal_mimic_link" pos="0 0 0.049997">
                         <inertial pos="6.95e-06 -6.402e-05 0.0177268" quat="0.700477 0.096599 -0.096599 0.700477" mass="0.0282109" diaginertia="7.31707e-06 6.83e-06 2.44293e-06"/>
-                        <joint name="l_hand_finger_distal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" damping="0.1" frictionloss="0.1"/>
+                        <joint name="l_hand_finger_distal_mimic" pos="0 0 0" axis="1 0 0" range="-0.51 0.554" actuatorfrcrange="-100 100" damping="0.1" armature="0.005" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
                         <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
                         <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="pincette_distal"/>
                       </body>
@@ -197,6 +203,22 @@
       </body>
     </body>
   </worldbody>
+
+  <equality>
+
+    <joint joint1="r_hand_finger" joint2="r_hand_finger_proximal" polycoef="0.554 -0.4689 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="r_hand_finger_proximal" joint2="r_hand_finger_distal" polycoef="0 -1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="r_hand_finger_proximal" joint2="r_hand_finger_proximal_mimic" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="r_hand_finger_distal" joint2="r_hand_finger_distal_mimic" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+
+    <joint joint1="l_hand_finger" joint2="l_hand_finger_proximal" polycoef="0.554 -0.4689 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="l_hand_finger_proximal" joint2="l_hand_finger_distal" polycoef="0 -1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="l_hand_finger_proximal" joint2="l_hand_finger_proximal_mimic" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <joint joint1="l_hand_finger_distal" joint2="l_hand_finger_distal_mimic" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+
+  </equality>
+
+
   <actuator>
     <position name="neck_roll" joint="neck_roll" gear="1" inheritrange="1"  />
     <position name="neck_pitch" joint="neck_pitch" gear="1" inheritrange="1"  />
@@ -215,15 +237,8 @@
     <position name="r_wrist_roll" joint="r_wrist_roll" gear="1" inheritrange="1"  />
     <position name="r_wrist_pitch" joint="r_wrist_pitch" gear="1" inheritrange="1"  />
     <position name="r_wrist_yaw" joint="r_wrist_yaw" gear="1" inheritrange="1"  />
-    <!-- <position name="r_hand_finger" joint="r_hand_finger" gear="1" inheritrange="1"  />
-	 <position name="r_hand_finger_proximal" joint="r_hand_finger_proximal" gear="1" inheritrange="1"  />
-	 <position name="r_hand_finger_distal" joint="r_hand_finger_distal" gear="1" inheritrange="1"  />
-	 <position name="l_hand_finger" joint="l_hand_finger" gear="1" inheritrange="1"  />
-	 <position name="l_hand_finger_proximal" joint="l_hand_finger_proximal" gear="1" inheritrange="1"  />
-	 <position name="l_hand_finger_distal" joint="l_hand_finger_distal" gear="1" inheritrange="1"  />
-	 <position name="r_hand_finger_proximal_mimic" joint="r_hand_finger_proximal_mimic" gear="1" inheritrange="1"  />
-	 <position name="r_hand_finger_distal_mimic" joint="r_hand_finger_distal_mimic" gear="1" inheritrange="1"  />
-	 <position name="l_hand_finger_proximal_mimic" joint="l_hand_finger_proximal_mimic" gear="1" inheritrange="1"  />
-	 <position name="l_hand_finger_distal_mimic" joint="l_hand_finger_distal_mimic" gear="1" inheritrange="1"  /> -->
+    <position name="r_hand_finger" joint="r_hand_finger" gear="1" inheritrange="1"  />
+    <position name="l_hand_finger" joint="l_hand_finger" gear="1" inheritrange="1"  />
+
   </actuator>
 </mujoco>
