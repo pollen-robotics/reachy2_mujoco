@@ -13,7 +13,7 @@ class MobileBase:
         self._data = data
         self._target_position = np.zeros(3)
         self._pos_offset = np.zeros(3)
-        self._pid = [2, 0, 0]
+        self._pid = [1.3, 0, 0]
 
         self.position = np.zeros(3)  # x, y, theta
 
