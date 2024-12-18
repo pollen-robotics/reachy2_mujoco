@@ -59,11 +59,11 @@ class Wrist:
 
 class Gripper(Joint):
     def __init__(self, model, data, prefix="l_"):
-        super().__init__(model, data, name=f"{prefix}gripper")
+        super().__init__(model, data, name=f"{prefix}hand_finger")
+        self._limits = self._model.jnt_range[self._index]
 
     def set_opening(self, percentage):
-        print("Not implemented")
-        pass
+        self.goal_position = np.rad2deg(np.interp(percentage, [0, 100], self._limits))
 
 
 class Neck:
