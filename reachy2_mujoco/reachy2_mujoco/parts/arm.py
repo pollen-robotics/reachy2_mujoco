@@ -2,6 +2,9 @@ from reachy2_mujoco.parts.joints import Shoulder, Elbow, Wrist, Gripper
 from reachy2_symbolic_ik.control_ik import ControlIK
 import os
 import numpy as np
+from reachy2_mujoco.utils import minimum_jerk
+import time
+from threading import Thread
 
 
 class Arm:
@@ -9,7 +12,6 @@ class Arm:
         self._model = model
         self._data = data
         self._prefix = prefix
-        self._urdf_path = "/".join(os.path.realpath(__file__).split("/")[:-3]) + "/description/modified_urdf/reachy2.urdf"
         self._control_ik: ControlIK = control_ik
 
         self.shoulder = Shoulder(self._model, self._data, prefix=prefix)
@@ -25,7 +27,7 @@ class Arm:
         self.gripper._update()
 
     def get_present_positions(self):
-        return [
+        return np.array([
             self.shoulder.pitch.present_position,
             self.shoulder.roll.present_position,
             self.elbow.yaw.present_position,
@@ -33,9 +35,10 @@ class Arm:
             self.wrist.roll.present_position,
             self.wrist.pitch.present_position,
             self.wrist.yaw.present_position,
-        ]
+        ])
 
     def set_goal_positions(self, target):
+        # target = -target
         self.shoulder.pitch.goal_position = target[0]
         self.shoulder.roll.goal_position = target[1]
         self.elbow.yaw.goal_position = target[2]
@@ -43,6 +46,15 @@ class Arm:
         self.wrist.roll.goal_position = target[4]
         self.wrist.pitch.goal_position = target[5]
         self.wrist.yaw.goal_position = target[6]
+
+    def goto_joints(self, target, duration=2):
+        interp = minimum_jerk(np.array(self.get_present_positions()), np.array(target), duration)
+        t0 = time.time()
+        while time.time() - t0 < duration:
+            t = time.time() - t0
+            self.set_goal_positions(interp(t))
+            time.sleep(0.01)
+            # self._update()
 
     # TODO implement
     def goto(self, target, duration=2):
@@ -53,7 +65,8 @@ class Arm:
             matrix : 4x4 matrix representing the target pose
         """
         # TODO implement duration
-
+        print(self.get_present_positions())
+        exit()
         target = np.array(target)
 
         if target.shape == (4, 4):
@@ -75,9 +88,9 @@ class Arm:
                 print(state)
                 return
 
-            self.set_goal_positions(sol)
+            Thread(target=self.goto_joints, args=(sol,)).start()
 
         elif len(target) == 7:
-            self.set_goal_positions(target)
+            Thread(target=self.goto_joints, args=(target,)).start()
         else:
             raise ValueError("Invalid target shape")

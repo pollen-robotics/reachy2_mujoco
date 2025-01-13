@@ -8,6 +8,7 @@ class Joint:
         self._data = data
         self._name = name
         self._index = get_actuator_index(self._model, self._name)
+        print(f"Joint {self._name} has index {self._index}")
 
         self.goal_position = 0  # expects degrees
 

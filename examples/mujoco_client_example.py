@@ -27,5 +27,6 @@ while True:
     im = np.array(reachy.cameras.teleop.get_frame(view=CameraView.LEFT))
     cv2.imshow("image", im)
     cv2.waitKey(1)
+    print(np.around(np.array(reachy.r_arm.get_present_positions())))
 
     time.sleep(1 / 60)
