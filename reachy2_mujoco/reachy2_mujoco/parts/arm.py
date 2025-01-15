@@ -47,12 +47,16 @@ class Arm:
         self.wrist.pitch.goal_position = target[5]
         self.wrist.yaw.goal_position = target[6]
 
+        self._update()
+
     def goto_joints(self, target, duration=2):
-        interp = minimum_jerk(np.array(self.get_present_positions()), np.array(target), duration)
+        # self._control_ik.previous_sol = np.deg2rad(self.get_present_positions())
+        interp = minimum_jerk(np.array(np.deg2rad(self.get_present_positions())), np.array(target), duration)
         t0 = time.time()
         while time.time() - t0 < duration:
             t = time.time() - t0
-            self.set_goal_positions(interp(t))
+            target = interp(t)
+            self.set_goal_positions(np.rad2deg(target))
             time.sleep(0.01)
             # self._update()
 
@@ -65,8 +69,6 @@ class Arm:
             matrix : 4x4 matrix representing the target pose
         """
         # TODO implement duration
-        print(self.get_present_positions())
-        exit()
         target = np.array(target)
 
         if target.shape == (4, 4):
@@ -78,7 +80,7 @@ class Arm:
                 f"{self._prefix}arm",
                 target,
                 "continuous",
-                current_joints=self.get_present_positions(),
+                current_joints=np.deg2rad(self.get_present_positions()),
                 constrained_mode="unconstrained",
                 # current_pose=current_pose,
                 d_theta_max=0.02,
@@ -87,7 +89,7 @@ class Arm:
                 print("Target is not reachable")
                 print(state)
                 return
-
+            print("SOL : ", np.rad2deg(sol))
             Thread(target=self.goto_joints, args=(sol,)).start()
 
         elif len(target) == 7:

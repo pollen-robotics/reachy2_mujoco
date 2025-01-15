@@ -1,5 +1,6 @@
 import numpy as np
 import time
+
 from reachy2_mujoco import ReachySDK, CameraView
 
 reachy = ReachySDK("localhost")
@@ -15,18 +16,24 @@ elbow_90 = np.array(
 )
 
 reachy.l_arm.shoulder.roll.goal_position = 40
+reachy.r_arm.shoulder.roll.goal_position = -40
 reachy.send_goal_positions()
 time.sleep(1)
-reachy.l_arm.shoulder.pitch.goal_position = -40
-reachy.send_goal_positions()
-while True:
-    pos = reachy.l_arm.get_present_positions()
-    print(np.around(np.array(pos)))
-# exit()
 
-# print(reachy.l_arm._control_ik)
 reachy.l_arm.goto(elbow_90)
-reachy.send_goal_positions()
+# reachy.send_goal_positions()
+
+time.sleep(2)
+
+# up = elbow_90.copy()
+# up[:3, 3] += np.array([0, 0, -0.2])
+
+# while True:
+#     reachy.l_arm.goto(up)
+#     time.sleep(2)
+#     reachy.l_arm.goto(elbow_90)
+#     time.sleep(2)
+
 
 
 # while True:

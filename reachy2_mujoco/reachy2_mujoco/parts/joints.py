@@ -1,23 +1,31 @@
 from reachy2_mujoco.utils import get_actuator_index
 import numpy as np
-
+import mujoco
 
 class Joint:
     def __init__(self, model, data, name):
         self._model = model
         self._data = data
         self._name = name
-        self._index = get_actuator_index(self._model, self._name)
-        print(f"Joint {self._name} has index {self._index}")
+        self._ctrl_index = get_actuator_index(self._model, self._name)
+
+        # self._qpos_index = self._model.actuator(self._name).trnid[0]
+
+        joint_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_JOINT, self._name)
+        self._qpos_index = self._model.jnt_qposadr[joint_id]
+
+        print(f"Joint {self._name} has ctrl index {self._ctrl_index} and qpos index {self._qpos_index}")
 
         self.goal_position = 0  # expects degrees
 
     @property
     def present_position(self):
-        return np.rad2deg(self._data.qpos[self._index])
+        return np.rad2deg(self._data.qpos[self._qpos_index])
 
     def _update(self):
-        self._data.ctrl[self._index] = self.goal_position * np.pi / 180
+        self._data.ctrl[self._ctrl_index] = self.goal_position * np.pi / 180
+
+        # print(f"{self._name} present_position : {self.present_position}")
 
 
 class Shoulder:
@@ -61,7 +69,8 @@ class Wrist:
 class Gripper(Joint):
     def __init__(self, model, data, prefix="l_"):
         super().__init__(model, data, name=f"{prefix}hand_finger")
-        self._limits = self._model.jnt_range[self._index]
+        # self._limits = self._model.jnt_range[self._ctrl_index]
+        self._limits = [-100, 100] # TODO fix
 
     def set_opening(self, percentage):
         self.goal_position = np.rad2deg(np.interp(percentage, [0, 100], self._limits))

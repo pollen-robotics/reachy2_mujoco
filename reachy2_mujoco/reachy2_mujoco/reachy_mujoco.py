@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import cv2
 import threading
 import time
@@ -60,6 +61,10 @@ class ReachyMujoco:
         pass
 
     def _update(self):
+        # maybe not necessary to update except mobile base
+        # self.l_arm._update()
+        # self.r_arm._update()
+        # self.head._update()
         self.mobile_base._update()
         if self.cameras is None:
             self.cameras = Cameras(self._model, self._data, 640, 480)
@@ -70,6 +75,13 @@ class ReachyMujoco:
             # cv2.imshow("left", left)
             # cv2.imshow("right", right)
             # cv2.waitKey(1)
+
+        # for i in range(len(self._data.qpos)):
+        #     print(f"{i} : {np.rad2deg(np.around(self._data.qpos[i], 2))}")
+
+        l_shoulder_roll_present_pos = self.l_arm.shoulder.roll.present_position
+        # print(f"l_shoulder_roll_present_pos : {l_shoulder_roll_present_pos}")
+        # print("===")
 
     def _run(self):
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
