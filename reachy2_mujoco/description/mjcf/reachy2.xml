@@ -27,6 +27,11 @@
         <!-- This looks good -->
         <joint damping="5" frictionloss="2.0" />
         <position kp="100" kv="10" />
+        <default class="gripper">
+            <joint damping="0.1" frictionloss="0.5" />
+            <position kp="20" kv="0" />
+        </default>
+
     </default>
     <worldbody>
         <body name="trunk">
@@ -377,6 +382,7 @@
                                                 axis="1 0 0"
                                                 range="0 2.27"
                                                 actuatorfrcrange="-50 50"
+                                                class="gripper"
                                             />
                                         </body>
                                         <body
@@ -396,6 +402,7 @@
                                                 axis="1 0 0"
                                                 range="-0.51 0.554"
                                                 actuatorfrcrange="-50 50"
+                                                class="gripper"
                                             />
                                             <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                                             <geom
@@ -419,6 +426,7 @@
                                                     axis="1 0 0"
                                                     range="-0.51 0.554"
                                                     actuatorfrcrange="-50 50"
+                                                    class="gripper"
                                                 />
                                                 <!-- <joint name="r_hand_finger_distal" pos="0 0 0" axis="1 0 0"/> -->
                                                 <geom type="mesh" mesh="pincette_distal_collider" />
@@ -449,6 +457,7 @@
                                                 axis="1 0 0"
                                                 range="-0.51 0.554"
                                                 actuatorfrcrange="-50 50"
+                                                class="gripper"
                                             />
                                             <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                                             <geom
@@ -472,6 +481,7 @@
                                                     axis="1 0 0"
                                                     range="-0.51 0.554"
                                                     actuatorfrcrange="-50 50"
+                                                    class="gripper"
                                                 />
                                                 <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
                                                 <geom
@@ -682,6 +692,7 @@
                                                 axis="1 0 0"
                                                 range="0 2.27"
                                                 actuatorfrcrange="-50 50"
+                                                class="gripper"
                                             />
                                         </body>
                                         <body
@@ -701,6 +712,7 @@
                                                 axis="1 0 0"
                                                 range="-0.51 0.554"
                                                 actuatorfrcrange="-50 50"
+                                                class="gripper"
                                             />
                                             <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                                             <geom
@@ -724,6 +736,7 @@
                                                     axis="1 0 0"
                                                     range="-0.51 0.554"
                                                     actuatorfrcrange="-50 50"
+                                                    class="gripper"
                                                 />
                                                 <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
                                                 <geom
@@ -753,6 +766,7 @@
                                                 axis="1 0 0"
                                                 range="-0.51 0.554"
                                                 actuatorfrcrange="-50 50"
+                                                class="gripper"
                                             />
                                             <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
                                             <geom
@@ -776,6 +790,7 @@
                                                     axis="1 0 0"
                                                     range="-0.51 0.554"
                                                     actuatorfrcrange="-50 50"
+                                                    class="gripper"
                                                 />
                                                 <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
                                                 <geom
@@ -948,12 +963,14 @@
             joint="r_hand_finger"
             gear="1"
             inheritrange="1"
+            class="gripper"
         />
         <position
             name="l_hand_finger"
             joint="l_hand_finger"
             gear="1"
             inheritrange="1"
+            class="gripper"
         />
     </actuator>
 </mujoco>

@@ -13,7 +13,7 @@ class CameraView(IntEnum):
 
 # TODO implement reachy.cameras.teleop.get_frame(left/right)
 class Camera:
-    def __init__(self, model, data, cam_name, width, height, offscreen: mujoco.Renderer, fps=30):
+    def __init__(self, model, data, cam_name, width, height, offscreen: mujoco.Renderer, fps=5):
         self._model = model
         self._data = data
         self._cam_name = cam_name
@@ -31,6 +31,8 @@ class Camera:
         self._depth_im = np.zeros((self._height, self._width), dtype=np.float32)
 
     def _update(self):
+        # This has a huge impact on the performance. Keep the fps low
+        # return
         if time.time() - self._last_update < 1 / self._fps:
             return
         self._offscreen.update_scene(self._data, self._left_camera_id)
