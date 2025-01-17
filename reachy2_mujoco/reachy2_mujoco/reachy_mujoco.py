@@ -24,7 +24,7 @@ class ReachyMujoco:
         self._urdf_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/modified_urdf/reachy2.urdf"
 
         self._model = mujoco.MjModel.from_xml_path(self._scene_path)
-        self._model.opt.timestep = 0.001
+        self._model.opt.timestep = 0.0005
         self._data = mujoco.MjData(self._model)
 
         self._control_ik = ControlIK(urdf_path=self._urdf_path, current_joints=[[0] * 7, [0] * 7])
@@ -75,10 +75,10 @@ class ReachyMujoco:
         with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
             i = 0
             while True:
-                mujoco.mj_step(self._model, self._data, 20)  # 4 seems good
+                mujoco.mj_step(self._model, self._data, 30)  # 4 seems good
                 self._update()
                 viewer.sync()
-                time.sleep(1 / 500)
+                # time.sleep(1 / 500)
                 i += 1
 
     def send_goal_positions(self, check_positions=False):

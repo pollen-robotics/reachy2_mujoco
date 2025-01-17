@@ -9,18 +9,18 @@
 
     <!-- simpleWoodTable -©vk©-->
     <body name="simpleWoodTable" pos="0 0 0"  childclass="body_simpleTable" >
-        <geom class="viz_simpleWoodTable" type="box" size=".6 .375 .025" pos="0 0 0.735"/>
-        <geom class="viz_simpleWoodTable" type="box" size="0.59 0.26 .05" pos="0 0 0.66"/>
-        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.305" pos="-0.565 0.235 0.305"/>
-        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.305" pos="-0.565 -0.235 0.305"/>
-        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.305" pos="0.565 0.235 0.305"/>
-        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.305" pos="0.565 -0.235 0.305"/>
+        <geom class="viz_simpleWoodTable" type="box" size=".6 .375 .025" pos="0 0 0.6"/>
+        <geom class="viz_simpleWoodTable" type="box" size="0.59 0.26 .05" pos="0 0 0.5"/>
+        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.250" pos="-0.565 0.235 0.250"/>
+        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.250" pos="-0.565 -0.235 0.250"/>
+        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.250" pos="0.565 0.235 0.250"/>
+        <geom class="viz_simpleWoodTable" type="box" size="0.025 0.025 0.250" pos="0.565 -0.235 0.250"/>
 
-        <geom type="box" size=".6 .375 .025" pos="0 0 0.735" mass="40" />
-        <geom type="box" size="0.59 0.26 .05" pos="0 0 0.66"/>
-        <geom type="box" size="0.025 0.025 0.305" pos="-0.565 0.235 0.305"/>
-        <geom type="box" size="0.025 0.025 0.305" pos="-0.565 -0.235 0.305"/>
-        <geom type="box" size="0.025 0.025 0.305" pos="0.565 0.235 0.305"/>
-        <geom type="box" size="0.025 0.025 0.305" pos="0.565 -0.235 0.305"/>
+        <geom type="box" size=".6 .375 .025" pos="0 0 0.6" mass="40" />
+        <geom type="box" size="0.59 0.26 .05" pos="0 0 0.5"/>
+        <geom type="box" size="0.025 0.025 0.250" pos="-0.565 0.235 0.250"/>
+        <geom type="box" size="0.025 0.025 0.250" pos="-0.565 -0.235 0.250"/>
+        <geom type="box" size="0.025 0.025 0.250" pos="0.565 0.235 0.250"/>
+        <geom type="box" size="0.025 0.025 0.250" pos="0.565 -0.235 0.250"/>
     </body>
 </mujocoinclude>
