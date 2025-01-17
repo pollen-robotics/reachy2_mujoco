@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import cv2
 import threading
 import time
@@ -8,9 +9,9 @@ import mujoco.viewer
 
 from reachy2_mujoco.parts import Arm, Cameras, Head, MobileBase
 from reachy2_mujoco.parts.cameras import CameraView
+from reachy2_symbolic_ik.control_ik import ControlIK
 
-# import os
-# os.environ['MUJOCO_GL'] = 'egl'
+os.environ['MUJOCO_GL'] = 'egl'
 
 # with freejoint
 # qpos = [x, y, z, qw, qx, qy, qz]
@@ -19,15 +20,19 @@ from reachy2_mujoco.parts.cameras import CameraView
 
 class ReachyMujoco:
     def __init__(self):
-        scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/table_scene.xml"
+        self._scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/table_scene.xml"
+        self._urdf_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/modified_urdf/reachy2.urdf"
 
-        self._model = mujoco.MjModel.from_xml_path(scene_path)
+        self._model = mujoco.MjModel.from_xml_path(self._scene_path)
         self._model.opt.timestep = 0.001
         self._data = mujoco.MjData(self._model)
+
+        self._control_ik = ControlIK(urdf_path=self._urdf_path, current_joints=[[0] * 7, [0] * 7])
+
         mujoco.mj_step(self._model, self._data)
 
-        self.l_arm = Arm(self._model, self._data, prefix="l_")
-        self.r_arm = Arm(self._model, self._data, prefix="r_")
+        self.l_arm = Arm(self._model, self._data, self._control_ik, prefix="l_")
+        self.r_arm = Arm(self._model, self._data, self._control_ik, prefix="r_")
         self.head = Head(self._model, self._data)
         self.mobile_base = MobileBase(self._model, self._data)
 
@@ -57,7 +62,7 @@ class ReachyMujoco:
     def _update(self):
         self.mobile_base._update()
         if self.cameras is None:
-            self.cameras = Cameras(self._model, self._data, 640, 480)
+            self.cameras = Cameras(self._model, self._data, 640, 480)       
         else:
             self.cameras._update()
             # left = self.cameras.teleop.get_frame(view=CameraView.LEFT)
@@ -73,7 +78,7 @@ class ReachyMujoco:
                 mujoco.mj_step(self._model, self._data, 20)  # 4 seems good
                 self._update()
                 viewer.sync()
-                time.sleep(1 / 500)
+                # time.sleep(1 / 500)
                 i += 1
 
     def send_goal_positions(self, check_positions=False):
