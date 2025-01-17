@@ -6,8 +6,6 @@
 pip install -e .
 ```
 
-Install https://github.com/pollen-robotics/reachy2_symbolic_ik (private repo for now. Will be added as a dependency when made public)
-
 ## Usage
 
 Run the server :
