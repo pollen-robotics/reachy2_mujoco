@@ -1,11 +1,10 @@
 <mujoco model="reachy2 scene">
 	<!-- <statistic center="0 0 0.55" extent="1.1" /> -->
 	<include file="reachy2.xml" />
-    <include file="assets/simpleTable_asset.xml"/>
+	<include file="assets/simpleTable_asset.xml"/>
 	<default>
 		<!-- TODO tried doubling sliding friction -->
 		<geom friction="0.1 0.005 0.0001"/>
-		
 	</default>
 	<visual>
 		<headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
@@ -22,9 +21,13 @@
 		<body name="floor">
 			<geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane" conaffinity="1" contype="1" />
 		</body>
-        <body pos="1 0 0" euler="0 0 1.57">
-            <freejoint/>
-            <include file="assets/simpleWoodTable_body.xml" />
-        </body>
+		<body pos="1 0 0" euler="0 0 1.57">
+			<freejoint/>
+			<include file="assets/simpleWoodTable_body.xml" />
+		</body>
+		<body name="goal" pos="0.7 0. 0.8">
+			<freejoint />
+			<geom type="box" size="0.03 0.03 0.03" rgba="1.0 0 0 1" conaffinity="1" contype="1" />
+		</body>
 	</worldbody>
 </mujoco>
