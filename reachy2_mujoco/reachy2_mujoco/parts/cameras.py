@@ -28,13 +28,22 @@ class Camera:
         self._right_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, "right_" + self._cam_name)
         self._left_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
         self._right_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
-        self._depth_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
+        self._depth_im = np.zeros((self._height, self._width), dtype=np.float32)
 
     def _update(self):
         if time.time() - self._last_update < 1 / self._fps:
             return
         self._offscreen.update_scene(self._data, self._left_camera_id)
-        self._offscreen.render(out=self._left_im)
+        self._left_im = self._offscreen.render()
+        # return
+        self._offscreen.enable_depth_rendering()
+        # self._offscreen.update_scene(self._data, self._left_camera_id)
+        self._depth_im = self._offscreen.render()
+        self._offscreen.disable_depth_rendering()
+        # return
+        # self._depth_im -= self._depth_im.min()
+        # self._depth_im /= 2 * self._depth_im[self._depth_im <= 1].mean()
+        # self._depth_im = 255 * np.clip(self._depth_im, 0, 1)
 
         self._offscreen.update_scene(self._data, self._right_camera_id)
         self._offscreen.render(out=self._right_im)
@@ -44,9 +53,8 @@ class Camera:
             return np.array(cv2.cvtColor(self._left_im, cv2.COLOR_RGB2BGR))
         elif view.value == CameraView.RIGHT.value:
             return cv2.cvtColor(self._right_im, cv2.COLOR_RGB2BGR)
-        elif view.value == CameraView.DEPTH.value:  # TODO implement
-            print("Depth camera not implemented yet")
-            return cv2.cvtColor(self._depth_im, cv2.COLOR_RGB2BGR)
+        elif view.value == CameraView.DEPTH.value:
+            return self._depth_im
         else:
             raise ValueError("Unknown view")
 
@@ -58,6 +66,7 @@ class Cameras:
         self._width = width
         self._height = height
         self._offscreen = mujoco.Renderer(self._model, height=self._height, width=self._width)
+        # self._offscreen.enable_depth_rendering()
 
         self.teleop = Camera(self._model, self._data, "teleop_cam", self._width, self._height, self._offscreen)
 

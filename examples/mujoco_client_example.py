@@ -16,16 +16,18 @@ while True:
 
     reachy.r_arm.gripper.set_opening(100 if pos > 0 else 0)
 
-    reachy.head.neck.roll.goal_position = np.rad2deg(pos)
-    reachy.head.neck.pitch.goal_position = np.rad2deg(pos)
-    reachy.head.neck.yaw.goal_position = np.rad2deg(pos)
+    # reachy.head.neck.roll.goal_position = np.rad2deg(pos)
+    reachy.head.neck.pitch.goal_position = 30
+    # reachy.head.neck.yaw.goal_position = np.rad2deg(pos)
 
     mobile_base_pos = [-1, -1, -np.pi / 2] if pos > 0 else [0, 0, 0]
     reachy.mobile_base.goto(*mobile_base_pos)
 
     reachy.send_goal_positions()
-    im = np.array(reachy.cameras.teleop.get_frame(view=CameraView.LEFT))
-    cv2.imshow("image", im)
+    left = np.array(reachy.cameras.teleop.get_frame(view=CameraView.LEFT))
+    depth = np.array(reachy.cameras.teleop.get_frame(view=CameraView.DEPTH))
+    cv2.imshow("depth", depth)
+    cv2.imshow("left", left)
     cv2.waitKey(1)
     print(np.around(np.array(reachy.r_arm.get_present_positions())))
 
