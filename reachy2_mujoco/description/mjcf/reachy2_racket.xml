@@ -35,7 +35,7 @@
     <default>
         <!-- This looks good -->
         <joint damping="10" frictionloss="2.0" />
-        <position kp="300" kv="2" />
+        <position kp="500" kv="2" />
         <default class="gripper">
             <joint damping="0.1" frictionloss="0.5" />
             <position kp="50" kv="0" />

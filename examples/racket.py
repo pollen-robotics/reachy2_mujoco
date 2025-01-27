@@ -98,6 +98,7 @@ while True:
     # offset = [5, 0]
     error = plane_center_pos - ball_pos
     print(error)
+    # error = [0, 0]
     control = PD_control(args.kp, args.kd, error, ball_vel)
     control = np.clip(control, -20, 20)
     T_torso_hand = fv_utils.rotateInSelf(
