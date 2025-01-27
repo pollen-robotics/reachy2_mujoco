@@ -1,0 +1,13 @@
+<mujoco model="onshape">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="part_1" file="part_1.stl"/>
+  </asset>
+  <worldbody>
+    <body name="racket" pos="0.6 0.2 0.7" euler="0 0 -1.57">
+      <freejoint/>
+      <site name='racket_handle' size='0.01' pos='-0.1 -0.25 0.0'/>
+      <geom pos="-0.0993345 0.0124218 -0.0162676" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="part_1" mass="1" conaffinity="1" contype="1"/>
+    </body>
+  </worldbody>
+</mujoco>

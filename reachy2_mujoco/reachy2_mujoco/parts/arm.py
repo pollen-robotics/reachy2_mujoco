@@ -27,15 +27,17 @@ class Arm:
         self.gripper._update()
 
     def get_present_positions(self):
-        return np.array([
-            self.shoulder.pitch.present_position,
-            self.shoulder.roll.present_position,
-            self.elbow.yaw.present_position,
-            self.elbow.pitch.present_position,
-            self.wrist.roll.present_position,
-            self.wrist.pitch.present_position,
-            self.wrist.yaw.present_position,
-        ])
+        return np.array(
+            [
+                self.shoulder.pitch.present_position,
+                self.shoulder.roll.present_position,
+                self.elbow.yaw.present_position,
+                self.elbow.pitch.present_position,
+                self.wrist.roll.present_position,
+                self.wrist.pitch.present_position,
+                self.wrist.yaw.present_position,
+            ]
+        )
 
     def set_goal_positions(self, target):
         # target = -target
@@ -60,6 +62,30 @@ class Arm:
             time.sleep(0.01)
             # self._update()
 
+    def get_ik_sol(self, target):
+        sol, is_reachable, state = self._control_ik.symbolic_inverse_kinematics(
+            f"{self._prefix}arm",
+            target,
+            "continuous",
+            current_joints=np.deg2rad(self.get_present_positions()),
+            constrained_mode="unconstrained",
+            # current_pose=current_pose,
+            d_theta_max=0.02,
+        )
+        return sol, is_reachable, state
+
+    def set_target(self, target):
+        target = np.array(target)
+        sol, is_reachable, state = self.get_ik_sol(target)
+        if not is_reachable:
+            print("Target is not reachable")
+            print(state)
+            print("===")
+            return
+
+        self.set_goal_positions(np.rad2deg(sol))
+
+
     # TODO implement
     def goto(self, target, duration=2):
         """
@@ -76,20 +102,12 @@ class Arm:
             # target = self._control_ik.symbolic_ik_solver(target)
             #
             # target = self._control_ik.symbolic_inverse_kinematics(name=self._prefix)
-            sol, is_reachable, state = self._control_ik.symbolic_inverse_kinematics(
-                f"{self._prefix}arm",
-                target,
-                "continuous",
-                current_joints=np.deg2rad(self.get_present_positions()),
-                constrained_mode="unconstrained",
-                # current_pose=current_pose,
-                d_theta_max=0.02,
-            )
+            sol, is_reachable, state = self.get_ik_sol(target)
             if not is_reachable:
                 print("Target is not reachable")
                 print(state)
                 return
-            print("SOL : ", np.rad2deg(sol))
+            # print("SOL : ", np.rad2deg(sol))
             Thread(target=self.goto_joints, args=(sol,)).start()
 
         elif len(target) == 7:

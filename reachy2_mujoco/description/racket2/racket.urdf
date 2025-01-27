@@ -1,0 +1,39 @@
+<robot name="onshape">
+    <link name="handle">
+        <visual>
+            <origin xyz="-0.20073520552319129573 0.071549184375637842059 0.016564167562597549577" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="package:///plane.stl"/>
+            </geometry>
+            <material name="plane_material">
+                <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.20073520552319129573 0.071549184375637842059 0.016564167562597549577" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="package:///plane.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="-0.20073520552319132348 0.071549184375637869815 0.016564167562597542638" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="package:///handle.stl"/>
+            </geometry>
+            <material name="handle_material">
+                <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="-0.20073520552319132348 0.071549184375637869815 0.016564167562597542638" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="package:///handle.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0" />
+            <inertia ixx="0" ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+        </inertial>
+    </link>
+</robot>

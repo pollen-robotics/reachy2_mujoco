@@ -1,10 +1,12 @@
 <mujoco model="reachy2 scene">
 	<!-- <statistic center="0 0 0.55" extent="1.1" /> -->
-	<include file="reachy2.xml" />
-	<include file="assets/simpleTable_asset.xml"/>
+	<include file="reachy2_racket.xml" />
+	<!-- <include file="assets/simpleTable_asset.xml"/> -->
 	<!-- <include file="../racket2/racket.xml"/> -->
 	<default>
 		<geom friction="0.1 0.005 0.0001"/>
+		<!-- for the ball -->
+		<!-- <geom friction="1.0 0.005 0.0001"/>  -->
 	</default>
 
 	<option>
@@ -26,13 +28,9 @@
 		<body name="floor">
 			<geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane" conaffinity="1" contype="1" />
 		</body>
-		<body pos="0.75 0 0" euler="0 0 1.57">
-			<freejoint/>
-			<include file="assets/simpleWoodTable_body.xml" />
-		</body>
 		<body name="ball" pos="0.45 -0.3 0.8">
 			<freejoint />
-			<geom type="sphere" size="0.03 0.03 0.03" rgba="1.0 0 0 1" conaffinity="1" contype="1" mass="0.05"/>
+			<geom friction="1 0.5 1" type="sphere" size="0.03 0.03 0.03" rgba="1.0 0 0 1" conaffinity="1" contype="1" mass="0.01"/>
 		</body>
 	</worldbody>
 </mujoco>

@@ -1,0 +1,14 @@
+<mujoco model="onshape">
+  <compiler angle="radian"/>
+  <asset>
+    <mesh name="plane" file="plane.stl"/>
+    <mesh name="handle" file="handle.stl"/>
+  </asset>
+  <worldbody>
+    <body name="racket" pos="0.6 0.2 0.7" euler="0 0 -1.57">
+      <!-- <freejoint/> -->
+      <geom pos="-0.200735 0.0715492 0.0165642" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="plane" conaffinity="1" contype="1"/>
+      <geom pos="-0.200735 0.0715492 0.0165642" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="handle" conaffinity="1" contype="1" name="handle"/>
+    </body>
+  </worldbody>
+</mujoco>

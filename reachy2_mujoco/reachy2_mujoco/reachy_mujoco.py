@@ -11,7 +11,7 @@ from reachy2_mujoco.parts import Arm, Cameras, Head, MobileBase
 from reachy2_mujoco.parts.cameras import CameraView
 from reachy2_symbolic_ik.control_ik import ControlIK
 
-os.environ['MUJOCO_GL'] = 'egl'
+os.environ["MUJOCO_GL"] = "egl"
 
 # with freejoint
 # qpos = [x, y, z, qw, qx, qy, qz]
@@ -20,7 +20,8 @@ os.environ['MUJOCO_GL'] = 'egl'
 
 class ReachyMujoco:
     def __init__(self):
-        self._scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/table_scene.xml"
+        self._scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/ball_racket_scene.xml"
+        # self._scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/table_scene.xml"
         self._urdf_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/modified_urdf/reachy2.urdf"
 
         self._model = mujoco.MjModel.from_xml_path(self._scene_path)
@@ -62,7 +63,7 @@ class ReachyMujoco:
     def _update(self):
         self.mobile_base._update()
         if self.cameras is None:
-            self.cameras = Cameras(self._model, self._data, 640, 480)       
+            self.cameras = Cameras(self._model, self._data, 640, 480)
         else:
             self.cameras._update()
             # left = self.cameras.teleop.get_frame(view=CameraView.LEFT)
@@ -71,8 +72,15 @@ class ReachyMujoco:
             # cv2.imshow("right", right)
             # cv2.waitKey(1)
 
+    def key_callback(self, keycode):
+        pass
+        # if keycode == 257:  # enter
+        #     print("AAAAAAAA")
+
     def _run(self):
-        with mujoco.viewer.launch_passive(self._model, self._data, show_left_ui=False, show_right_ui=False) as viewer:
+        with mujoco.viewer.launch_passive(
+            self._model, self._data, show_left_ui=False, show_right_ui=False, key_callback=self.key_callback
+        ) as viewer:
             i = 0
             while True:
                 mujoco.mj_step(self._model, self._data, 20)  # 4 seems good

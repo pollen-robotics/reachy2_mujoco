@@ -22,11 +22,20 @@
         <mesh name="pincette_distal" file="pincette_distal.obj" />
         <mesh name="pincette_left_collider" file="pincette_left_collider.obj" />
         <mesh name="pincette_left_visual" file="pincette_left_visual.obj" />
+        <mesh name="plane" file="plane.stl"/>
+        <mesh name="handle" file="handle.stl"/>
     </asset>
+    <contact>
+        <exclude name="exclude1" body1="racket" body2="trunk"/>
+        <exclude name="exclude2" body1="racket" body2="floor"/>
+        <!-- <exclude name="exclude3" body1="racket" body2="l_hand_finger"/> -->
+        <exclude name="exclude4" body1="racket" body2="l_hand_proximal_link"/>
+        <exclude name="exclude5" body1="racket" body2="l_hand_distal_link"/>
+    </contact>
     <default>
         <!-- This looks good -->
         <joint damping="10" frictionloss="2.0" />
-        <position kp="200" kv="10" />
+        <position kp="300" kv="2" />
         <default class="gripper">
             <joint damping="0.1" frictionloss="0.5" />
             <position kp="50" kv="0" />
@@ -694,6 +703,10 @@
                                                 actuatorfrcrange="-50 50"
                                                 class="gripper"
                                             />
+                                        </body>
+                                        <body name="racket" pos="-0.05 -0.2 -0.3" euler="1.57 1.57 3.14">
+                                            <geom friction="1 0.5 1" pos="-0.200735 0.0715492 0.0165642" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="plane" conaffinity="1" contype="1" name="plane_center"/>
+                                            <geom pos="-0.200735 0.0715492 0.0165642" type="mesh" rgba="0.615686 0.811765 0.929412 1" mesh="handle" conaffinity="1" contype="1" name="handle"/>
                                         </body>
                                         <body
                                             name="l_hand_proximal_link"
