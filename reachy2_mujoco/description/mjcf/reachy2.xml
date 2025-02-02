@@ -1,5 +1,8 @@
 <mujoco model="reachy2">
     <compiler angle="radian" meshdir="./obj_meshes/" />
+    <visual>
+        <map znear="0.01" zfar="10.0" />  <!-- Set near and far clipping planes for depth -->
+    </visual>
     <asset>
         <mesh name="mobile_base_visual" file="mobile_base_visual.obj" />
         <mesh name="torso_visual_high" file="torso_visual_high.obj" />
@@ -22,6 +25,12 @@
         <mesh name="pincette_distal" file="pincette_distal.obj" />
         <mesh name="pincette_left_collider" file="pincette_left_collider.obj" />
         <mesh name="pincette_left_visual" file="pincette_left_visual.obj" />
+        <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+            height="3072" />
+        <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+            rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+        <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+            reflectance="0.2" />
     </asset>
     <default>
         <!-- This looks good -->
@@ -34,9 +43,28 @@
 
     </default>
     <worldbody>
+        <light pos="0 0 3" dir="0 0 -1" directional="false" />
+        <body name="floor">
+            <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane"
+                conaffinity="1" contype="1" />
+        </body>
+        <!-- <body name="boxKiFaitTomber">
+            <freejoint />
+            <geom name="boxKiFaitTomber_geom" type="box" size="2.2 2.2 0.2" pos="1 0 0.5" mass="2"
+                rgba="0 0 1 1" />
+        </body> -->
+        <body name="box">
+            <freejoint />
+            <geom name="box_geom" type="box" size="0.2 0.2 0.2" pos="2 0 0" mass="2"
+                rgba="0 0 1 1" />
+        </body>
+
+
         <body name="trunk">
             <freejoint />
-            <site name="torso" pos="-0.05 0.0 1.02 "/>
+            <site name="torso" pos="-0.05 0.0 1.02 " />
+            <camera name="torso_cam" pos="0.2 0.0 1.2" euler="0.0 -0.2 -1.57" />
+
             <geom
                 type="mesh"
                 contype="0"
@@ -293,7 +321,8 @@
                                 density="0"
                                 mesh="forearm_visual"
                             />
-                            <!-- <geom quat="2.31079e-07 0.707107 0.707107 2.31079e-07" type="mesh" mesh="forearm_collider"/> -->
+                            <!-- <geom quat="2.31079e-07 0.707107 0.707107 2.31079e-07" type="mesh"
+                            mesh="forearm_collider"/> -->
                             <body
                                 name="r_wrist_dummy_link1"
                                 pos="1.83005e-07 0 -0.28"
@@ -355,7 +384,8 @@
                                             type="cylinder"
                                             rgba="0.8 0.8 0.8 1"
                                         />
-                                        <!-- <geom quat="3.26795e-07 1 0 0" type="mesh" mesh="pincette_right_collider"/> -->
+                                        <!-- <geom quat="3.26795e-07 1 0 0" type="mesh"
+                                        mesh="pincette_right_collider"/> -->
                                         <geom
                                             quat="3.26795e-07 1 0 0"
                                             type="mesh"
@@ -376,7 +406,8 @@
                                                 mass="0.001"
                                                 diaginertia="1.02e-06 9.9e-07 9.9e-07"
                                             />
-                                            <!-- <joint name="r_hand_finger" pos="0 0 0" axis="1 0 0" range="0 2.27" actuatorfrcrange="-50 50"/> -->
+                                            <!-- <joint name="r_hand_finger" pos="0 0 0" axis="1 0
+                                            0" range="0 2.27" actuatorfrcrange="-50 50"/> -->
                                             <joint
                                                 name="r_hand_finger"
                                                 pos="0 0 0"
@@ -405,7 +436,8 @@
                                                 actuatorfrcrange="-50 50"
                                                 class="gripper"
                                             />
-                                            <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
+                                            <!-- <geom type="mesh"
+                                            mesh="pincette_proximal_collider"/> -->
                                             <geom
                                                 type="mesh"
                                                 contype="0"
@@ -429,7 +461,8 @@
                                                     actuatorfrcrange="-50 50"
                                                     class="gripper"
                                                 />
-                                                <!-- <joint name="r_hand_finger_distal" pos="0 0 0" axis="1 0 0"/> -->
+                                                <!-- <joint name="r_hand_finger_distal" pos="0 0 0"
+                                                axis="1 0 0"/> -->
                                                 <geom type="mesh" mesh="pincette_distal_collider" />
                                                 <geom
                                                     type="mesh"
@@ -460,7 +493,8 @@
                                                 actuatorfrcrange="-50 50"
                                                 class="gripper"
                                             />
-                                            <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
+                                            <!-- <geom type="mesh"
+                                            mesh="pincette_proximal_collider"/> -->
                                             <geom
                                                 type="mesh"
                                                 contype="0"
@@ -484,7 +518,7 @@
                                                     actuatorfrcrange="-50 50"
                                                     class="gripper"
                                                 />
-                                                <geom type="mesh" mesh="pincette_distal_collider"/>
+                                                <geom type="mesh" mesh="pincette_distal_collider" />
                                                 <geom
                                                     type="mesh"
                                                     contype="0"
@@ -604,7 +638,8 @@
                                 density="0"
                                 mesh="forearm_visual"
                             />
-                            <!-- <geom quat="2.31079e-07 0.707107 0.707107 2.31079e-07" type="mesh" mesh="forearm_collider"/> -->
+                            <!-- <geom quat="2.31079e-07 0.707107 0.707107 2.31079e-07" type="mesh"
+                            mesh="forearm_collider"/> -->
                             <body
                                 name="l_wrist_dummy_link1"
                                 pos="1.83005e-07 0 -0.28"
@@ -666,7 +701,8 @@
                                             type="cylinder"
                                             rgba="0.8 0.8 0.8 1"
                                         />
-                                        <!-- <geom quat="3.26795e-07 1 0 0" type="mesh" mesh="pincette_left_collider"/> -->
+                                        <!-- <geom quat="3.26795e-07 1 0 0" type="mesh"
+                                        mesh="pincette_left_collider"/> -->
                                         <geom
                                             quat="3.26795e-07 1 0 0"
                                             type="mesh"
@@ -715,7 +751,8 @@
                                                 actuatorfrcrange="-50 50"
                                                 class="gripper"
                                             />
-                                            <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
+                                            <!-- <geom type="mesh"
+                                            mesh="pincette_proximal_collider"/> -->
                                             <geom
                                                 type="mesh"
                                                 contype="0"
@@ -739,7 +776,7 @@
                                                     actuatorfrcrange="-50 50"
                                                     class="gripper"
                                                 />
-                                                <geom type="mesh" mesh="pincette_distal_collider"/>
+                                                <geom type="mesh" mesh="pincette_distal_collider" />
                                                 <geom
                                                     type="mesh"
                                                     contype="0"
@@ -769,7 +806,8 @@
                                                 actuatorfrcrange="-50 50"
                                                 class="gripper"
                                             />
-                                            <!-- <geom type="mesh" mesh="pincette_proximal_collider"/> -->
+                                            <!-- <geom type="mesh"
+                                            mesh="pincette_proximal_collider"/> -->
                                             <geom
                                                 type="mesh"
                                                 contype="0"
@@ -793,7 +831,8 @@
                                                     actuatorfrcrange="-50 50"
                                                     class="gripper"
                                                 />
-                                                <!-- <geom type="mesh" mesh="pincette_distal_collider"/> -->
+                                                <!-- <geom type="mesh"
+                                                mesh="pincette_distal_collider"/> -->
                                                 <geom
                                                     type="mesh"
                                                     contype="0"
