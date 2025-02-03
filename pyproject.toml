@@ -1,9 +1,43 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
 
-[tool.isort]
-profile = "black"
+[project]
+name = "reachy2_mujoco"
+version = "0.1.0"
+authors = [{name = "Pollen Robotics", email = "contact@pollen-robotics.com"}]
+description = "Reachy2 mujoco fake server"
+dependencies = [
+    "rpyc==6.0.1",
+    "mujoco==3.2.7",
+    "pyquaternion==0.9.9",
+    "opencv-contrib-python==4.10.0.84",
+    "reachy2_symbolic_ik @ git+https://github.com/pollen-robotics/reachy2_symbolic_ik@110-scipy-version-dependency",
+    "FramesViewer==1.0.2",
+]
+# requires-python = "== 3.10.*"
+requires-python = ">=3.10"
 
-[tool.black]
-line-length = 128
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+Homepage = "https://github.com/pollen-robotics/reachy2_mujoco"
+
+[project.scripts]
+reachy2-mujoco = "reachy2_mujoco.mujoco_server:main"
+
+[tool.setuptools]
+zip-safe = true
+include-package-data = true
+package-dir = {"" = "reachy2_mujoco"}
+
+[tool.setuptools.packages.find]
+where = ["reachy2_mujoco"]
+namespaces = false
+
+[tool.uv]
+environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'"
+]
