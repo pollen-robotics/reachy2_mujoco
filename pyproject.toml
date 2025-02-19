@@ -4,16 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reachy2_mujoco"
-version = "0.1.0"
+version = "0.1.1"
 authors = [{name = "Pollen Robotics", email = "contact@pollen-robotics.com"}]
 description = "Reachy2 mujoco fake server"
 dependencies = [
-    "rpyc==6.0.1",
-    "mujoco==3.2.7",
-    "pyquaternion==0.9.9",
-    "opencv-contrib-python==4.8.0.74",
-    "reachy2_symbolic_ik @ git+https://github.com/pollen-robotics/reachy2_symbolic_ik@110-scipy-version-dependency",
-    "FramesViewer==1.0.2",
+    "rpyc>=6.0.1",
+    "mujoco>=3.2.7",
+    "pyquaternion>=0.9.9",
+    "opencv-contrib-python>=4.9.0.80,<5.0.0.0",
+    "reachy2_symbolic_ik @ git+https://github.com/pollen-robotics/reachy2_symbolic_ik@110-scipy-version-dependency_2",
+    "FramesViewer>=1.0.2",
 ]
 # requires-python = "== 3.10.*"
 requires-python = ">=3.10"
