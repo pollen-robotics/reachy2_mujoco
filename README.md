@@ -1,6 +1,9 @@
 # Reachy2 fake mujoco sdk server
 
-You can interact with Reachy2 in mujoco through Reachy2's sdk! 
+You can interact with Reachy2 in mujoco through Reachy2's (fake) sdk! 
+
+![Capture d’écran du 2025-02-20 10-12-34](https://github.com/user-attachments/assets/d363d60a-0881-483e-8240-3dab9250eee8)
+
 
 For now this is a re-implementation of the sdk, far from feature complete, but with enough basic fonctionnality to perform complex tasks.
 
@@ -9,6 +12,8 @@ Features :
 - cartesian control with goto 
 - mobile base control
 - access to the cameras
+
+> This is an early prototype, expect bugs :)
 
 ## Installation
 
@@ -39,6 +44,16 @@ reachy.r_arm.shoulder_pitch.goal_position = np.pi/2
 
 reachy.send_goal_positions()
 ```
+
+## Demos
+
+https://github.com/user-attachments/assets/71dba964-e955-49fd-96fd-f75069f70bb4
+
+https://github.com/user-attachments/assets/5f57de88-49db-4243-ae3a-73185efffbfc
+
+https://github.com/user-attachments/assets/60fa3aa7-9cdc-45d8-9a1d-d74ed3cb4301
+
+
 
 ## TODO
 - Match mobile base behavior with real one
