@@ -5,7 +5,7 @@ You can interact with Reachy2 in mujoco through Reachy2's (fake) sdk!
 ![Capture d’écran du 2025-02-20 10-12-34](https://github.com/user-attachments/assets/d363d60a-0881-483e-8240-3dab9250eee8)
 
 
-For now this is a re-implementation of the sdk, far from feature complete, but with enough basic fonctionnality to perform complex tasks.
+For now this is a minimalistic re-implementation of the sdk, far from feature complete, but with enough basic fonctionnality to perform complex tasks.
 
 Features :
 - joint space control
