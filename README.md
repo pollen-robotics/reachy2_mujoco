@@ -17,6 +17,8 @@ Features :
 
 ## Installation
 
+> Using a virtual environment is advised
+
 ```bash
 pip install -e .
 ```
