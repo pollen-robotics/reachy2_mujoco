@@ -9,7 +9,7 @@ For now this is a re-implementation of the sdk, far from feature complete, but w
 
 Features :
 - joint space control
-- cartesian control with goto 
+- 6D end effector space control with goto and Reachy2's [symbolic ik](https://github.com/pollen-robotics/reachy2_symbolic_ik)
 - mobile base control
 - access to the cameras (rgb and depth)
 
