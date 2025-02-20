@@ -11,7 +11,7 @@ Features :
 - joint space control
 - cartesian control with goto 
 - mobile base control
-- access to the cameras
+- access to the cameras (rgb and depth)
 
 > This is an early prototype, expect bugs :)
 
@@ -60,4 +60,5 @@ https://github.com/user-attachments/assets/60fa3aa7-9cdc-45d8-9a1d-d74ed3cb4301
 ## TODO
 - Match mobile base behavior with real one
 - Better tune the actuators to match real behavior (ideally, perform system identification)
+- Check that depth is metric
 - Improve performance
