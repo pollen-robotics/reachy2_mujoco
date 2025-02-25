@@ -87,30 +87,33 @@
             <inertial pos="-0.051614 -0.000471 -0.018363" quat="0.708121 0.704566 0.0268143 -0.0378516" mass="6.314" diaginertia="0.0741454 0.0547883 0.0445377"/>
             <geom type="mesh" mesh="torso_visual" class="visual"/>
             <geom type="mesh" mesh="torso_collider" class="collider"/>
-            <!-- <body name="left_bar_inner" pos="0 0.048 -0.258" quat="0.995449 0 0 0.0952985"> -->
-            <!--   <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/> -->
-            <!--   <joint name="left_bar_joint_mimic" pos="0 0 0" axis="0 1 0" range="-1 1" actuatorfrcrange="-0.01 0.01"  /> -->
-            <!--   <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="0.8 0.8 0.8 1"/> -->
-            <!--   <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1"/> -->
-            <!--   <body name="left_bar_base" pos="0 0 -0.485"> -->
-            <!--     <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/> -->
-            <!--     <joint name="left_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide" range="-1 1" actuatorfrcrange="-1 1"  /> -->
-            <!--     <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="0.8 0.8 0.8 1"/> -->
-            <!--     <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1"/> -->
-            <!--   </body> -->
-            <!-- </body> -->
-            <!-- <body name="right_bar_inner" pos="0 -0.048 -0.258" quat="0.995449 0 0 -0.0952985"> -->
-            <!--   <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/> -->
-            <!--   <joint name="right_bar_joint_mimic" pos="0 0 0" axis="0 1 0" range="-1 1" actuatorfrcrange="-0.01 0.01"  /> -->
-            <!--   <!-\- <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="0.8 0.8 0.8 1"/> -\-> -->
-            <!--   <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
-            <!--   <body name="right_bar_base" pos="0 0 -0.485"> -->
-            <!--     <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/> -->
-            <!--     <joint name="right_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide" range="-1 1" actuatorfrcrange="-1 1"  /> -->
-            <!--     <!-\- <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="0.8 0.8 0.8 1"/> -\-> -->
-            <!--     <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
-            <!--   </body> -->
-            <!-- </body> -->
+
+            <body name="left_bar_inner" pos="0 0.048 -0.258" quat="0.995449 0 0 0.0952985">
+
+              <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/>
+              <joint name="left_bar_joint_mimic" pos="0 0 0" axis="0 1 0"   />
+              <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" density="0" rgba="0.8 0.8 0.8 1" class="visual"/>
+              <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+              <body name="left_bar_base" pos="0 0 -0.485">
+                <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/>
+                <joint name="left_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide" range="0 1" actuatorfrcrange="-0.1 0.1"  />
+                <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
+                <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+              </body>
+            </body>
+            <body name="right_bar_inner" pos="0 -0.048 -0.258" quat="0.995449 0 0 -0.0952985">
+              <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/>
+              <joint name="right_bar_joint_mimic" pos="0 0 0" axis="0 1 0" range="-1 1" actuatorfrcrange="-0.01 0.01"  />
+              <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
+              <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+              <body name="right_bar_base" pos="0 0 -0.485">
+                <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/>
+                <joint name="right_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide" range="-1 1" actuatorfrcrange="-1 1"  />
+                <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
+                <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+              </body>
+            </body>
+
             <body name="neck_base_link" pos="0 0 0.115" quat="0.996195 0 0.0871557 0">
               <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
               <body name="neck_dummy_link1">
@@ -147,18 +150,26 @@
                             <geom type="mesh"  rgba="0.9 0.9 0.9 1" mesh="head_antenna_visual" class="visual"/>
                           </body>
                           <body name="left_camera" pos="0.03531 0.0325 0.062">
-                            <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06 1e-06"/>
-                            <body name="left_camera_optical" quat="0.5 -0.5 0.5 -0.5">
-                              <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
+                            <!-- <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06 1e-06"/> -->
+                            <!-- <body name="left_camera_optical" quat="0.5 -0.5 0.5 -0.5"> -->
+                            <body name="left_camera_optical" quat="-0.5 -0.5 0.5 0.5">
+
+                              <!-- <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/> -->
+                              <camera name="left_teleop_cam" pos="0 0 0" euler="0 0 0" />
                             </body>
+
                           </body>
                           <body name="right_camera" pos="0.03531 -0.0325 0.062">
-                            <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06 1e-06"/>
-                            <body name="right_camera_optical" quat="0.5 -0.5 0.5 -0.5"/>
+                            <!-- <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06 1e-06"/> -->
+                            <body name="right_camera_optical" quat="-0.5 -0.5 0.5 0.5">
+                            <camera name="right_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                            </body>
                           </body>
                           <body name="tof_camera" pos="0.05643 0 0.061954">
-                            <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06 1e-06"/>
-                            <body name="tof_camera_optical" quat="0.5 -0.5 0.5 -0.5"/>
+                            <!-- <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06 1e-06"/> -->
+                            <body name="tof_camera_optical" quat="-0.5 -0.5 0.5 0.5">
+                            <camera name="tof_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                            </body>
                           </body>
                         </body>
                       </body>
@@ -397,8 +408,11 @@
             <body name="depth_cam_l_frame" pos="0.058 0.025 -0.03" quat="0.915311 0 0.402747 0">
               <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
             </body>
-            <body name="depth_cam_rgb_optical" pos="0.058 0.0155 -0.03" quat="0.256282 -0.659029 0.659029 -0.256282">
+
+            <!-- <body name="depth_cam_rgb_optical" pos="0.058 0.0155 -0.03" quat="0.256282 -0.659029 0.659029 -0.256282"> -->
+            <body name="depth_cam_rgb_optical" pos="0.058 0.0155 -0.03" quat="0.65902908 0.25628239 -0.25628239 -0.65902908">
               <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
+              <camera name="depth_cam" pos="0 0 0" euler="0 0 0" />
             </body>
             <body name="depth_cam_rgb_frame" pos="0.058 0.0155 -0.03" quat="0.915311 0 0.402747 0">
               <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/>
@@ -414,13 +428,13 @@
       </body>
       <body name="left_bar_anchor" pos="0.084 0.066 0.241">
         <inertial pos="0 0 0" mass="1.759" diaginertia="0.00026385 0.00026385 0.00026385"/>
-        <!-- <geom size="0.015 0.015 0.015" pos="0 0 0.015" quat="0.995449 0 0 0.0952985" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="0.8 0.8 0.8 1"/> -->
         <geom size="0.015 0.015 0.015" pos="0 0 0.015" quat="0.995449 0 0 0.0952985" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+        <geom size="0.015 0.015 0.015" pos="0 0 0.015" quat="0.995449 0 0 0.0952985" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
       </body>
       <body name="right_bar_anchor" pos="0.084 -0.066 0.241">
         <inertial pos="0 0 0" mass="1.759" diaginertia="0.00026385 0.00026385 0.00026385"/>
-        <!-- <geom size="0.015 0.015 0.015" pos="0 0 0.015" quat="0.995449 0 0 -0.0952985" type="box" contype="0" conaffinity="0" group="1" density="0" rgba="0.8 0.8 0.8 1"/> -->
         <geom size="0.015 0.015 0.015" pos="0 0 0.015" quat="0.995449 0 0 -0.0952985" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+        <geom size="0.015 0.015 0.015" pos="0 0 0.015" quat="0.995449 0 0 -0.0952985" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
       </body>
     </body>
   </worldbody>
@@ -482,6 +496,41 @@
             solimp="0.95 0.99 0.001"
             solref="0.005 1"
         />
+
+        <joint
+            joint1="left_bar_joint_mimic"
+            joint2="tripod_joint"
+            polycoef="-0.20061291 0.40967047 -0.74428024 0.82037152 0"
+            solimp="0.95 0.99 0.001"
+            solref="0.005 1"
+        />
+
+        <joint
+            joint1="tripod_joint"
+            joint2="left_bar_prism_joint_mimic"
+            polycoef="0.4814718126556904 -0.9861535348976198 0 0 0"
+            solimp="0.95 0.99 0.001"
+            solref="0.005 1"
+        />
+
+        <joint
+            joint1="right_bar_joint_mimic"
+            joint2="tripod_joint"
+            polycoef="-0.20061291 0.40967047 -0.74428024 0.82037152 0"
+            solimp="0.95 0.99 0.001"
+            solref="0.005 1"
+        />
+        <joint
+            joint1="tripod_joint"
+            joint2="right_bar_prism_joint_mimic"
+            polycoef="0.4814718126556904 -0.9861535348976198 0 0 0"
+            solimp="0.95 0.99 0.001"
+            solref="0.005 1"
+        />
+
+
+
+
     </equality>
     <actuator>
       <position name="tripod_joint" joint="tripod_joint" gear="1" inheritrange="1" class="tripod"/>
