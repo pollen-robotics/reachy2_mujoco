@@ -84,6 +84,7 @@
           <geom size="0.025 0.025 0.2425" pos="0 0 0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
           <geom size="0.015 0.015 0.2425" pos="0 0 0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
           <body name="torso" pos="0.08 0 0.72">
+            <site name="torso" pos="0.0 0.0 0 "/>
             <inertial pos="-0.051614 -0.000471 -0.018363" quat="0.708121 0.704566 0.0268143 -0.0378516" mass="6.314" diaginertia="0.0741454 0.0547883 0.0445377"/>
             <geom type="mesh" mesh="torso_visual" class="visual"/>
             <geom type="mesh" mesh="torso_collider" class="collider"/>

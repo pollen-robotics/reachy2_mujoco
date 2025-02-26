@@ -11,9 +11,10 @@ dependencies = [
     "rpyc==6.0.1",
     "mujoco==3.2.7",
     "pyquaternion==0.9.9",
-    "opencv-contrib-python==4.8.0.74",
+    "opencv-contrib-python>=4.8.0.74",
     "reachy2_symbolic_ik @ git+https://github.com/pollen-robotics/reachy2_symbolic_ik@110-scipy-version-dependency",
     "FramesViewer==1.0.2",
+    "numpy",
 ]
 # requires-python = "== 3.10.*"
 requires-python = ">=3.10"
