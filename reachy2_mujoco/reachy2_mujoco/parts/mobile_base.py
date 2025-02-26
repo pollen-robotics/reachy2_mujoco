@@ -18,9 +18,6 @@ class MobileBase:
         self.position = np.zeros(3)  # x, y, theta
 
     def _update_position(self):
-        # print(f"DEBUG: add {utils.get_mobile_base_add(self._model)}")
-        # print(f"DEBUG: qpos {utils.get_mobile_base_qpos(self._model,self._data)}")
-        # print(f"DEBUG: qvel {utils.get_mobile_base_qvel(self._model,self._data)}")
 
         mobile_base_qpos=utils.get_mobile_base_qpos(self._model,self._data)
         # self.position[:2] = self._data.qpos[:2] - self._pos_offset[:2]
