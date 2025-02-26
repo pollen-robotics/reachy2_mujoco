@@ -11,10 +11,42 @@ def get_actuator_index(model, name: str) -> int:
     return mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, name)
 
 
+def get_joint_name(model, index: int) -> str:
+    return mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_JOINT, index)
+
+
 def list_actuators(model):
     for i in range(20):
         name = get_actuator_name(model, i)
         print(i, name)
+
+def get_mobile_base_add(model):
+
+    floating_base_add = model.jnt_dofadr[
+        np.where(model.jnt_type == 0)
+    ]  # Assuming the mobile base freejoint is named "mobile_base"! the jnt_type==0 is a floating joint. 3 is a hinge
+
+    mobile_base_add=[idx for idx in floating_base_add if get_joint_name(model, idx)=="mobile_base"]
+    return mobile_base_add[0]
+
+def get_mobile_base_qpos(model, data):
+    add=get_mobile_base_add(model)
+    return data.qpos[add:add+7]
+
+def set_mobile_base_qpos(model, data, new_data):
+    add=get_mobile_base_add(model)
+    data.qpos[add:add+7]=new_data
+    return data
+
+def get_mobile_base_qvel(model, data):
+    add=get_mobile_base_add(model)
+    return data.qvel[add:add+6]
+
+
+def set_mobile_base_qvel(model, data, new_data):
+    add=get_mobile_base_add(model)
+    data.qvel[add:add+6]=new_data
+    return data
 
 
 InterpolationFunc = Callable[[float], np.ndarray]

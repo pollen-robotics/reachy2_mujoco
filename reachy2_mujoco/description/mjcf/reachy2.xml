@@ -44,11 +44,17 @@
       <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1"/>
     </default>
 
+    <!-- <default class="bar_collider"> -->
+    <!--   <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="0" conaffinity="0"/> -->
+    <!-- </default> -->
+
+
     </default>
 
 
   <worldbody>
     <body name="base_link">
+      <freejoint name="mobile_base"/>
       <inertial pos="0.008 -0.00048 0.112" quat="-0.0363977 0.704069 0.0372966 0.708217" mass="24" diaginertia="0.709918 0.423857 0.407726"/>
       <geom type="mesh"  mesh="mobile_base_visual" class="collider"/>
       <geom size="0.245 0.095" pos="0 0 0.145" type="cylinder"/>
@@ -89,29 +95,36 @@
             <geom type="mesh" mesh="torso_visual" class="visual"/>
             <geom type="mesh" mesh="torso_collider" class="collider"/>
 
-            <body name="left_bar_inner" pos="0 0.048 -0.258" quat="0.995449 0 0 0.0952985">
+            <!-- <body name="left_bar_inner" pos="0 0.048 -0.258" quat="0.995449 0 0 0.0952985"> -->
+            <body name="left_bar_inner" pos="0 0.048 -0.258" quat="0.99046537  0.00952377 -0.09948142  0.09482141">
 
               <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/>
               <joint name="left_bar_joint_mimic" pos="0 0 0" axis="0 1 0"   />
               <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" density="0" rgba="0.8 0.8 0.8 1" class="visual"/>
-              <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
-              <body name="left_bar_base" pos="0 0 -0.485">
+              <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
+              <!-- <body name="left_bar_base" pos="0 0 -0.485"> -->
+              <body name="left_bar_base" pos="0 0 0">
+
                 <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/>
-                <joint name="left_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide" range="0 1" actuatorfrcrange="-0.1 0.1"  />
+                <joint name="left_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide"  />
                 <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
-                <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+                <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
               </body>
             </body>
-            <body name="right_bar_inner" pos="0 -0.048 -0.258" quat="0.995449 0 0 -0.0952985">
+            <!-- <body name="right_bar_inner" pos="0 -0.048 -0.258" quat="0.995449 0 0 -0.0952985"> -->
+            <body name="right_bar_inner" pos="0 -0.048 -0.258" quat="0.99046537 -0.00952377 -0.09948142 -0.09482141">
+
               <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/>
               <joint name="right_bar_joint_mimic" pos="0 0 0" axis="0 1 0" range="-1 1" actuatorfrcrange="-0.01 0.01"  />
               <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
-              <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
-              <body name="right_bar_base" pos="0 0 -0.485">
+              <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
+              <!-- <body name="right_bar_base" pos="0 0 -0.485"> -->
+              <body name="right_bar_base" pos="0 0 0">
+
                 <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/>
-                <joint name="right_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide" range="-1 1" actuatorfrcrange="-1 1"  />
+                <joint name="right_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide"   />
                 <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
-                <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
+                <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
               </body>
             </body>
 
@@ -498,10 +511,41 @@
             solref="0.005 1"
         />
 
+        <!-- <joint -->
+        <!--     joint1="left_bar_joint_mimic" -->
+        <!--     joint2="tripod_joint" -->
+        <!--     polycoef="-0.20061291 0.40967047 -0.74428024 0.82037152 0" -->
+        <!--     solimp="0.95 0.99 0.001" -->
+        <!--     solref="0.005 1" -->
+        <!-- /> -->
+
+        <!-- <joint -->
+        <!--     joint1="tripod_joint" -->
+        <!--     joint2="left_bar_prism_joint_mimic" -->
+        <!--     polycoef="0.4814718126556904 -0.9861535348976198 0 0 0" -->
+        <!--     solimp="0.95 0.99 0.001" -->
+        <!--     solref="0.005 1" -->
+        <!-- /> -->
+
+        <!-- <joint -->
+        <!--     joint1="right_bar_joint_mimic" -->
+        <!--     joint2="tripod_joint" -->
+        <!--     polycoef="-0.20061291 0.40967047 -0.74428024 0.82037152 0" -->
+        <!--     solimp="0.95 0.99 0.001" -->
+        <!--     solref="0.005 1" -->
+        <!-- /> -->
+        <!-- <joint -->
+        <!--     joint1="tripod_joint" -->
+        <!--     joint2="right_bar_prism_joint_mimic" -->
+        <!--     polycoef="0.4814718126556904 -0.9861535348976198 0 0 0" -->
+        <!--     solimp="0.95 0.99 0.001" -->
+        <!--     solref="0.005 1" -->
+        <!-- /> -->
+
         <joint
             joint1="left_bar_joint_mimic"
             joint2="tripod_joint"
-            polycoef="-0.20061291 0.40967047 -0.74428024 0.82037152 0"
+            polycoef="0 0.40967047 -0.74428024 0.82037152 0"
             solimp="0.95 0.99 0.001"
             solref="0.005 1"
         />
@@ -509,7 +553,7 @@
         <joint
             joint1="tripod_joint"
             joint2="left_bar_prism_joint_mimic"
-            polycoef="0.4814718126556904 -0.9861535348976198 0 0 0"
+            polycoef="0 -0.9861535348976198 0 0 0"
             solimp="0.95 0.99 0.001"
             solref="0.005 1"
         />
@@ -517,19 +561,17 @@
         <joint
             joint1="right_bar_joint_mimic"
             joint2="tripod_joint"
-            polycoef="-0.20061291 0.40967047 -0.74428024 0.82037152 0"
+            polycoef="0 0.40967047 -0.74428024 0.82037152 0"
             solimp="0.95 0.99 0.001"
             solref="0.005 1"
         />
         <joint
             joint1="tripod_joint"
             joint2="right_bar_prism_joint_mimic"
-            polycoef="0.4814718126556904 -0.9861535348976198 0 0 0"
+            polycoef="0 -0.9861535348976198 0 0 0"
             solimp="0.95 0.99 0.001"
             solref="0.005 1"
         />
-
-
 
 
     </equality>

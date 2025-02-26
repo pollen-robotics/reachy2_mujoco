@@ -68,6 +68,3 @@ time.sleep(2)
 lift_pose = target_pose.copy()
 lift_pose = fv_utils.translateAbsolute(lift_pose, [0, 0, 0.1])
 reachy.r_arm.goto(lift_pose)
-
-
-
