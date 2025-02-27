@@ -23,7 +23,8 @@
 	<worldbody>
 		<light pos="0 0 3" dir="0 0 -1" directional="false" />
 		<body name="floor">
-			<geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane" conaffinity="1" contype="1" />
+			<!-- <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane" conaffinity="1" contype="1" condim="3" /> -->
+                        <geom contype="1" conaffinity="2" friction=".1 0.005 0.0001" name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="groundplane" condim="3" solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/>
 		</body>
 		<body pos="0.75 0 0" euler="0 0 1.57">
 			<freejoint name="table"/>
@@ -34,4 +35,12 @@
 			<geom type="box" size="0.03 0.03 0.03" rgba="1.0 0 0 1" conaffinity="1" contype="1" mass="0.05"/>
 		</body>
 	</worldbody>
+        <!-- <contact> -->
+        <!--   <pair name="wheel1" geom1="floor" geom2="left_wheel" friction="1 1 0.9 0.0001 0.0001" /> -->
+        <!--   <pair name="wheel2" geom1="floor" geom2="right_wheel" friction="1 1 0.9 0.0001 0.0001" /> -->
+        <!--   <pair name="wheel3" geom1="floor" geom2="back_wheel" friction="1 1 0.9 0.0001 0.0001" /> -->
+        <!--   <!-\- <pair name="wheel1" geom1="floor" geom2="left_wheel" friction="1 0 0.0 0.0001 0.0001" /> -\-> -->
+        <!--   <!-\- <pair name="wheel2" geom1="floor" geom2="right_wheel" friction="1 0 0.0 0.0001 0.0001" /> -\-> -->
+        <!--   <!-\- <pair name="wheel3" geom1="floor" geom2="back_wheel" friction="1 0 0.0 0.0001 0.0001" /> -\-> -->
+        <!-- </contact> -->
 </mujoco>

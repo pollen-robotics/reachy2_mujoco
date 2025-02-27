@@ -19,6 +19,8 @@
     <mesh name="pincette_proximal_visual" file="pincette_proximal_visual.obj"/>
     <mesh name="pincette_distal_collider" file="pincette_distal_collider.obj"/>
     <mesh name="pincette_distal" file="pincette_distal.obj"/>
+    <texture builtin="checker" height="10" name="texplane" rgb1="0 0 0" rgb2="0.8 0.8 0.8" type="2d" width="10"/>
+    <material name="checkmat" reflectance="0.5" shininess="1" specular="1" texrepeat="6 6" texture="texplane"/>
   </asset>
 
     <default>
@@ -41,12 +43,20 @@
       <geom type="mesh" mass="0" group="2"  contype="0" conaffinity="0"/>
     </default>
     <default class="collider">
-      <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1"/>
+      <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1" conaffinity="1"/>
     </default>
 
     <!-- <default class="bar_collider"> -->
     <!--   <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="0" conaffinity="0"/> -->
     <!-- </default> -->
+
+    <default class="wheel_collision">
+      <!-- <geom condim="6" group="3" friction="1 0 0"/> -->
+      <!-- <geom conaffinity="0" condim="3" group="3" friction="1 0.5 0.5"/> -->
+      <!-- <geom condim="3" friction="1 0.0 0.0" group="3"/> -->
+    <geom  friction="0.3 0.005 0.0001" condim="3" contype="2" conaffinity="0" solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0" />
+    </default>
+
 
 
     </default>
@@ -55,23 +65,216 @@
   <worldbody>
     <body name="base_link">
       <freejoint name="mobile_base"/>
+
       <inertial pos="0.008 -0.00048 0.112" quat="-0.0363977 0.704069 0.0372966 0.708217" mass="24" diaginertia="0.709918 0.423857 0.407726"/>
-      <geom type="mesh"  mesh="mobile_base_visual" class="collider"/>
-      <geom size="0.245 0.095" pos="0 0 0.145" type="cylinder"/>
-      <body name="drivewhl1_link" pos="0.099 -0.171473 0.105" quat="0.965926 0 0 0.258819">
+      <geom type="mesh"  mesh="mobile_base_visual" class="visual"/>
+      <geom size="0.245 0.095" pos="0 0 0.145" type="cylinder" class="collider"/>
+      <body name="drivewhl1_link" pos="0.099 -0.171473 0.105" quat="0.965926 0 0 0.258819" >
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5" diaginertia="0.00275625 0.00142917 0.00142917"/>
-        <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"/>
-        <body name="drivewhl1_extra_link"/>
+        <joint name="right_wheel" pos="0 0 0" axis="0 1 0" actuatorfrcrange="-100 100" />
+
+        <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder" class="wheel_collision" /> -->
+        <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="visual" /> -->
+        <!-- <geom name="right_wheel" size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid" class="wheel_collision" /> -->
+        <geom size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid" class="visual" />
+        <!-- <body name="drivewhl1_extra_link"/> -->
+        <body pos="0.0 0.0 0.0945" euler="0 0 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.0 0.0 -0.0945" euler="0 0 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.0945 0.0 0.0" euler="0 1.5707963267948966 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.0945 0.0 0.0" euler="0 1.5707963267948966 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.06682159082212874 0.0 0.06682159082212874" euler="0 0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.06682159082212874 0.0 0.06682159082212874" euler="0 -0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.06682159082212874 0.0 -0.06682159082212874" euler="0 0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+
+        <body  pos="0.06682159082212874 0.0 -0.06682159082212874" euler="0 -0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
       </body>
       <body name="drivewhl2_link" pos="0.099 0.171473 0.105" quat="-0.258819 0 0 -0.965926">
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5" diaginertia="0.00275625 0.00142917 0.00142917"/>
-        <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"/>
-        <body name="drivewhl2_extra_link"/>
+        <joint name="left_wheel" pos="0 0 0" axis="0 1 0" actuatorfrcrange="-100 100" />
+
+        <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="wheel_collision" /> -->
+        <!-- <geom name="left_wheel" size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid"  class="wheel_collision" /> -->
+        <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="visual" /> -->
+        <geom size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid"  class="visual" />
+        <!-- <body name="drivewhl2_extra_link"/> -->
+
+        <body pos="0.0 0.0 0.0945" euler="0 0 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.0 0.0 -0.0945" euler="0 0 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.0945 0.0 0.0" euler="0 1.5707963267948966 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.0945 0.0 0.0" euler="0 1.5707963267948966 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.06682159082212874 0.0 0.06682159082212874" euler="0 0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.06682159082212874 0.0 0.06682159082212874" euler="0 -0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.06682159082212874 0.0 -0.06682159082212874" euler="0 0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+
+        <body  pos="0.06682159082212874 0.0 -0.06682159082212874" euler="0 -0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+
+
       </body>
-      <body name="drivewhl3_link" pos="-0.198 0 0.105" quat="0.707107 0 0 -0.707107">
+      <body name="drivewhl3_link" pos="-0.198 0 0.105" quat="0.707107 0 0 -0.707107" >
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5" diaginertia="0.00275625 0.00142917 0.00142917"/>
-        <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"/>
-        <body name="drivewhl3_extra_link"/>
+        <joint name="back_wheel" pos="0 0 0" axis="0 1 0" actuatorfrcrange="-100 100" />
+
+        <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="wheel_collision" /> -->
+        <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="visual" /> -->
+        <!-- <geom name="back_wheel" size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid"  class="wheel_collision" /> -->
+        <geom size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid"  class="visual" />
+        <!-- <body name="drivewhl3_extra_link"/> -->
+
+        <body pos="0.0 0.0 0.0945" euler="0 0 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.0 0.0 -0.0945" euler="0 0 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.0945 0.0 0.0" euler="0 1.5707963267948966 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.0945 0.0 0.0" euler="0 1.5707963267948966 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="0.06682159082212874 0.0 0.06682159082212874" euler="0 0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.06682159082212874 0.0 0.06682159082212874" euler="0 -0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+        <body  pos="-0.06682159082212874 0.0 -0.06682159082212874" euler="0 0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+
+        <body  pos="0.06682159082212874 0.0 -0.06682159082212874" euler="0 -0.7853981633974483 0">
+          <inertial pos="0 0 0.0" quat="1 0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid" material="checkmat" class="visual" />
+          <geom size="0.0105 0.0105 0.04" quat="0.707107 0 0.707107  0" type="ellipsoid"  class="wheel_collision" />
+          <joint  pos="0 0 0" axis="1 0 0"  />
+        </body>
+
+
+
       </body>
       <body name="lidar_link" pos="0.184 0 0.25" quat="0 0 0 1">
         <inertial pos="0 0 0" mass="0.125" diaginertia="0.001 0.001 0.001"/>
@@ -679,6 +882,58 @@
             inheritrange="1"
             class="gripper"
         />
+
+        <!-- <velocity -->
+        <!--     name="left_wheel" -->
+        <!--     joint="left_wheel" -->
+        <!--     ctrlrange="-5 5" kv="100" -->
+        <!-- /> -->
+        <!-- <velocity -->
+        <!--     name="right_wheel" -->
+        <!--     joint="right_wheel" -->
+        <!--     ctrlrange="-5 5" kv="100" -->
+        <!-- /> -->
+        <!-- <velocity -->
+        <!--     name="back_wheel" -->
+        <!--     joint="back_wheel" -->
+        <!--     ctrlrange="-5 5" kv="100" -->
+        <!-- /> -->
+
+
+        <!-- <velocity -->
+        <!--     name="left_wheel" -->
+        <!--     joint="left_wheel" -->
+        <!--     ctrlrange="-5 5" kv="1000" -->
+        <!-- /> -->
+        <!-- <velocity -->
+        <!--     name="right_wheel" -->
+        <!--     joint="right_wheel" -->
+        <!--     ctrlrange="-5 5" kv="1000" -->
+        <!-- /> -->
+        <!-- <velocity -->
+        <!--     name="back_wheel" -->
+        <!--     joint="back_wheel" -->
+        <!--     ctrlrange="-5 5" kv="1000" -->
+        <!-- /> -->
+
+        <motor
+            name="left_wheel"
+            joint="left_wheel"
+            ctrlrange="-50 50" ctrllimited="true"
+        />
+        <motor
+            name="right_wheel"
+            joint="right_wheel"
+            ctrlrange="-50 50" ctrllimited="true"
+        />
+        <motor
+            name="back_wheel"
+            joint="back_wheel"
+            ctrlrange="-50 50" ctrllimited="true"
+        />
+
+
+
     </actuator>
 
     <contact>
@@ -699,7 +954,7 @@
 
         <exclude name="back_bar" body1="back_bar_base" body2="back_bar_inner"/>
 
-
+        <!-- <pair name="shell1-ground" geom1="ground" geom2="shell_geom" friction="1 1 0.9 0.0001 0.0001" /> -->
     </contact>
 
 </mujoco>
