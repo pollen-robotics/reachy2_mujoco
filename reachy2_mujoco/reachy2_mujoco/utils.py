@@ -10,6 +10,10 @@ def get_actuator_name(model, index: int) -> str:
 def get_actuator_index(model, name: str) -> int:
     return mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, name)
 
+def get_joint_index(model, name: str) -> int:
+    return mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, name)
+
+
 
 def get_joint_name(model, index: int) -> str:
     return mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_JOINT, index)
@@ -47,6 +51,24 @@ def set_mobile_base_qvel(model, data, new_data):
     add=get_mobile_base_add(model)
     data.qvel[add:add+6]=new_data
     return data
+
+
+def get_wheels_qvel(model, data):
+
+    r_vel=data.qvel[model.jnt_dofadr[get_joint_index(model, "right_wheel")]]
+    b_vel=data.qvel[model.jnt_dofadr[get_joint_index(model, "back_wheel")]]
+    l_vel=data.qvel[model.jnt_dofadr[get_joint_index(model, "left_wheel")]]
+    return np.array([r_vel,b_vel,l_vel])
+
+def get_wheels_qpos(model, data):
+
+    r_pos=data.qpos[model.jnt_qposadr[get_joint_index(model, "right_wheel")]]
+    b_pos=data.qpos[model.jnt_qposadr[get_joint_index(model, "back_wheel")]]
+    l_pos=data.qpos[model.jnt_qposadr[get_joint_index(model, "left_wheel")]]
+
+    return np.array([r_pos,b_pos,l_pos])
+
+
 
 
 InterpolationFunc = Callable[[float], np.ndarray]

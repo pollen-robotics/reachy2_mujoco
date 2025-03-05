@@ -37,6 +37,12 @@
             <position kp="50000" kv="1" />
         </default>
 
+        <default class="wheel">
+            <!-- <joint damping="1" frictionloss="1" actuatorfrcrange="-50 50" /> -->
+            <!-- <position kp="5" kv="1" /> -->
+            <!-- <velocity kv="0.1" /> -->
+        </default>
+
 
 
    <default class="visual">
@@ -71,7 +77,7 @@
       <geom size="0.245 0.095" pos="0 0 0.145" type="cylinder" class="collider"/>
       <body name="drivewhl1_link" pos="0.099 -0.171473 0.105" quat="0.965926 0 0 0.258819" >
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5" diaginertia="0.00275625 0.00142917 0.00142917"/>
-        <joint name="right_wheel" pos="0 0 0" axis="0 1 0" actuatorfrcrange="-100 100" />
+        <joint name="right_wheel" pos="0 0 0" axis="0 1 0" class="wheel" />
 
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder" class="wheel_collision" /> -->
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="visual" /> -->
@@ -138,7 +144,7 @@
       </body>
       <body name="drivewhl2_link" pos="0.099 0.171473 0.105" quat="-0.258819 0 0 -0.965926">
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5" diaginertia="0.00275625 0.00142917 0.00142917"/>
-        <joint name="left_wheel" pos="0 0 0" axis="0 1 0" actuatorfrcrange="-100 100" />
+        <joint name="left_wheel" pos="0 0 0" axis="0 1 0"  class="wheel" />
 
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="wheel_collision" /> -->
         <!-- <geom name="left_wheel" size="0.105 0.105 0.0175" quat="0.707107 0.707107 0 0" type="ellipsoid"  class="wheel_collision" /> -->
@@ -208,7 +214,7 @@
       </body>
       <body name="drivewhl3_link" pos="-0.198 0 0.105" quat="0.707107 0 0 -0.707107" >
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5" diaginertia="0.00275625 0.00142917 0.00142917"/>
-        <joint name="back_wheel" pos="0 0 0" axis="0 1 0" actuatorfrcrange="-100 100" />
+        <joint name="back_wheel" pos="0 0 0" axis="0 1 0" class="wheel" />
 
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="wheel_collision" /> -->
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"  class="visual" /> -->
@@ -304,14 +310,14 @@
               <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/>
               <joint name="left_bar_joint_mimic" pos="0 0 0" axis="0 1 0"   />
               <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" density="0" rgba="0.8 0.8 0.8 1" class="visual"/>
-              <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
+              <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
               <!-- <body name="left_bar_base" pos="0 0 -0.485"> -->
               <body name="left_bar_base" pos="0 0 0">
 
                 <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/>
                 <joint name="left_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide"  />
                 <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
-                <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
+                <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
               </body>
             </body>
             <!-- <body name="right_bar_inner" pos="0 -0.048 -0.258" quat="0.995449 0 0 -0.0952985"> -->
@@ -320,14 +326,14 @@
               <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024"/>
               <joint name="right_bar_joint_mimic" pos="0 0 0" axis="0 1 0" range="-1 1" actuatorfrcrange="-0.01 0.01"  />
               <geom size="0.015 0.015 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
-              <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
+              <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
               <!-- <body name="right_bar_base" pos="0 0 -0.485"> -->
               <body name="right_bar_base" pos="0 0 0">
 
                 <inertial pos="0 0 0" mass="1.759" diaginertia="0.000469067 0.000469067 0.000469067"/>
                 <joint name="right_bar_prism_joint_mimic" pos="0 0 0" axis="0 0 1" type="slide"   />
                 <geom size="0.02 0.02 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
-                <!-- <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/> -->
+                <geom size="0.025 0.025 0.2425" pos="0 0 -0.2425" type="box" rgba="0.8 0.8 0.8 1" class="collider"/>
               </body>
             </body>
 
@@ -932,6 +938,18 @@
             ctrlrange="-50 50" ctrllimited="true"
         />
 
+        <!-- <velocity -->
+        <!--     name="left_wheel" -->
+        <!--     joint="left_wheel" -->
+        <!-- /> -->
+        <!-- <velocity -->
+        <!--     name="right_wheel" -->
+        <!--     joint="right_wheel" -->
+        <!-- /> -->
+        <!-- <velocity -->
+        <!--     name="back_wheel" -->
+        <!--     joint="back_wheel" -->
+        <!-- /> -->
 
 
     </actuator>
