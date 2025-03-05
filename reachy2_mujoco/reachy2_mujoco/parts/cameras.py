@@ -26,6 +26,8 @@ class Camera:
 
         self._left_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, "left_" + self._cam_name)
         self._right_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, "right_" + self._cam_name)
+        self._depth_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name +"_cam")
+
         self._left_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
         self._right_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
         self._depth_im = np.zeros((self._height, self._width), dtype=np.float32)
@@ -71,6 +73,8 @@ class Cameras:
         # self._offscreen.enable_depth_rendering()
 
         self.teleop = Camera(self._model, self._data, "teleop_cam", self._width, self._height, self._offscreen)
+        self.depth = Camera(self._model, self._data, "depth", self._width, self._height, self._offscreen)
 
     def _update(self):
         self.teleop._update()
+        self.depth._update()
