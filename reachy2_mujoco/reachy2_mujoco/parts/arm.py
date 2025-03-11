@@ -1,6 +1,5 @@
 from reachy2_mujoco.parts.joints import Shoulder, Elbow, Wrist, Gripper
 from reachy2_symbolic_ik.control_ik import ControlIK
-import os
 import numpy as np
 from reachy2_mujoco.utils import minimum_jerk
 import time
@@ -60,7 +59,6 @@ class Arm:
             time.sleep(0.01)
             # self._update()
 
-    # TODO implement
     def goto(self, target, duration=2):
         """
         Joint space goto
@@ -68,7 +66,6 @@ class Arm:
             list : [shoulder_pitch, shoulder_roll, elbow_yaw, elbow_pitch, wrist_roll, wrist_pitch, wrist_yaw]
             matrix : 4x4 matrix representing the target pose
         """
-        # TODO implement duration
         target = np.array(target)
 
         if target.shape == (4, 4):
@@ -90,9 +87,9 @@ class Arm:
                 print(state)
                 return
             print("SOL : ", np.rad2deg(sol))
-            Thread(target=self.goto_joints, args=(sol,)).start()
+            Thread(target=self.goto_joints, args=(sol, duration)).start()
 
         elif len(target) == 7:
-            Thread(target=self.goto_joints, args=(target,)).start()
+            Thread(target=self.goto_joints, args=(target, duration)).start()
         else:
             raise ValueError("Invalid target shape")
