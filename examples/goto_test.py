@@ -20,7 +20,7 @@ reachy.r_arm.shoulder.roll.goal_position = -40
 reachy.send_goal_positions()
 time.sleep(1)
 
-reachy.l_arm.goto(elbow_90)
+reachy.l_arm.goto(elbow_90, 1)
 # reachy.send_goal_positions()
 
 time.sleep(2)
@@ -29,10 +29,10 @@ up = elbow_90.copy()
 up[:3, 3] += np.array([0.2, 0, 0])
 
 while True:
-    reachy.l_arm.goto(up)
-    time.sleep(2)
-    reachy.l_arm.goto(elbow_90)
-    time.sleep(2)
+    reachy.l_arm.goto(up, 1)
+    time.sleep(1)
+    reachy.l_arm.goto(elbow_90, 1)
+    time.sleep(1)
 
 
 
