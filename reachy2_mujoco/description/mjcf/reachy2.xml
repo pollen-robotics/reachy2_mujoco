@@ -63,7 +63,13 @@
         <body name="trunk">
             <freejoint />
             <site name="torso" pos="-0.05 0.0 1.02 " />
-            <camera name="torso_cam" pos="0.2 0.0 1.2" euler="0.0 -0.2 -1.57" />
+            <!-- <camera name="torso_cam" pos="0.2 0.0 1.2" euler="0.0 -0.2 -1.57" /> -->
+            <camera name="sr_cam_r" pos="0.2 0.0 1.2" euler="0.0 -0.2 -1.57" fovy="58" mode="fixed"
+                resolution="640 480" />
+            <!-- <body name="torso_cam_body" pos="0.2 0.0 1.2" euler="0.0 -0.2 -1.57">
+                <camera name="sr_cam_r" fovy="58" mode="fixed" resolution="640 480" />
+                <site name="sr_cam_r_optical_frame" size="0.03" />
+            </body> -->
 
             <geom
                 type="mesh"
@@ -204,7 +210,16 @@
                                     pos="0 0 0"
                                     quat="-0.5 -0.5 0.5 0.5"
                                 >
-                                    <camera name="left_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                                    <!-- <camera name="left_teleop_cam" pos="0 0 0" euler="0 0 0" /> -->
+
+                                    <camera
+                                        name="left_camera"
+                                        pos="0 0 0"
+                                        euler="0 0 0"
+                                        fovy="58"
+                                        mode="fixed"
+                                        resolution="640 480"
+                                    />
                                 </body>
                             </body>
                             <body name="right_camera" pos="0.03531 -0.0325 0.056">
@@ -213,7 +228,16 @@
                                     pos="0 0 0"
                                     quat="-0.5 -0.5 0.5 0.5"
                                 >
-                                    <camera name="right_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                                    <!-- <camera name="right_teleop_cam" pos="0 0 0" euler="0 0 0"
+                                    /> -->
+                                    <camera
+                                        name="right_camera"
+                                        pos="0 0 0"
+                                        euler="0 0 0"
+                                        fovy="58"
+                                        mode="fixed"
+                                        resolution="640 480"
+                                    />
                                 </body>
                             </body>
                         </body>
