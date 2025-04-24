@@ -82,6 +82,13 @@
       <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane"
         conaffinity="1" contype="1" />
     </body>
+    <body name="box">
+      <freejoint />
+      <geom name="box_geom" type="box" size="0.2 2.0 2.0" pos="1.5 0 0" mass="2"
+        rgba="0 0 1 1" />
+    </body>
+
+
     <body name="base_link">
       <freejoint name="mobile_base" />
 
@@ -493,7 +500,9 @@
 
                               <!-- <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708"
                               mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07"/> -->
-                              <camera name="left_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                              <camera name="left_camera" pos="0 0 0" euler="0 0 0" fovy="58"
+                                mode="fixed"
+                                resolution="640 480" />
                             </body>
 
                           </body>
@@ -501,14 +510,18 @@
                             <!-- <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06
                             1e-06"/> -->
                             <body name="right_camera_optical" quat="-0.5 -0.5 0.5 0.5">
-                              <camera name="right_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                              <camera name="right_camera" pos="0 0 0" euler="0 0 0" fovy="58"
+                                mode="fixed"
+                                resolution="640 480" />
                             </body>
                           </body>
                           <body name="tof_camera" pos="0.05643 0 0.061954">
                             <!-- <inertial pos="0 0 0" mass="1e-05" diaginertia="1e-06 1e-06
                             1e-06"/> -->
                             <body name="tof_camera_optical" quat="-0.5 -0.5 0.5 0.5">
-                              <camera name="tof_teleop_cam" pos="0 0 0" euler="0 0 0" />
+                              <camera name="tof_camera" pos="0 0 0" euler="0 0 0" fovy="58"
+                                mode="fixed"
+                                resolution="640 480" />
                             </body>
                           </body>
                         </body>
@@ -982,7 +995,9 @@
               quat="0.65902908 0.25628239 -0.25628239 -0.65902908">
               <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001"
                 diaginertia="1.02e-06 9.9e-07 9.9e-07" />
-              <camera name="depth_cam" pos="0 0 0" euler="0 0 0" />
+              <camera name="depth_cam_rgb" pos="0 0 0" euler="0 0 0" fovy="58"
+                mode="fixed"
+                resolution="640 480" />
             </body>
             <body name="depth_cam_rgb_frame" pos="0.058 0.0155 -0.03" quat="0.915311 0 0.402747 0">
               <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001"
