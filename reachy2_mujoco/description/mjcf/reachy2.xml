@@ -84,7 +84,7 @@
     </body>
     <body name="box">
       <freejoint />
-      <geom name="box_geom" type="box" size="0.2 2.0 2.0" pos="1.5 0 0" mass="2"
+      <geom name="box_geom" type="box" size="0.2 0.2 0.2" pos="1.5 0 0" mass="2"
         rgba="0 0 1 1" />
     </body>
 
