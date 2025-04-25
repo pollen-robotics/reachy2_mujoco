@@ -1,4 +1,4 @@
-from reachy2_mujoco.utils import get_actuator_index
+from reachy2_mujoco.utils import get_actuator_index, get_joint_index
 import numpy as np
 import mujoco
 
@@ -8,7 +8,7 @@ class Joint:
         self._data = data
         self._name = name
         self._ctrl_index = get_actuator_index(self._model, self._name)
-
+        self._jnt_index= get_joint_index(self._model, self._name)
         # self._qpos_index = self._model.actuator(self._name).trnid[0]
 
         joint_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_JOINT, self._name)
@@ -69,7 +69,8 @@ class Wrist:
 class Gripper(Joint):
     def __init__(self, model, data, prefix="l_"):
         super().__init__(model, data, name=f"{prefix}hand_finger")
-        self._limits = self._model.jnt_range[self._ctrl_index]
+        self._limits = self._model.jnt_range[self._jnt_index]
+        self.open()
         # self._limits = [-100, 100] # TODO fix
 
     def set_opening(self, percentage):

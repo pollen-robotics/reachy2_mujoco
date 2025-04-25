@@ -25,14 +25,15 @@
       texture="texplane" />
 
   </asset>
-
+<!-- <option cone="elliptic" impratio="10"/> -->
   <default>
     <!-- This looks good -->
     <joint damping="10" frictionloss="2.0" />
     <position kp="200" kv="10" />
+
     <default class="gripper">
-      <joint damping="0.1" frictionloss="0.5" />
-      <position kp="50" kv="0" />
+      <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-200 200"/>
+      <position kp="80" kv="0" />
     </default>
 
     <default class="tripod">
@@ -41,6 +42,7 @@
     </default>
 
     <default class="wheel">
+      <!-- <joint  armature="1.0" /> -->
       <!-- <joint damping="1" frictionloss="1" actuatorfrcrange="-50 50" /> -->
       <!-- <position kp="5" kv="1" /> -->
       <!-- <velocity kv="0.1" /> -->
@@ -53,6 +55,30 @@
     <default class="collider">
       <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1"
         conaffinity="1" />
+    </default>
+
+    <default class="gripper_collider">
+      <!-- <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1" -->
+      <!--   conaffinity="1" /> -->
+      <!-- <geom group="3" type="mesh" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1" -->
+      <!--   solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/> -->
+      <geom group="3" type="mesh" condim="6" friction="1.0 0.5 0.01" solref=".01 1" contype="1"
+        conaffinity="1" />
+
+
+      <!-- <geom group="3" type="mesh"  friction="1" -->
+      <!--       solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" /> -->
+
+    </default>
+
+    <default class="gripper_collider_box">
+      <!-- <geom group="3" type="box" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1" -->
+      <!--   conaffinity="1" /> -->
+      <!-- <geom group="3" type="box" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1" -->
+      <!--   solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/> -->
+      <geom group="3" type="box" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1"
+        solimp="0.95 0.95 0.01" solref="0.02 1" margin="0"/>
+
     </default>
 
     <!-- <default class="bar_collider"> -->
@@ -73,7 +99,7 @@
 
 
   <worldbody>
-    <!-- 
+    <!--
     <light pos="0 0 3" dir="0 0 -1" directional="false" />
     <body name="floor">
       <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane"
@@ -635,7 +661,7 @@
                                                         diaginertia="0.00024601 0.000226526 0.000148634" />
                                                       <geom type="mesh"
                                                         mesh="pincette_base_collider"
-                                                        class="collider" />
+                                                        class="gripper_collider" />
                                                       <geom type="mesh" mesh="pincette_base_visual"
                                                         class="visual" />
                                                       <body name="r_hand_virtual_gripper_link"
@@ -644,7 +670,7 @@
                                                           diaginertia="1.66667e-07 1.66667e-07 1.66667e-07" />
                                                         <joint name="r_hand_finger" pos="0 0 0"
                                                           axis="1 0 0" range="0 2.27"
-                                                          actuatorfrcrange="-50 50" class="gripper" />
+                                                          class="gripper" />
                                                       </body>
                                                       <body name="r_hand_proximal_link"
                                                         pos="-0.010196 0.03792 0.070028">
@@ -655,13 +681,21 @@
                                                         <joint name="r_hand_finger_proximal"
                                                           pos="0 0 0" axis="1 0 0"
                                                           range="-0.51 0.554"
-                                                          actuatorfrcrange="-50 50" class="gripper" />
-                                                        <geom type="mesh"
-                                                          mesh="pincette_proximal_collider"
-                                                          class="collider" />
+                                                          class="gripper" />
+                                                        <!-- <geom type="mesh" -->
+                                                        <!--   mesh="pincette_proximal_collider" -->
+                                                        <!--   class="gripper_collider" /> -->
+
+
                                                         <geom type="mesh"
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
+
+                                                        <body name="r_prox_col"
+                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
                                                         <body name="r_hand_distal_link"
                                                           pos="0 0 0.049997">
                                                           <inertial
@@ -672,13 +706,18 @@
                                                           <joint name="r_hand_finger_distal"
                                                             pos="0 0 0" axis="1 0 0"
                                                             range="-0.51 0.554"
-                                                            actuatorfrcrange="-50 50"
                                                             class="gripper" />
-                                                          <geom type="mesh"
-                                                            mesh="pincette_distal_collider"
-                                                            class="collider" />
+                                                          <!-- <geom type="mesh" -->
+                                                          <!--   mesh="pincette_distal_collider" -->
+                                                          <!--   class="gripper_collider" /> -->
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+                                                        <body name="r_dist_col"
+                                                              pos="0 0 0.025" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
                                                         </body>
                                                       </body>
                                                       <body name="r_hand_proximal_mimic_link"
@@ -691,13 +730,21 @@
                                                         <joint name="r_hand_finger_proximal_mimic"
                                                           pos="0 0 0" axis="1 0 0"
                                                           range="-0.51 0.554"
-                                                          actuatorfrcrange="-50 50" class="gripper" />
-                                                        <geom type="mesh"
-                                                          mesh="pincette_proximal_collider"
-                                                          class="collider" />
+                                                          class="gripper" />
+                                                        <!-- <geom type="mesh" -->
+                                                        <!--   mesh="pincette_proximal_collider" -->
+                                                        <!--   class="gripper_collider" /> -->
                                                         <geom type="mesh"
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
+
+
+                                                        <body name="r_prox_col_mimic"
+                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
                                                         <body name="r_hand_distal_mimic_link"
                                                           pos="0 0 0.049997">
                                                           <inertial
@@ -708,15 +755,21 @@
                                                           <joint name="r_hand_finger_distal_mimic"
                                                             pos="0 0 0" axis="1 0 0"
                                                             range="-0.51 0.554"
-                                                            actuatorfrcrange="-50 50"
                                                             class="gripper" />
-                                                          <geom type="mesh"
-                                                            mesh="pincette_distal_collider"
-                                                            class="collider" />
+                                                          <!-- <geom type="mesh" -->
+                                                            <!-- mesh="pincette_distal_collider" -->
+                                                            <!-- class="gripper_collider" /> -->
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+
+                                                        <body name="r_dist_col_mimic"
+                                                              pos="0 0 0.025" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
-                                                      </body>
+
+
+                                                        </body>
+                                                        </body>
                                                       <body name="r_arm_tip" pos="0 0 0.1"
                                                         quat="0 1 0 0">
                                                         <inertial pos="0 0 0"
@@ -859,7 +912,7 @@
                                                         diaginertia="0.00024601 0.000226526 0.000148634" />
                                                       <geom type="mesh"
                                                         mesh="pincette_base_collider"
-                                                        class="collider" />
+                                                        class="gripper_collider" />
                                                       <geom type="mesh" mesh="pincette_base_visual"
                                                         class="visual" />
                                                       <body name="l_hand_virtual_gripper_link"
@@ -868,7 +921,7 @@
                                                           diaginertia="1.66667e-07 1.66667e-07 1.66667e-07" />
                                                         <joint name="l_hand_finger" pos="0 0 0"
                                                           axis="1 0 0" range="0 2.27"
-                                                          actuatorfrcrange="-50 50" class="gripper" />
+                                                          class="gripper" />
                                                       </body>
                                                       <body name="l_hand_proximal_link"
                                                         pos="-0.010196 0.03792 0.070028">
@@ -879,13 +932,22 @@
                                                         <joint name="l_hand_finger_proximal"
                                                           pos="0 0 0" axis="1 0 0"
                                                           range="-0.51 0.554"
-                                                          actuatorfrcrange="-50 50" class="gripper" />
-                                                        <geom type="mesh"
-                                                          mesh="pincette_proximal_collider"
-                                                          class="collider" />
+                                                          class="gripper" />
+
+                                                        <!-- <geom type="mesh" -->
+                                                        <!--   mesh="pincette_proximal_collider" -->
+                                                        <!--   class="gripper_collider" /> -->
+
                                                         <geom type="mesh"
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
+
+                                                        <body name="l_prox_col"
+                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
                                                         <body name="l_hand_distal_link"
                                                           pos="0 0 0.049997">
                                                           <inertial
@@ -896,13 +958,18 @@
                                                           <joint name="l_hand_finger_distal"
                                                             pos="0 0 0" axis="1 0 0"
                                                             range="-0.51 0.554"
-                                                            actuatorfrcrange="-50 50"
                                                             class="gripper" />
-                                                          <geom type="mesh"
-                                                            mesh="pincette_distal_collider"
-                                                            class="collider" />
+                                                           <!-- <geom type="mesh" -->
+                                                           <!--  mesh="pincette_distal_collider" -->
+                                                           <!--  class="gripper_collider" /> -->
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+                                                        <body name="l_dist_col"
+                                                              pos="0 0 0.025" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
                                                         </body>
                                                       </body>
                                                       <body name="l_hand_proximal_mimic_link"
@@ -915,13 +982,20 @@
                                                         <joint name="l_hand_finger_proximal_mimic"
                                                           pos="0 0 0" axis="1 0 0"
                                                           range="-0.51 0.554"
-                                                          actuatorfrcrange="-50 50" class="gripper" />
-                                                        <geom type="mesh"
-                                                          mesh="pincette_proximal_collider"
-                                                          class="collider" />
+                                                          class="gripper" />
+                                                        <!-- <geom type="mesh" -->
+                                                        <!--   mesh="pincette_proximal_collider" -->
+                                                        <!--   class="gripper_collider" /> -->
                                                         <geom type="mesh"
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
+
+                                                        <body name="l_prox_col_mimic"
+                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
                                                         <body name="l_hand_distal_mimic_link"
                                                           pos="0 0 0.049997">
                                                           <inertial
@@ -932,13 +1006,19 @@
                                                           <joint name="l_hand_finger_distal_mimic"
                                                             pos="0 0 0" axis="1 0 0"
                                                             range="-0.51 0.554"
-                                                            actuatorfrcrange="-50 50"
                                                             class="gripper" />
-                                                          <geom type="mesh"
-                                                            mesh="pincette_distal_collider"
-                                                            class="collider" />
+                                                          <!-- <geom type="mesh" -->
+                                                          <!--   mesh="pincette_distal_collider" -->
+                                                          <!--   class="gripper_collider" /> -->
+
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+                                                        <body name="l_dist_col_mimic"
+                                                              pos="0 0 0.025" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
                                                         </body>
                                                       </body>
                                                       <body name="l_arm_tip" pos="0 0 0.1"

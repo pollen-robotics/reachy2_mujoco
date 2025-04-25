@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
         reachy.r_arm.gripper.close()
         reachy.l_arm.gripper.close()
-        time.sleep(12.0)
+        time.sleep(15.0)
         goto_input_point(
             reachy,
             x=0.4,
