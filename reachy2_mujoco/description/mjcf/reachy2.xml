@@ -691,10 +691,22 @@
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
 
+                                                        <!-- <body name="r_prox_col" -->
+                                                        <!--       pos="0 0.003 0.035" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
                                                         <body name="r_prox_col"
-                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0.003 0.0175" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
+                                                        <body name="r_prox_col2"
+                                                              pos="0 0.003 0.0375" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
+
+
 
                                                         <body name="r_hand_distal_link"
                                                           pos="0 0 0.049997">
@@ -712,9 +724,25 @@
                                                           <!--   class="gripper_collider" /> -->
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+                                                        <!-- <body name="r_dist_col" -->
+                                                        <!--       pos="0 0 0.025" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
+
+                                                        <!-- <body name="r_dist_col" -->
+                                                        <!--       pos="0 0 0.025" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="visual" /> -->
+                                                        <!-- </body> -->
+
+
                                                         <body name="r_dist_col"
-                                                              pos="0 0 0.025" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0 0.015" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+                                                        <body name="r_dist_col2"
+                                                              pos="0 0 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
 
 
@@ -739,10 +767,22 @@
                                                           class="visual" />
 
 
+                                                        <!-- <body name="r_prox_col_mimic" -->
+                                                        <!--       pos="0 0.003 0.035" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
+
+
                                                         <body name="r_prox_col_mimic"
-                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0.003 0.0175" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
+                                                        <body name="r_prox_col2_mimic"
+                                                              pos="0 0.003 0.0375" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
 
 
                                                         <body name="r_hand_distal_mimic_link"
@@ -762,10 +802,21 @@
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
 
+                                                        <!-- <body name="r_dist_col_mimic" -->
+                                                        <!--       pos="0 0 0.025" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
+
                                                         <body name="r_dist_col_mimic"
-                                                              pos="0 0 0.025" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0 0.015" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
+                                                        <body name="r_dist_col2_mimic"
+                                                              pos="0 0 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
 
 
                                                         </body>
@@ -942,10 +993,20 @@
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
 
+                                                        <!-- <body name="l_prox_col" -->
+                                                        <!--       pos="0 0.003 0.035" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
                                                         <body name="l_prox_col"
-                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0.003 0.0175" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
+                                                        <body name="l_prox_col2"
+                                                              pos="0 0.003 0.0375" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
 
 
                                                         <body name="l_hand_distal_link"
@@ -964,10 +1025,22 @@
                                                            <!--  class="gripper_collider" /> -->
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+                                                        <!-- <body name="l_dist_col" -->
+                                                        <!--       pos="0 0 0.025" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
+
+
                                                         <body name="l_dist_col"
-                                                              pos="0 0 0.025" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0 0.015" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
+                                                        <body name="l_dist_col2"
+                                                              pos="0 0 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
 
 
                                                         </body>
@@ -990,9 +1063,19 @@
                                                           mesh="pincette_proximal_visual"
                                                           class="visual" />
 
+                                                        <!-- <body name="l_prox_col_mimic" -->
+                                                        <!--       pos="0 0.003 0.035" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
+
                                                         <body name="l_prox_col_mimic"
-                                                              pos="0 0.003 0.035" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0.003 0.0175" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+                                                        <body name="l_prox_col2_mimic"
+                                                              pos="0 0.003 0.0375" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
 
 
@@ -1013,10 +1096,21 @@
 
                                                           <geom type="mesh" mesh="pincette_distal"
                                                             class="visual" />
+                                                        <!-- <body name="l_dist_col_mimic" -->
+                                                        <!--       pos="0 0 0.025" quat="1 0 0 0" > -->
+                                                        <!--   <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" /> -->
+                                                        <!-- </body> -->
+
+
                                                         <body name="l_dist_col_mimic"
-                                                              pos="0 0 0.025" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.02" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                              pos="0 0 0.015" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
                                                         </body>
+                                                        <body name="l_dist_col2_mimic"
+                                                              pos="0 0 0.035" quat="1 0 0 0" >
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                        </body>
+
 
 
                                                         </body>

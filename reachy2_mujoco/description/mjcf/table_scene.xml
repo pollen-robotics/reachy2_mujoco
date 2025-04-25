@@ -32,7 +32,7 @@
 			<freejoint name="table"/>
 			<include file="assets/simpleWoodTable_body.xml" />
 		</body>
-		<body name="goal" pos="0.45 -0.32 0.8">
+		<body name="goal" pos="0.45 -0.4 0.8">
 			<freejoint name="box"/>
 			<geom type="box" size="0.025 0.025 0.025" rgba="1.0 0 0 1" conaffinity="1" contype="1" mass="0.05" friction="1.0 0.5 0.01" priority="1"/>
 		</body>
