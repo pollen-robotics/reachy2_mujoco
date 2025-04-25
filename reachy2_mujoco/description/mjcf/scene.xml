@@ -1,9 +1,12 @@
 <mujoco model="reachy2 scene">
+	<option timestep="0.002" solver="PGS" iterations="100" />
+
 	<!-- <statistic center="0 0 0.55" extent="1.1" /> -->
 	<include file="reachy2.xml" />
 	<default>
 		<!-- TODO tried doubling sliding friction -->
-		<geom friction="0.1 0.005 0.0001"/>
+		<!-- <geom friction="0.1 0.005 0.0001" /> -->
+		<geom solimp="0.98 0.98 0.001" solref="0.005 1" friction="3.0 0.01 0.002" />
 
 	</default>
 	<visual>
@@ -12,92 +15,56 @@
 		<global azimuth="150" elevation="-20" />
 	</visual>
 	<asset>
-		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
-		<texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
-		<material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+			height="3072" />
+		<texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+			rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+		<material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+			reflectance="0.2" />
 	</asset>
 	<worldbody>
 		<light pos="0 0 3" dir="0 0 -1" directional="false" />
 		<body name="floor">
-			<!-- <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane" conaffinity="1" contype="1" /> -->
-                 <geom contype="1" conaffinity="2" friction=".1 0.005 0.0001" name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="groundplane" condim="3" solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/>
+			<!-- <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane"
+			conaffinity="1" contype="1" /> -->
+			<geom contype="1" conaffinity="2" friction=".1 0.005 0.0001" name="floor" pos="0 0 0"
+				size="0 0 .25" type="plane" material="groundplane" condim="3"
+				solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0" />
+		</body>
+		<geom name="table_top" type="box" pos="0.55 0 0.5" size="0.4 0.6 0.05"
+			rgba="0.6 0.4 0.2 1"
+			friction="3.0 0.01 0.002"
+			condim="4"
+			solref="0.005 1"
+			solimp="0.98 0.98 0.001"
+			contype="1" conaffinity="1" />
+		<!-- Table -->
+		<!-- <body name="table" pos="0.55 0 0.5">
+			<geom name="table_top" type="box" size="0.4 0.6 0.05"
+				rgba="0.6 0.4 0.2 1"
+				friction="3.0 0.01 0.002"
+				condim="4"
+				solref="0.005 1"
+				solimp="0.98 0.98 0.001"
+				contype="1" conaffinity="1" />
+		</body> -->
+		<body name="bottle" pos="0.43 0.1 0.8">
+			<geom name="bottle_main" type="cylinder" size="0.03 0.07"
+				rgba="0.2 0.6 0.9 1"
+				mass="0.8"
+				friction="3.0 0.01 0.002"
+				condim="4"
+				solref="0.005 1"
+				solimp="0.97 0.97 0.001"
+				margin="0.002"
+				contype="1" conaffinity="1" />
+			<joint name="bottle_free" type="free" />
+
+
 		</body>
 
 
-		<!-- <body name="goal" pos="0.5 0.5 0.1">
-			<freejoint />
-			<geom type="box" size="0.015 0.015 0.015" rgba=".5 .7 .5 1" conaffinity="1" contype="1" />
-		</body> -->
 	</worldbody>
 
-        <!-- <contact> -->
-        <!--   <pair name="wheel1" geom1="floor" geom2="left_wheel" friction="1 1 0.9 0.0001 0.0001" /> -->
-        <!--   <pair name="wheel2" geom1="floor" geom2="right_wheel" friction="1 1 0.9 0.0001 0.0001" /> -->
-        <!--   <pair name="wheel3" geom1="floor" geom2="back_wheel" friction="1 1 0.9 0.0001 0.0001" /> -->
-        <!--   <!-\- <pair name="wheel1" geom1="floor" geom2="left_wheel" friction="1 1 10" /> -\-> -->
-        <!--   <!-\- <pair name="wheel2" geom1="floor" geom2="right_wheel" friction="1 1 10 " /> -\-> -->
-        <!--   <!-\- <pair name="wheel3" geom1="floor" geom2="back_wheel" friction="1 1 10" /> -\-> -->
-
-        <!-- </contact> -->
-
-  <!-- <keyframe> -->
-
-<!-- <key name="init" -->
-<!--      qpos='-0.000373947 1.90716e-06 0.000253618 3.36284e-07 8.44785e-10 -8.38547e-10 -2.76748e-05 0.000336361 -1.88464e-05 -7.21488e-05 0.000512574 3.58577e-05 9.53975e-06 0.00395873 0.537585 -0.539412 0.536727 -0.541125 -0.000101911 -0.000333621 1.88372e-05 -7.10679e-05 -0.000228714 3.59536e-05 -9.57936e-06 0.00395958 0.537446 -0.539287 0.536642 -0.540801' -->
-
-<!--       ctrl=" -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-
-<!--           "/> -->
-
-
-<!-- <key name="high" -->
-<!--      qpos='0.20 1.90716e-06 0.000253618 3.36284e-07 8.44785e-10 -8.38547e-10 -2.76748e-05 0.000336361 -1.88464e-05 -7.21488e-05 0.000512574 3.58577e-05 9.53975e-06 0.00395873 0.537585 -0.539412 0.536727 -0.541125 -0.000101911 -0.000333621 1.88372e-05 -7.10679e-05 -0.000228714 3.59536e-05 -9.57936e-06 0.00395958 0.537446 -0.539287 0.536642 -0.540801' -->
-
-<!--       ctrl=" -->
-<!--             0.20 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-<!--             0 -->
-
-<!--           "/> -->
-
-
-<!--   </keyframe> -->
 
 </mujoco>
