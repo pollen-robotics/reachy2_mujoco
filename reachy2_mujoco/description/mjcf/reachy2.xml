@@ -28,12 +28,12 @@
 <!-- <option cone="elliptic" impratio="10"/> -->
   <default>
     <!-- This looks good -->
-    <joint damping="10" frictionloss="2.0" />
-    <position kp="200" kv="10" />
+    <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
+    <position kp="500" kv="10" />
 
     <default class="gripper">
-      <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-2000 2000"/>
-      <position kp="80" kv="0" />
+      <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-20 20" armature="1.0"/>
+      <position kp="200" kv="0" />
     </default>
 
     <default class="tripod">
@@ -42,8 +42,8 @@
     </default>
 
     <default class="wheel">
-      <!-- <joint  armature="1.0" /> -->
-      <!-- <joint damping="1" frictionloss="1" actuatorfrcrange="-50 50" /> -->
+      <joint  armature="0.1" />
+      <!-- <joint damping="1" frictionloss="1" actuatorfrcrange="-50 50" armature="1.0"/> -->
       <!-- <position kp="5" kv="1" /> -->
       <!-- <velocity kv="0.1" /> -->
     </default>

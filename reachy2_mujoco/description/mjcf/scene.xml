@@ -31,7 +31,7 @@
 				size="0 0 .25" type="plane" material="groundplane" condim="3"
 				solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0" />
 		</body>
-		<geom name="table_top" type="box" pos="0.55 0 0.5" size="0.4 0.6 0.05"
+		<geom name="table_top" type="box" pos="0.55 0 0.5" size="0.15 0.6 0.05"
 			rgba="0.6 0.4 0.2 1"
 			friction="3.0 0.01 0.002"
 			condim="4"
@@ -50,6 +50,9 @@
 		</body> -->
 				<!-- friction="3.0 0.01 0.002" -->
 		<body name="bottle" pos="0.43 0.1 0.8">
+			<!-- <joint name="bottle_free" type="free" /> -->
+		        <freejoint name="bottle_free"/>
+
 			<geom name="bottle_main" type="cylinder" size="0.03 0.07"
 				rgba="0.2 0.6 0.9 1"
 				mass="0.8"
@@ -59,8 +62,6 @@
 				solimp="0.97 0.97 0.001"
 				margin="0.002"
 				contype="1" conaffinity="1" />
-			<joint name="bottle_free" type="free" />
-
 
 		</body>
 
