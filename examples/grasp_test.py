@@ -31,6 +31,10 @@ def get_T_torso_cube():
     return T_torso_cube
 
 
+# reachy.r_arm.gripper.close()
+# reachy.r_arm.gripper.open()
+# reachy.send_goal_positions()
+# time.sleep(4)
 reachy.l_arm.shoulder.roll.goal_position = 40
 reachy.r_arm.shoulder.roll.goal_position = -30
 reachy.r_arm.shoulder.pitch.goal_position = 40
@@ -40,7 +44,7 @@ reachy.r_arm.wrist.yaw.goal_position = -45
 reachy.r_arm.wrist.pitch.goal_position = -45
 reachy.r_arm.gripper.open()
 reachy.send_goal_positions()
-time.sleep(1)
+time.sleep(2)
 # exit()
 
 # fv = Viewer()
@@ -49,9 +53,9 @@ time.sleep(1)
 T_torso_cube = get_T_torso_cube()
 target_pose = T_torso_cube.copy()
 target_pose = fv_utils.rotateInSelf(target_pose, [0, -np.pi / 2, 0], degrees=False)
-target_pose = fv_utils.translateInSelf(target_pose, [0.07, 0, 0.0])
+target_pose = fv_utils.translateInSelf(target_pose, [0.05, 0.0, 0.0])
 pregrasp_pose = target_pose.copy()
-pregrasp_pose = fv_utils.translateInSelf(pregrasp_pose, [0, 0, 0.05])
+pregrasp_pose = fv_utils.translateInSelf(pregrasp_pose, [0, 0, 0.1])
 # fv.pushFrame(T_torso_cube, "cube")
 # fv.pushFrame(target_pose, "target")
 # fv.pushFrame(pregrasp_pose, "pregrasp")

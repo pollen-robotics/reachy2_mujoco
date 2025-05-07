@@ -15,7 +15,7 @@ class MobileBase:
         self._target_position = np.zeros(3)
         self._pos_offset = np.zeros(3)
         self._pid_translation = [2, 0, 0]
-        self._pid_rotation = [3, 0.0, 0.0]
+        self._pid_rotation = [10, 5, 0.0]
 
         self.position = np.zeros(3)  # x, y, theta
         self.velocity = np.zeros(3)  # x, y, theta
