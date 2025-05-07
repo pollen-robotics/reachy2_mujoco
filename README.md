@@ -1,6 +1,6 @@
 # Reachy2 fake mujoco sdk server
 
-You can interact with Reachy2 in mujoco through Reachy2's (fake) sdk! 
+You can interact with Reachy2 in mujoco through Reachy2's (fake) sdk!
 
 ![Capture d’écran du 2025-02-20 10-12-34](https://github.com/user-attachments/assets/d363d60a-0881-483e-8240-3dab9250eee8)
 
@@ -40,7 +40,7 @@ reachy = ReachySDK("localhost")
 
 reachy.mobile_base.goto(-1.0, 1.0, -np.pi / 2)
 
-reachy.r_arm.shoulder_pitch.goal_position = np.pi/2
+reachy.r_arm.shoulder.pitch.goal_position = 90.0
 # target_pose = <...> # 4x4 pose matrix
 # reachy.r_arm.goto(target_pose)
 
