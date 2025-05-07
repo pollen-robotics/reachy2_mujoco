@@ -52,7 +52,7 @@ time.sleep(2)
 
 T_torso_cube = get_T_torso_cube()
 target_pose = T_torso_cube.copy()
-target_pose = fv_utils.rotateInSelf(target_pose, [0, -np.pi / 2, 0], degrees=False)
+target_pose = fv_utils.rotateInSelf(target_pose, [0, -np.pi/2.0, 0], degrees=False)
 target_pose = fv_utils.translateInSelf(target_pose, [0.05, 0.0, 0.0])
 pregrasp_pose = target_pose.copy()
 pregrasp_pose = fv_utils.translateInSelf(pregrasp_pose, [0, 0, 0.1])

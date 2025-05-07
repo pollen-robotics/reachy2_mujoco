@@ -7,8 +7,8 @@ import time
 import mujoco
 import mujoco.viewer
 
-from reachy2_mujoco.parts import Arm, Cameras, Head, MobileBase
-from reachy2_mujoco.parts.cameras import CameraView
+from .parts import Arm, Cameras, Head, MobileBase
+from .parts.cameras import CameraView
 from reachy2_symbolic_ik.control_ik import ControlIK
 
 os.environ['MUJOCO_GL'] = 'egl'
@@ -62,7 +62,7 @@ class ReachyMujoco:
     def _update(self):
         self.mobile_base._update()
         if self.cameras is None:
-            self.cameras = Cameras(self._model, self._data, 640, 480)       
+            self.cameras = Cameras(self._model, self._data, 640, 480)
         else:
             self.cameras._update()
             # left = self.cameras.teleop.get_frame(view=CameraView.LEFT)

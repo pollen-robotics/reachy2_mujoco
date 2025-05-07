@@ -1,4 +1,4 @@
-from reachy2_mujoco.utils import get_actuator_index, get_joint_index
+from ..utils import get_actuator_index, get_joint_index
 import numpy as np
 import mujoco
 

@@ -1,4 +1,4 @@
-from reachy2_mujoco.parts import Neck
+from ..parts import Neck
 
 
 class Head:

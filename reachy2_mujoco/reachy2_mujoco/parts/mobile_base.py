@@ -1,6 +1,6 @@
 import pyquaternion
 import numpy as np
-import reachy2_mujoco.utils as utils
+from ..utils import get_actuator_index, get_mobile_base_qpos, get_mobile_base_qvel, get_wheels_qpos, get_wheels_qvel
 import time
 
 class MobileBase:
@@ -21,9 +21,9 @@ class MobileBase:
         self.velocity = np.zeros(3)  # x, y, theta
         self.wheel_qvel = np.zeros(3) #left, back, right
         self.wheel_qpos = np.zeros(3) #left, back, right
-        self.left_idx=utils.get_actuator_index(self._model,"left_wheel")
-        self.right_idx=utils.get_actuator_index(self._model,"right_wheel")
-        self.back_idx=utils.get_actuator_index(self._model,"back_wheel")
+        self.left_idx=get_actuator_index(self._model,"left_wheel")
+        self.right_idx=get_actuator_index(self._model,"right_wheel")
+        self.back_idx=get_actuator_index(self._model,"back_wheel")
         self.wheel_rad=0.105
         self.wheel_base_rad=0.198
         self._prevt=time.time()
@@ -45,7 +45,7 @@ class MobileBase:
 
     def _update_position(self):
 
-        mobile_base_qpos=utils.get_mobile_base_qpos(self._model,self._data)
+        mobile_base_qpos=get_mobile_base_qpos(self._model,self._data)
         # self.position[:2] = self._data.qpos[:2] - self._pos_offset[:2]
         self.position[:2] = mobile_base_qpos[:2] - self._pos_offset[:2]
 
@@ -54,13 +54,13 @@ class MobileBase:
         yaw = pyquaternion.Quaternion(quat).yaw_pitch_roll[0]
 
         self.position[2] = yaw - self._pos_offset[2]
-        qvel=utils.get_mobile_base_qvel(self._model,self._data)
+        qvel=get_mobile_base_qvel(self._model,self._data)
         self.velocity=np.zeros(3)
         self.velocity[:2]=qvel[:2]
         self.velocity[2]=qvel[5]
 
-        self.wheel_qvel=utils.get_wheels_qvel(self._model, self._data)
-        self.wheel_qpos=utils.get_wheels_qpos(self._model, self._data)
+        self.wheel_qvel=get_wheels_qvel(self._model, self._data)
+        self.wheel_qpos=get_wheels_qpos(self._model, self._data)
 
     def _update(self):
         dt=time.time()-self._prevt
@@ -122,9 +122,9 @@ class MobileBase:
 
         # print(f'DEBUG: target: {self._target_position}\nctrl: {ctrlvec.T}\npos: {self.position}\nvel: {self.velocity}\nw_vel: {self.wheel_qvel}\nw_pos: {self.wheel_qpos}\npos_err: {pos_err}\ndist_err: {dist_err}')
 
-        self._data.ctrl[utils.get_actuator_index(self._model, "left_wheel")]=ctrlvec[0]
-        self._data.ctrl[utils.get_actuator_index(self._model, "back_wheel")]=ctrlvec[1]
-        self._data.ctrl[utils.get_actuator_index(self._model, "right_wheel")]=ctrlvec[2]
+        self._data.ctrl[get_actuator_index(self._model, "left_wheel")]=ctrlvec[0]
+        self._data.ctrl[get_actuator_index(self._model, "back_wheel")]=ctrlvec[1]
+        self._data.ctrl[get_actuator_index(self._model, "right_wheel")]=ctrlvec[2]
 
 
     # TODO not working
@@ -135,10 +135,14 @@ class MobileBase:
 
     # TODO implement better (with PID ?)
     def goto(self, x, y, theta):
-        self._target_position = np.array([x, y, theta])
+        self._target_position = np.array([x, y, np.radians(theta)])
 
     # TODO match real behvior (command for only 200ms ? )
     def set_goal_speed(self, vx, vy, vtheta):
-        mobile_base_qvel=utils.get_mobile_base_qvel(self._model,self._data)
+        mobile_base_qvel=get_mobile_base_qvel(self._model,self._data)
         mobile_base_qvel = [vx, vy, 0.0, 0.0, 0.0, vtheta]
-        utils.set_mobile_base_qvel(self._model,self._data,mobile_base_qvel)
+        set_mobile_base_qvel(self._model,self._data,mobile_base_qvel)
+
+    @property
+    def odometry(self):
+        return {'x': self.position[0], 'y': self.position[1], 'theta': np.degrees(self.position[2])}
