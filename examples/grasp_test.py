@@ -7,7 +7,7 @@ import FramesViewer.utils as fv_utils
 from reachy2_mujoco import ReachySDK
 
 reachy = ReachySDK("localhost")
-
+reachy.turn_on()
 
 def get_T_torso_cube():
     cube_pos = np.around(np.array(reachy._data.body("goal").xpos), 2)

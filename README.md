@@ -45,7 +45,7 @@ Then you can use the ReachySDK as usual, just import it from `reachy2_mujoco` :
 from reachy2_mujoco import ReachySDK
 
 reachy = ReachySDK("localhost")
-
+reachy.tuen_on()
 reachy.mobile_base.goto(-1.0, 1.0, -90.0)
 
 reachy.r_arm.shoulder.pitch.goal_position = 90.0

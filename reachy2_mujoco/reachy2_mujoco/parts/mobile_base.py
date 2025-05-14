@@ -3,6 +3,12 @@ import numpy as np
 from ..utils import get_actuator_index, get_mobile_base_qpos, get_mobile_base_qvel, get_wheels_qpos, get_wheels_qvel
 import time
 
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig()
+logger.setLevel(logging.INFO)
+
+
 class MobileBase:
     # TODO implement
     # self.reachy.mobile_base.set_goal_speed(action[19], action[20], action[21])
@@ -42,6 +48,8 @@ class MobileBase:
          ]
         )
 
+    def _reset(self):
+        self._target_position=np.zeros(3) #TODO reset to key
 
     def _update_position(self):
 
@@ -130,7 +138,7 @@ class MobileBase:
     # TODO not working
     def reset_odometry(self):
         # self._pos_offset = self.position
-        print("Not implemented")
+        logger.warning("Not implemented")
         pass
 
     # TODO implement better (with PID ?)

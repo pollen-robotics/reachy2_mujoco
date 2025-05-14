@@ -6,6 +6,12 @@ import time
 from threading import Thread
 
 
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig()
+logger.setLevel(logging.INFO)
+
+
 class Arm:
     def __init__(self, model, data, control_ik, prefix="l_"):
         self._model = model
@@ -16,8 +22,39 @@ class Arm:
         self.shoulder = Shoulder(self._model, self._data, prefix=prefix)
         self.elbow = Elbow(self._model, self._data, prefix=prefix)
         self.wrist = Wrist(self._model, self._data, prefix=prefix)
-
         self.gripper = Gripper(self._model, self._data, prefix=prefix)
+
+    def turn_on(self):
+        self.shoulder.turn_on()
+        self.elbow.turn_on()
+        self.wrist.turn_on()
+        self.gripper.turn_on()
+        return True
+
+
+    def turn_off(self):
+        self.shoulder.turn_off()
+        self.elbow.turn_off()
+        self.wrist.turn_off()
+        self.gripper.turn_off()
+        return True
+
+    def turn_off_smoothly(self):
+        #TODO
+        pass
+
+    def is_on(self):
+        self.shoulder.is_on() and self.elbow.is_on() and self.wrist.is_on() and self.gripper.is_on()
+
+    def is_off(self):
+        self.shoulder.is_off() and self.elbow.is_off() and self.wrist.is_off() and self.gripper.is_off()
+
+
+    def _reset(self):
+        self.shoulder._reset()
+        self.elbow._reset()
+        self.wrist._reset()
+        self.gripper._reset()
 
     def _update(self):
         self.shoulder._update()
@@ -83,10 +120,10 @@ class Arm:
                 d_theta_max=0.02,
             )
             if not is_reachable:
-                print("Target is not reachable")
-                print(state)
+                logger.error("Target is not reachable")
+                logger.debug(state)
                 return
-            print("SOL : ", np.rad2deg(sol))
+            logger.debug("SOL : ", np.rad2deg(sol))
             Thread(target=self.goto_joints, args=(sol, duration)).start()
 
         elif len(target) == 7:

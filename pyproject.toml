@@ -15,6 +15,7 @@ dependencies = [
     "reachy2_symbolic_ik @ git+https://github.com/pollen-robotics/reachy2_symbolic_ik",
     "FramesViewer>=1.0.2",
     "numpy",
+    "argparse>=1.4.0",
 ]
 # requires-python = "== 3.10.*"
 requires-python = ">=3.10"

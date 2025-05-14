@@ -4,7 +4,7 @@ import time
 from reachy2_mujoco import ReachySDK, CameraView
 
 reachy = ReachySDK("localhost")
-
+reachy.turn_on()
 reachy.l_arm.shoulder.roll.goal_position = 90
 
 reachy.r_arm.shoulder.roll.goal_position = -40
