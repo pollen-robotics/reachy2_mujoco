@@ -27,9 +27,19 @@
   </asset>
 <!-- <option cone="elliptic" impratio="10"/> -->
   <default>
-    <!-- This looks good -->
     <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
     <position kp="500" kv="10" />
+
+    <!-- This looks good -->
+    <default class="shoulder">
+    <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
+    <position kp="500" kv="10" />
+    </default>
+
+    <default class="elbow">
+    <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
+    <position kp="500" kv="10" />
+    </default>
 
     <default class="gripper">
       <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-20 20" armature="1.0"/>
@@ -37,7 +47,7 @@
     </default>
 
     <default class="tripod">
-      <joint damping="1000" frictionloss="50.0" actuatorfrcrange="-2000000 2000000" />
+      <joint damping="1000" frictionloss="50.0" actuatorfrcrange="-20000 20000" armature="5.0"/>
       <position kp="50000" kv="1" />
     </default>
 
@@ -569,13 +579,13 @@
                       quat="0.996708 0.000282525 0.00106617 -0.0810711" mass="0.487"
                       diaginertia="0.000578016 0.000572943 0.000243342" />
                     <joint name="r_shoulder_pitch" pos="0 0 0" axis="0 1 0" range="-3.14159 3.14159"
-                      actuatorfrcrange="-50 50" />
+                      class="shoulder" />
                     <geom quat="0.707107 0.707107 0 0" mesh="2D_sphere_visual" class="visual" />
                     <body name="r_shoulder_ball_link">
                       <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001"
                         diaginertia="1.02e-06 9.9e-07 9.9e-07" />
                       <joint name="r_shoulder_roll" pos="0 0 0" axis="1 0 0" range="-3.14159 0"
-                        actuatorfrcrange="-50 50" />
+                        class="shoulder" />
                       <body name="r_shoulder_fix_link" quat="0.707107 0.707107 0 0">
                         <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708"
                           mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07" />
@@ -600,14 +610,14 @@
                                     quat="0.996708 0.000282525 0.00106617 -0.0810711" mass="0.487"
                                     diaginertia="0.000578016 0.000572943 0.000243342" />
                                   <joint name="r_elbow_yaw" pos="0 0 0" axis="0 0 1"
-                                    range="-3.14159 3.14159" actuatorfrcrange="-50 50" />
+                                    range="-3.14159 3.14159" class="elbow" />
                                   <geom quat="2.31079e-07 0.707107 -0.707107 -2.31079e-07"
                                     mesh="2D_sphere_visual" class="visual" />
                                   <body name="r_elbow_ball_link">
                                     <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708"
                                       mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07" />
                                     <joint name="r_elbow_pitch" pos="0 0 0" axis="0 1 0"
-                                      range="-2.25 0.1" actuatorfrcrange="-50 50" />
+                                      range="-2.25 0.1" class="elbow" />
                                     <body name="r_elbow_fix_link"
                                       quat="2.31079e-07 0.707107 0.707107 2.31079e-07">
                                       <inertial pos="0 0 0"
@@ -871,13 +881,13 @@
                       quat="0.996708 0.000282525 0.00106617 -0.0810711" mass="0.487"
                       diaginertia="0.000578016 0.000572943 0.000243342" />
                     <joint name="l_shoulder_pitch" pos="0 0 0" axis="0 1 0" range="-3.14159 3.14159"
-                      actuatorfrcrange="-50 50" />
+                      class="shoulder" />
                     <geom quat="0.707107 -0.707107 0 0" mesh="2D_sphere_visual" class="visual" />
                     <body name="l_shoulder_ball_link">
                       <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.001"
                         diaginertia="1.02e-06 9.9e-07 9.9e-07" />
                       <joint name="l_shoulder_roll" pos="0 0 0" axis="1 0 0" range="0 3.14159"
-                        actuatorfrcrange="-50 50" />
+                        class="shoulder" />
                       <body name="l_shoulder_fix_link" quat="0.707107 0.707107 0 0">
                         <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708"
                           mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07" />
@@ -902,14 +912,14 @@
                                     quat="0.996708 0.000282525 0.00106617 -0.0810711" mass="0.487"
                                     diaginertia="0.000578016 0.000572943 0.000243342" />
                                   <joint name="l_elbow_yaw" pos="0 0 0" axis="0 0 1"
-                                    range="-3.14159 3.14159" actuatorfrcrange="-50 50" />
+                                    range="-3.14159 3.14159" class="elbow" />
                                   <geom quat="2.31079e-07 0.707107 0.707107 2.31079e-07"
                                     mesh="2D_sphere_visual" class="visual" />
                                   <body name="l_elbow_ball_link">
                                     <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708"
                                       mass="0.001" diaginertia="1.02e-06 9.9e-07 9.9e-07" />
                                     <joint name="l_elbow_pitch" pos="0 0 0" axis="0 1 0"
-                                      range="-2.25 0.1" actuatorfrcrange="-50 50" />
+                                      range="-2.25 0.1" class="elbow" />
                                     <body name="l_elbow_fix_link"
                                       quat="2.31079e-07 0.707107 0.707107 2.31079e-07">
                                       <inertial pos="0 0 0"
