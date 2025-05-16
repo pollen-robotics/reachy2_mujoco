@@ -122,7 +122,7 @@
       <body name="drivewhl1_link" pos="0.099 -0.171473 0.105" quat="0.965926 0 0 0.258819">
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5"
           diaginertia="0.00275625 0.00142917 0.00142917" />
-        <joint name="right_wheel" pos="0 0 0" axis="0 1 0" class="wheel" />
+        <joint name="drivewhl2_joint" pos="0 0 0" axis="0 1 0" class="wheel" />
 
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"
         class="wheel_collision" /> -->
@@ -209,7 +209,7 @@
       <body name="drivewhl2_link" pos="0.099 0.171473 0.105" quat="-0.258819 0 0 -0.965926">
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5"
           diaginertia="0.00275625 0.00142917 0.00142917" />
-        <joint name="left_wheel" pos="0 0 0" axis="0 1 0" class="wheel" />
+        <joint name="drivewhl1_joint" pos="0 0 0" axis="0 1 0" class="wheel" />
 
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"
         class="wheel_collision" /> -->
@@ -298,7 +298,7 @@
       <body name="drivewhl3_link" pos="-0.198 0 0.105" quat="0.707107 0 0 -0.707107">
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5"
           diaginertia="0.00275625 0.00142917 0.00142917" />
-        <joint name="back_wheel" pos="0 0 0" axis="0 1 0" class="wheel" />
+        <joint name="drivewhl3_joint" pos="0 0 0" axis="0 1 0" class="wheel" />
 
         <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"
         class="wheel_collision" /> -->
@@ -1464,33 +1464,33 @@
     <!-- /> -->
 
     <motor
-      name="left_wheel"
-      joint="left_wheel"
+      name="drivewhl1_joint"
+      joint="drivewhl1_joint"
       ctrlrange="-50 50" ctrllimited="true"
     />
     <motor
-      name="right_wheel"
-      joint="right_wheel"
+      name="drivewhl2_joint"
+      joint="drivewhl2_joint"
       ctrlrange="-50 50" ctrllimited="true"
     />
     <motor
-      name="back_wheel"
-      joint="back_wheel"
+      name="drivewhl3_joint"
+      joint="drivewhl3_joint"
       ctrlrange="-50 50" ctrllimited="true"
     />
 
-    <!-- <velocity -->
-    <!--     name="left_wheel" -->
-    <!--     joint="left_wheel" -->
-    <!-- /> -->
-    <!-- <velocity -->
-    <!--     name="right_wheel" -->
-    <!--     joint="right_wheel" -->
-    <!-- /> -->
-    <!-- <velocity -->
-    <!--     name="back_wheel" -->
-    <!--     joint="back_wheel" -->
-    <!-- /> -->
+    <!-- <velocity
+        name="drivewhl1_joint"
+        joint="drivewhl1_joint"
+    />
+    <velocity
+        name="drivewhl2_joint"
+        joint="drivewhl2_joint"
+    />
+    <velocity
+        name="drivewhl3_joint"
+        joint="drivewhl3_joint"
+    /> -->
 
 
   </actuator>
