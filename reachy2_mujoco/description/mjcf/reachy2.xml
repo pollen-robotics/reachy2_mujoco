@@ -90,8 +90,10 @@
       <!-- <geom condim="6" group="3" friction="1 0 0"/> -->
       <!-- <geom conaffinity="0" condim="3" group="3" friction="1 0.5 0.5"/> -->
       <!-- <geom condim="3" friction="1 0.0 0.0" group="3"/> -->
-      <geom friction="0.3 0.005 0.0001" condim="3" contype="2" conaffinity="0"
-        solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0" />
+      <!-- <geom friction="0.3 0.005 0.0001" condim="3" contype="2" conaffinity="0"
+        solimp="0.0 0.8 0.001 0.5 2" solref="0.002 1" margin="0" /> -->
+      <geom friction="0.0 0.0 0.0" condim="3" contype="2" conaffinity="0"
+        solimp="0.0 0.8 0.001 0.5 2" solref="0.002 1" margin="0" />
     </default>
 
 
@@ -387,6 +389,7 @@
       <body name="lidar_link" pos="0.184 0 0.25" quat="0 0 0 1">
         <inertial pos="0 0 0" mass="0.125" diaginertia="0.001 0.001 0.001" />
         <geom size="0.0508 0.0275" type="cylinder" />
+        <site name="lidar_site" pos="0 0 0" size="0.001" />
       </body>
       <body name="back_bar_base" pos="-0.09 0 0.241">
         <inertial pos="0 0 0" mass="0.759" diaginertia="0.0002024 0.0002024 0.0002024" />
@@ -1494,6 +1497,14 @@
 
 
   </actuator>
+
+  <sensor>
+    <ray name="lidar_ray"
+         type="rangefinder"
+         site="lidar_site"
+         group="1"
+         cutoff="30.0"/>
+  </sensor>
 
   <contact>
     <!-- <exclude name="torso_l_shoulder" body1="torso" body2="r_shoulder_base_link"/> -->
