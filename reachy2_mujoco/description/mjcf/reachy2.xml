@@ -1499,11 +1499,9 @@
   </actuator>
 
   <sensor>
-    <ray name="lidar_ray"
-         type="rangefinder"
-         site="lidar_site"
-         group="1"
-         cutoff="30.0"/>
+    <rangefinder name="lidar_ray"
+        site="lidar_site"
+        cutoff="30.0"/>
   </sensor>
 
   <contact>
