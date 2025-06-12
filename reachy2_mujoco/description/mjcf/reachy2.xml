@@ -1,24 +1,24 @@
 <mujoco model="reachy2">
-  <compiler angle="radian" meshdir="./obj_meshes/" />
+  <compiler angle="radian" meshdir="./assets/meshes" texturedir="./assets/textures" />
 
   <asset>
-    <mesh name="mobile_base_visual" file="mobile_base_visual.obj" />
-    <mesh name="torso_visual" file="torso_visual.obj" />
-    <mesh name="torso_collider" file="torso_collider.obj" />
-    <mesh name="head_visual" file="head_visual.obj" />
-    <mesh name="head_collider" file="head_collider.obj" />
-    <mesh name="head_antenna_visual" file="head_antenna_visual.obj" />
-    <mesh name="2D_sphere_visual" file="2D_sphere_visual.obj" />
-    <mesh name="upper_arm_visual" file="upper_arm_visual.obj" />
-    <mesh name="upper_arm_collider" file="upper_arm_collider.obj" />
-    <mesh name="forearm_visual" file="forearm_visual.obj" />
-    <mesh name="forearm_collider" file="forearm_collider.obj" />
-    <mesh name="pincette_base_collider" file="pincette_base_collider.obj" />
-    <mesh name="pincette_base_visual" file="pincette_base_visual.obj" />
-    <mesh name="pincette_proximal_collider" file="pincette_proximal_collider.obj" />
-    <mesh name="pincette_proximal_visual" file="pincette_proximal_visual.obj" />
-    <mesh name="pincette_distal_collider" file="pincette_distal_collider.obj" />
-    <mesh name="pincette_distal" file="pincette_distal.obj" />
+    <mesh name="mobile_base_visual" file="reachy2/mobile_base_visual.obj" />
+    <mesh name="torso_visual" file="reachy2/torso_visual.obj" />
+    <mesh name="torso_collider" file="reachy2/torso_collider.obj" />
+    <mesh name="head_visual" file="reachy2/head_visual.obj" />
+    <mesh name="head_collider" file="reachy2/head_collider.obj" />
+    <mesh name="head_antenna_visual" file="reachy2/head_antenna_visual.obj" />
+    <mesh name="2D_sphere_visual" file="reachy2/2D_sphere_visual.obj" />
+    <mesh name="upper_arm_visual" file="reachy2/upper_arm_visual.obj" />
+    <mesh name="upper_arm_collider" file="reachy2/upper_arm_collider.obj" />
+    <mesh name="forearm_visual" file="reachy2/forearm_visual.obj" />
+    <mesh name="forearm_collider" file="reachy2/forearm_collider.obj" />
+    <mesh name="pincette_base_collider" file="reachy2/pincette_base_collider.obj" />
+    <mesh name="pincette_base_visual" file="reachy2/pincette_base_visual.obj" />
+    <mesh name="pincette_proximal_collider" file="reachy2/pincette_proximal_collider.obj" />
+    <mesh name="pincette_proximal_visual" file="reachy2/pincette_proximal_visual.obj" />
+    <mesh name="pincette_distal_collider" file="reachy2/pincette_distal_collider.obj" />
+    <mesh name="pincette_distal" file="reachy2/pincette_distal.obj" />
     <texture builtin="checker" height="10" name="texplane" rgb1="0 0 0" rgb2="0.8 0.8 0.8" type="2d"
       width="10" />
     <material name="checkmat" reflectance="0.5" shininess="1" specular="1" texrepeat="6 6"
