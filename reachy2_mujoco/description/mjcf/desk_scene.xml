@@ -1,8 +1,11 @@
 <mujoco model="reachy2_manipulation_scene">
     <compiler meshdir="assets/meshes" texturedir="assets/textures" />
 
-    <include file="assets/simpleTable_asset.xml"/>
     <include file="reachy2.xml"/>
+    <include file="assets/fruits_assets.xml"/>
+    <include file="assets/bowl_asset.xml"/>
+    <include file="assets/plate_asset.xml"/>
+    <include file="assets/table_asset.xml"/>
 
     <default>
         <default class="ycb_col">
@@ -11,6 +14,7 @@
         <default class="ycb_viz">
             <geom contype="0" conaffinity="0" type="mesh" mass="0"/>
         </default>
+
     </default>
 
     <option gravity="0 0 -9.81" timestep="0.0005" iterations="50" integrator="RK4">
@@ -24,29 +28,10 @@
     </visual>
 
     <asset>
-
         <!-- Ground -->
         <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
         <texture type="2d" name="groundplane" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
         <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
-
-        <!-- Table -->
-        <texture type="2d" name="wooden_table_texture" file="wooden_table.png"/>
-        <material name="wooden_table_material" texture="wooden_table_texture"/>
-        <mesh name="wooden_table" file="wooden_table.obj" scale="0.8 0.8 0.8"/>
-
-        <!-- Apple -->
-        <texture type="2d" name="apple_tex" file="apple_texture.png"/>
-        <material name="apple_mat" texture="apple_tex" specular="0.5" shininess="0.5"/>
-        <mesh file="apple/apple.obj" name="apple"/>
-        <mesh file="apple/apple_collision.obj" name="apple_collision"/>
-
-        <!-- Orange -->
-        <texture type="2d" name="orange_texture" file="orange_texture.png"/>
-        <material name="orange_mat" texture="orange_texture" specular="0.5" shininess="0.5"/>
-        <mesh file="orange/textured.obj" name="orange"/>
-        <mesh file="orange/textured_collision_0.obj" name="orange_collision_0"/>
-
     </asset>
 
     <worldbody>
@@ -64,18 +49,39 @@
             <geom name="table_collision" type="box" size="0.45 0.64 0.28" contype="1" conaffinity="1" rgba="0 0 0 0"/>
         </body>
 
-
-        <!-- Apple -->
-        <body name="apple" pos="0.75 0.2 0.64" >
+        <!-- Apples -->
+        <body name="apple1" pos="0.5 -0.1 0.64" >
             <geom class="ycb_viz" material="apple_mat" mesh="apple"/>
             <geom class="ycb_col" mesh="apple_collision" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.068" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>
         </body>
 
-        <!-- Orange -->
-        <body name="orange" pos="0.8 -0.2 0.64">
+       <body name="apple2" pos="0.47 0 0.64" >
+            <geom class="ycb_viz" material="apple_mat" mesh="apple"/>
+            <geom class="ycb_col" mesh="apple_collision" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.068" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>
+        </body>
+
+        <!-- Oranges -->
+        <body name="orange1" pos="0.52 0.1 0.64">
             <geom class="ycb_viz" material="orange_mat" mesh="orange"/>
             <geom class="ycb_col" mesh="orange_collision_0" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.047" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>
         </body>
+
+        <body name="orange2" pos="0.61 0.05 0.64">
+            <geom class="ycb_viz" material="orange_mat" mesh="orange"/>
+            <geom class="ycb_col" mesh="orange_collision_0" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.047" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>
+        </body>
+
+        <!-- Plate -->
+        <body pos="0.58 0.27 0.64" euler="0 0 0">
+			<freejoint name="plate"/>
+			<include file="objects/plate_body.xml" />
+		</body>
+
+        <!-- Bowl -->
+        <body pos="0.62 -0.2 0.64" euler="0 0 1.57">
+			<freejoint name="bowl"/>
+			<include file="objects/bowl_body.xml" />
+		</body>
     </worldbody>
 
 </mujoco>

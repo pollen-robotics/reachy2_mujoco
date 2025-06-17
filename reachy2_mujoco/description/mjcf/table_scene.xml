@@ -32,7 +32,7 @@
 		</body>
 		<body pos="0.75 0 0" euler="0 0 1.57">
 			<freejoint name="table"/>
-			<include file="assets/simpleWoodTable_body.xml" />
+			<include file="objects/simpleWoodTable_body.xml" />
 		</body>
 		<body name="goal" pos="0.45 -0.4 0.8">
 			<freejoint name="box"/>

@@ -29,7 +29,7 @@
   <default>
     <!-- This looks good -->
     <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
-    <position kp="500" kv="10" />
+    <position kp="500" kv="50" />
 
     <default class="gripper">
       <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-20 20" armature="1.0"/>
