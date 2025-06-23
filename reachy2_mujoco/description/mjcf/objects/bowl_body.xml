@@ -1,6 +1,6 @@
 <mujocoinclude>
     <body name="bowl" pos="0 0 0">
-        <geom name="bowl_geom" type="mesh" mesh="bowl" material="bowl_mat" />
+        <geom class="ycb_viz" name="bowl_geom" type="mesh" mesh="bowl" material="bowl_mat" />
         <geom class="ycb_col" mesh="bowl_collision_0" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.0010354428905953725" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>
         <geom class="ycb_col" mesh="bowl_collision_1" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.0017477411157947452" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>
         <geom class="ycb_col" mesh="bowl_collision_2" conaffinity="1" condim="4" friction="0.1 0.1 0.1" mass="0.002170790326150948" rgba="1 1 1 1" solimp="0.99 0.99 0.01" solref=".001 0.1" type="mesh" group="3"/>

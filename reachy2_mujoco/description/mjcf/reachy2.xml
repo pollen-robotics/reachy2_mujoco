@@ -25,15 +25,16 @@
       texture="texplane" />
 
   </asset>
+
 <!-- <option cone="elliptic" impratio="10"/> -->
   <default>
     <!-- This looks good -->
-    <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
-    <position kp="500" kv="50" />
+    <joint damping="10"  frictionloss="0.1" actuatorfrcrange="-10000 10000" armature="0.1"/> 
+    <position kp="6000" kv="250" />
 
     <default class="gripper">
-      <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-20 20" armature="1.0"/>
-      <position kp="200" kv="0" />
+      <joint damping="0.5" frictionloss="0.5" actuatorfrcrange="-300 300" armature="0.1"/>
+      <position kp="5000" kv="50" />
     </default>
 
     <default class="tripod">
@@ -72,12 +73,12 @@
     </default>
 
     <default class="gripper_collider_box">
+      <geom group="3" type="box" friction="5.0 0.5 0.01" condim="6" contype="1" conaffinity="1" solimp="0.95 0.99 0.001" solref="0.002 1" margin="0.002"/>
       <!-- <geom group="3" type="box" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1" -->
       <!--   conaffinity="1" /> -->
       <!-- <geom group="3" type="box" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1" -->
       <!--   solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/> -->
-      <geom group="3" type="box" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1"
-        solimp="0.95 0.95 0.01" solref="0.02 1" margin="0"/>
+      
 
     </default>
 
@@ -117,7 +118,7 @@
 
       <inertial pos="0.008 -0.00048 0.112" quat="-0.0363977 0.704069 0.0372966 0.708217" mass="24"
         diaginertia="0.709918 0.423857 0.407726" />
-      <geom type="mesh" mesh="mobile_base_visual" class="visual" />
+      <geom type="mesh" mesh="mobile_base_visual" class="visual" friction="5 0.1 0.01"/>
       <geom size="0.245 0.095" pos="0 0 0.145" type="cylinder" class="collider" />
       <body name="drivewhl1_link" pos="0.099 -0.171473 0.105" quat="0.965926 0 0 0.258819">
         <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5"
@@ -810,7 +811,7 @@
 
                                                         <body name="r_dist_col_mimic"
                                                               pos="0 0 0.015" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0.5 0 1" class="gripper_collider_box" />
                                                         </body>
                                                         <body name="r_dist_col2_mimic"
                                                               pos="0 0 0.035" quat="1 0 0 0" >
@@ -1000,11 +1001,11 @@
 
                                                         <body name="l_prox_col"
                                                               pos="0 0.003 0.0175" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="0.5 1 0 1" class="gripper_collider_box" />
                                                         </body>
                                                         <body name="l_prox_col2"
                                                               pos="0 0.003 0.0375" quat="1 0 0 0" >
-                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0 0 1" class="gripper_collider_box" />
+                                                          <geom type="box" size="0.015 0.01 0.01" rgba="1.0 0.5 0 1" class="gripper_collider_box" />
                                                         </body>
 
 

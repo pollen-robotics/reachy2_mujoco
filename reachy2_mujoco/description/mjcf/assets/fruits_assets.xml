@@ -2,8 +2,8 @@
     <asset>
         <texture type="2d" name="apple_tex" file="apple_texture.png"/>
         <material name="apple_mat" texture="apple_tex" specular="0.5" shininess="0.5"/>
-        <mesh name="apple" file="apple/apple.obj"/>
-        <mesh name="apple_collision" file="apple/apple_collision.obj"/>
+        <mesh file="apple/apple.obj" name="apple"/>
+        <mesh file="apple/apple_collision.obj" name="apple_collision" />
 
         <texture type="2d" name="orange_texture" file="orange_texture.png"/>
         <material name="orange_mat" texture="orange_texture" specular="0.5" shininess="0.5"/>
