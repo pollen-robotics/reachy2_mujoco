@@ -1,14 +1,14 @@
 <mujocoinclude>
     <asset>
-        <texture type="2d" name="apple_tex" file="apple_texture.png"/>
+        <texture type="2d" name="apple_tex" file="textures/apple_texture.png"/>
         <material name="apple_mat" texture="apple_tex" specular="0.5" shininess="0.5"/>
-        <mesh file="apple/apple.obj" name="apple"/>
-        <mesh file="apple/apple_collision.obj" name="apple_collision" />
+        <mesh file="meshes/apple/apple.obj" name="apple"/>
+        <mesh file="meshes/apple/apple_collision.obj" name="apple_collision" />
 
-        <texture type="2d" name="orange_texture" file="orange_texture.png"/>
+        <texture type="2d" name="orange_texture" file="textures/orange_texture.png"/>
         <material name="orange_mat" texture="orange_texture" specular="0.5" shininess="0.5"/>
-        <mesh file="orange/textured.obj" name="orange"/>
-        <mesh file="orange/textured_collision_0.obj" name="orange_collision_0"/>
+        <mesh file="meshes/orange/textured.obj" name="orange"/>
+        <mesh file="meshes/orange/textured_collision_0.obj" name="orange_collision_0"/>
         
     </asset>
 </mujocoinclude>

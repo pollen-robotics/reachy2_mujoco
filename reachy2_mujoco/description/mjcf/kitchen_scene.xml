@@ -1,0 +1,28 @@
+<mujoco model="reachy2_kitchen_scene">
+    <compiler angle="radian"/>
+
+    <include file="assets/reachy2_asset.xml"/>
+    <include file="assets/kitchen2_asset.xml"/>
+
+    <option gravity="0 0 -9.81" timestep="0.001" iterations="50" integrator="implicitfast">
+        <flag multiccd="enable" contact="enable"/>
+    </option>
+
+    <visual>
+        <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+        <rgba haze="0.15 0.25 0.35 1"/>
+        <global azimuth="160" elevation="-20" offwidth="1280" offheight="720"/>
+    </visual>
+
+    <worldbody>
+        <light pos="0 0 3" dir="0 0 -1" directional="false"/>
+
+        <include file="objects/kitchen2_body.xml"/>
+
+        <body name="reachy" pos="1 -1 0" euler="0 0 1.57">
+            <freejoint name="mobile_base" />
+            <include file="objects/reachy2_body.xml"/>
+        </body>
+
+    </worldbody>
+</mujoco>

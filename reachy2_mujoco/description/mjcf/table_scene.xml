@@ -1,6 +1,7 @@
-<mujoco model="reachy2 scene">
+<mujoco model="reachy2 table_scene">
+	<compiler angle="radian"/>
 	<!-- <statistic center="0 0 0.55" extent="1.1" /> -->
-	<include file="reachy2.xml" />
+	<include file="assets/reachy2_asset.xml" />
 	<include file="assets/simpleTable_asset.xml"/>
 	
 	<default>
@@ -30,10 +31,16 @@
 			<!-- <geom pos="0 0 0" name="floor" size="0 0 .125" type="plane" material="groundplane" conaffinity="1" contype="1" condim="3" /> -->
                         <geom contype="1" conaffinity="2" friction=".1 0.005 0.0001" name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="groundplane" condim="3" solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/>
 		</body>
-		<body pos="0.75 0 0" euler="0 0 1.57">
-			<freejoint name="table"/>
+		
+		<body name="reachy" pos="0 0 0" euler="0 0 0">
+            <freejoint name="mobile_base" />
+            <include file="objects/reachy2_body.xml"/>
+        </body>
+
+		<body pos="0.75 0 0" name="table" euler="0 0 1.57">
 			<include file="objects/simpleWoodTable_body.xml" />
 		</body>
+
 		<body name="goal" pos="0.45 -0.4 0.8">
 			<freejoint name="box"/>
 			<geom type="box" size="0.025 0.025 0.025" rgba="1.0 0 0 1" conaffinity="1" contype="1" mass="0.05" friction="1.0 0.5 0.01" priority="1"/>
