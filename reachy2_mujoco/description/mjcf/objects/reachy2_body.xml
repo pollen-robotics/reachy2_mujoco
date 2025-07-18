@@ -1,12 +1,12 @@
 <mujocoinclude>
-    <body name="base_link">
+    <body name="reachy_body">
         <inertial pos="0.008 -0.00048 0.112" quat="-0.0363977 0.704069 0.0372966 0.708217" mass="24"
             diaginertia="0.709918 0.423857 0.407726" />
         <geom type="mesh" mesh="mobile_base_visual" class="visual" friction="5 0.1 0.01"/>
         <geom size="0.245 0.095" pos="0 0 0.145" type="cylinder" class="collider" />
         <body name="drivewhl1_link" pos="0.099 -0.171473 0.105" quat="0.965926 0 0 0.258819">
             <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.5"
-            diaginertia="0.00275625 0.00142917 0.00142917" />
+            diaginertia="0.00275625 0.00142917 0.00142917"/>
             <joint name="right_wheel" pos="0 0 0" axis="0 1 0" class="wheel" />
 
             <!-- <geom size="0.105 0.0175" quat="0.707107 0.707107 0 0" type="cylinder"

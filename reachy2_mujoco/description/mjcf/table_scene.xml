@@ -37,7 +37,7 @@
             <include file="objects/reachy2_body.xml"/>
         </body>
 
-		<body pos="0.75 0 0" name="table" euler="0 0 1.57">
+		<body pos="0.95 0 0" name="table" euler="0 0 1.57">
 			<include file="objects/simpleWoodTable_body.xml" />
 		</body>
 

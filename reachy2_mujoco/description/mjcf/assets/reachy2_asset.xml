@@ -1,5 +1,5 @@
 <mujocoinclude>
-    <compiler meshdir="assets/meshes" texturedir="assets/textures" />
+    <!-- <compiler meshdir="assets/meshes" texturedir="assets/textures" /> -->
     <asset>
         <mesh name="mobile_base_visual" file="meshes/reachy2/mobile_base_visual.obj" />
         <mesh name="torso_visual" file="meshes/reachy2/torso_visual.obj" />
@@ -25,13 +25,13 @@
 
     <!-- <option cone="elliptic" impratio="10"/> -->
     <default>
-        <!-- This looks good -->
-        <joint damping="10"  frictionloss="0.1" actuatorfrcrange="-10000 10000" armature="0.1"/> 
+        <!-- Modifications avant mujoco ok-->
+        <!-- <joint damping="10"  frictionloss="0.1" actuatorfrcrange="-10000 10000" armature="0.1"/> 
         <position kp="6000" kv="250" />
 
         <default class="gripper">
-        <joint damping="0.5" frictionloss="0.5" actuatorfrcrange="-300 300" armature="0.1"/>
-        <position kp="5000" kv="50" />
+        <joint damping="0.5" frictionloss="1.0" actuatorfrcrange="-100 100" armature="0.1"/>
+        <position kp="1000" kv="10" />
         </default>
 
         <default class="tripod">
@@ -41,9 +41,6 @@
 
         <default class="wheel">
         <joint  armature="0.1" />
-        <!-- <joint damping="1" frictionloss="1" actuatorfrcrange="-50 50" armature="1.0"/> -->
-        <!-- <position kp="5" kv="1" /> -->
-        <!-- <velocity kv="0.1" /> -->
         </default>
 
 
@@ -56,41 +53,67 @@
         </default>
 
         <default class="gripper_collider">
-        <!-- <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1" -->
-        <!--   conaffinity="1" /> -->
-        <!-- <geom group="3" type="mesh" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1" -->
-        <!--   solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/> -->
         <geom group="3" type="mesh" condim="6" friction="1.0 0.5 0.01" solref=".01 1" contype="1"
             conaffinity="1" />
-
-
-        <!-- <geom group="3" type="mesh"  friction="1" -->
-        <!--       solimp="0.95 0.99 0.001" solref="0.004 1" priority="1" /> -->
 
         </default>
 
         <default class="gripper_collider_box">
         <geom group="3" type="box" friction="5.0 0.5 0.01" condim="6" contype="1" conaffinity="1" solimp="0.95 0.99 0.001" solref="0.002 1" margin="0.002"/>
-        <!-- <geom group="3" type="box" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1" -->
-        <!--   conaffinity="1" /> -->
-        <!-- <geom group="3" type="box" friction="1.0 0.5 0.01" condim="6" contype="1" conaffinity="1" -->
-        <!--   solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/> -->
         
 
         </default>
 
-        <!-- <default class="bar_collider"> -->
-        <!--   <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="0"
-        conaffinity="0"/> -->
-        <!-- </default> -->
+        <default class="wheel_collision">
+        <geom friction="0.3 0.005 0.0001" condim="3" contype="2" conaffinity="0"
+            solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0" />
+        </default> -->
+
+        <!-- This looks good -->
+        <joint damping="10" frictionloss="2.0" actuatorfrcrange="-2000 2000" armature="1.0"/>
+        <position kp="500" kv="10" />
+        
+        <default class="gripper">
+        <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-20 20" armature="1.0"/>
+        <position kp="200" kv="0" />
+        </default>
+
+        <default class="tripod">
+        <joint damping="1000" frictionloss="50.0" actuatorfrcrange="-2000000 2000000" />
+        <position kp="50000" kv="1" />
+        </default>
+
+        <default class="wheel">
+        <joint  armature="0.1" />
+        </default>
+
+
+        <default class="visual">
+        <geom type="mesh" mass="0" group="2" contype="0" conaffinity="0" />
+        </default>
+        <default class="collider">
+        <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1"
+            conaffinity="1" />
+        </default>
+
+        <default class="gripper_collider">
+
+        <geom group="3" type="mesh" condim="6" friction="1.0 0.5 0.01" solref=".01 1" contype="1"
+            conaffinity="1" />
+        </default>
+
+        <default class="gripper_collider_box">
+        <geom group="3" type="box" friction="4.0 1.0 0.01" condim="6" contype="1" conaffinity="1"
+            solimp="0.95 0.99 0.01" solref="0.002 1" margin="0.001"/>
+
+        </default>
 
         <default class="wheel_collision">
-        <!-- <geom condim="6" group="3" friction="1 0 0"/> -->
-        <!-- <geom conaffinity="0" condim="3" group="3" friction="1 0.5 0.5"/> -->
-        <!-- <geom condim="3" friction="1 0.0 0.0" group="3"/> -->
+
         <geom friction="0.3 0.005 0.0001" condim="3" contype="2" conaffinity="0"
             solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0" />
         </default>
+
 
 
     </default>
