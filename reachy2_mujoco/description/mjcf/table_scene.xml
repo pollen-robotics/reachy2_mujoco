@@ -1,4 +1,7 @@
 <mujoco model="reachy2 scene">
+	<custom>
+		<text name="tracked_bodies" data="cube,simpleWoodTable" />
+	</custom>
 	<!-- <statistic center="0 0 0.55" extent="1.1" /> -->
 	<include file="reachy2.xml" />
 	<include file="assets/simpleTable_asset.xml" />
