@@ -1,6 +1,6 @@
 # Reachy2 fake mujoco sdk server
 
-You can interact with Reachy2 in mujoco through Reachy2's (fake) sdk! 
+You can interact with Reachy2 in mujoco through Reachy2's (fake) sdk!
 
 ![Capture d’écran du 2025-02-20 10-12-34](https://github.com/user-attachments/assets/d363d60a-0881-483e-8240-3dab9250eee8)
 
@@ -20,15 +20,23 @@ Features :
 > Using a virtual environment is advised
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install -e .
 ```
 
 ## Usage
 
-Run the server :
+Run the server (from the virtual environment):
 
 ```bash
 $ reachy2-mujoco
+```
+
+Or you can also use [`uv`](https://docs.astral.sh/uv/getting-started/installation/):
+
+```bash
+uv run reachy2-mujoco
 ```
 
 Then you can use the ReachySDK as usual, just import it from `reachy2_mujoco` :
@@ -38,9 +46,9 @@ from reachy2_mujoco import ReachySDK
 
 reachy = ReachySDK("localhost")
 
-reachy.mobile_base.goto(-1.0, 1.0, -np.pi / 2)
+reachy.mobile_base.goto(-1.0, 1.0, -90.0)
 
-reachy.r_arm.shoulder_pitch.goal_position = np.pi/2
+reachy.r_arm.shoulder.pitch.goal_position = 90.0
 # target_pose = <...> # 4x4 pose matrix
 # reachy.r_arm.goto(target_pose)
 
@@ -49,7 +57,13 @@ reachy.send_goal_positions()
 
 ## Demos
 
+
+
 https://github.com/user-attachments/assets/71dba964-e955-49fd-96fd-f75069f70bb4
+
+```bash
+uv run examples/grasp_test.py
+```
 
 https://github.com/user-attachments/assets/5f57de88-49db-4243-ae3a-73185efffbfc
 

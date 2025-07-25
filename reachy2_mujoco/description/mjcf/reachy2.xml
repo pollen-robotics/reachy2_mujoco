@@ -1331,6 +1331,10 @@
     <position name="neck_roll" joint="neck_roll" gear="1" inheritrange="1" />
     <position name="neck_pitch" joint="neck_pitch" gear="1" inheritrange="1" />
     <position name="neck_yaw" joint="neck_yaw" gear="1" inheritrange="1" />
+
+    <position name="antenna_left" joint="antenna_left" gear="1" inheritrange="1" />
+    <position name="antenna_right" joint="antenna_right" gear="1" inheritrange="1" />
+
     <position
       name="l_shoulder_pitch"
       joint="l_shoulder_pitch"

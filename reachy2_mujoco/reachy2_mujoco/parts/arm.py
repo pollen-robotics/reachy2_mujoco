@@ -1,7 +1,7 @@
-from reachy2_mujoco.parts.joints import Shoulder, Elbow, Wrist, Gripper
+from ..parts.joints import Shoulder, Elbow, Wrist, Gripper
 from reachy2_symbolic_ik.control_ik import ControlIK
 import numpy as np
-from reachy2_mujoco.utils import minimum_jerk
+from ..utils import minimum_jerk
 import time
 from threading import Thread
 

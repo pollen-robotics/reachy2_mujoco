@@ -24,9 +24,10 @@ class Camera:
 
         self._last_update = time.time()
 
+        #FIXME: not very elegant...
         self._left_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, "left_" + self._cam_name)
         self._right_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, "right_" + self._cam_name)
-        self._depth_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, self._cam_name +"_cam")
+        self._depth_camera_id = mujoco.mj_name2id(self._model, mujoco.mjtObj.mjOBJ_CAMERA, "depth_"+self._cam_name +"_rgb")
 
         self._left_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
         self._right_im = np.zeros((self._height, self._width, 3), dtype=np.uint8)
@@ -72,7 +73,7 @@ class Cameras:
         self._offscreen = mujoco.Renderer(self._model, height=self._height, width=self._width)
         # self._offscreen.enable_depth_rendering()
 
-        self.teleop = Camera(self._model, self._data, "teleop_cam", self._width, self._height, self._offscreen)
+        self.teleop = Camera(self._model, self._data, "camera", self._width, self._height, self._offscreen)
         self.depth = Camera(self._model, self._data, "depth", self._width, self._height, self._offscreen)
 
     def _update(self):

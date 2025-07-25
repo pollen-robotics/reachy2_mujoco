@@ -1,5 +1,5 @@
 import rpyc
-from reachy2_mujoco import ReachyMujoco
+from . import ReachyMujoco
 
 
 class ReachySDK(ReachyMujoco):
