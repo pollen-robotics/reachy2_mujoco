@@ -74,7 +74,7 @@
         <position kp="500" kv="10" />
         
         <default class="gripper">
-        <joint damping="0.1" frictionloss="0.5" actuatorfrcrange="-20 20" armature="1.0"/>
+        <joint damping="0.1" frictionloss="1.0" actuatorfrcrange="-20 20" armature="1.0"/>
         <position kp="200" kv="0" />
         </default>
 
@@ -89,7 +89,7 @@
 
 
         <default class="visual">
-        <geom type="mesh" mass="0" group="2" contype="0" conaffinity="0" />
+        <geom type="mesh" mass="0" group="2" contype="0" conaffinity="0"/>
         </default>
         <default class="collider">
         <geom group="3" type="mesh" condim="6" friction="1 5e-3 5e-4" solref=".01 1" contype="1"
@@ -97,7 +97,6 @@
         </default>
 
         <default class="gripper_collider">
-
         <geom group="3" type="mesh" condim="6" friction="1.0 0.5 0.01" solref=".01 1" contype="1"
             conaffinity="1" />
         </default>
@@ -246,6 +245,10 @@
         <position name="neck_roll" joint="neck_roll" gear="1" inheritrange="1" />
         <position name="neck_pitch" joint="neck_pitch" gear="1" inheritrange="1" />
         <position name="neck_yaw" joint="neck_yaw" gear="1" inheritrange="1" />
+
+        <position name="antenna_left" joint="antenna_left" gear="1" inheritrange="1" />
+        <position name="antenna_right" joint="antenna_right" gear="1" inheritrange="1" />
+
         <position
         name="l_shoulder_pitch"
         joint="l_shoulder_pitch"
@@ -346,65 +349,65 @@
         />
 
         <!-- <velocity -->
-        <!--     name="left_wheel" -->
-        <!--     joint="left_wheel" -->
+        <!--     name="drivewhl2_joint" -->
+        <!--     joint="drivewhl2_joint" -->
         <!--     ctrlrange="-5 5" kv="100" -->
         <!-- /> -->
         <!-- <velocity -->
-        <!--     name="right_wheel" -->
-        <!--     joint="right_wheel" -->
+        <!--     name="drivewhl1_joint" -->
+        <!--     joint="drivewhl1_joint" -->
         <!--     ctrlrange="-5 5" kv="100" -->
         <!-- /> -->
         <!-- <velocity -->
-        <!--     name="back_wheel" -->
-        <!--     joint="back_wheel" -->
+        <!--     name="drivewhl3_joint" -->
+        <!--     joint="drivewhl3_joint" -->
         <!--     ctrlrange="-5 5" kv="100" -->
         <!-- /> -->
 
 
         <!-- <velocity -->
-        <!--     name="left_wheel" -->
-        <!--     joint="left_wheel" -->
+        <!--     name="drivewhl2_joint" -->
+        <!--     joint="drivewhl2_joint" -->
         <!--     ctrlrange="-5 5" kv="1000" -->
         <!-- /> -->
         <!-- <velocity -->
-        <!--     name="right_wheel" -->
-        <!--     joint="right_wheel" -->
+        <!--     name="drivewhl1_joint" -->
+        <!--     joint="drivewhl1_joint" -->
         <!--     ctrlrange="-5 5" kv="1000" -->
         <!-- /> -->
         <!-- <velocity -->
-        <!--     name="back_wheel" -->
-        <!--     joint="back_wheel" -->
+        <!--     name="drivewhl3_joint" -->
+        <!--     joint="drivewhl3_joint" -->
         <!--     ctrlrange="-5 5" kv="1000" -->
         <!-- /> -->
 
         <motor
-        name="left_wheel"
-        joint="left_wheel"
+        name="drivewhl2_joint"
+        joint="drivewhl2_joint"
         ctrlrange="-50 50" ctrllimited="true"
         />
         <motor
-        name="right_wheel"
-        joint="right_wheel"
+        name="drivewhl1_joint"
+        joint="drivewhl1_joint"
         ctrlrange="-50 50" ctrllimited="true"
         />
         <motor
-        name="back_wheel"
-        joint="back_wheel"
+        name="drivewhl3_joint"
+        joint="drivewhl3_joint"
         ctrlrange="-50 50" ctrllimited="true"
         />
 
         <!-- <velocity -->
-        <!--     name="left_wheel" -->
-        <!--     joint="left_wheel" -->
+        <!--     name="drivewhl2_joint" -->
+        <!--     joint="drivewhl2_joint" -->
         <!-- /> -->
         <!-- <velocity -->
-        <!--     name="right_wheel" -->
-        <!--     joint="right_wheel" -->
+        <!--     name="drivewhl1_joint" -->
+        <!--     joint="drivewhl1_joint" -->
         <!-- /> -->
         <!-- <velocity -->
-        <!--     name="back_wheel" -->
-        <!--     joint="back_wheel" -->
+        <!--     name="drivewhl3_joint" -->
+        <!--     joint="drivewhl3_joint" -->
         <!-- /> -->
 
 

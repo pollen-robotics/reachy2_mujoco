@@ -9,6 +9,12 @@
     <include file="assets/plate_asset.xml"/>
     <include file="assets/cup_asset.xml"/>
 
+    <asset>
+		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+		<texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+		<material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+	</asset>
+
     <default>
         <default class="ycb_col">
             <geom contype="1" rgba = "1 1 1 1" conaffinity="1" condim ="6" solimp="0.95 0.99 0.001" solref=".002 1" margin = "0.002" friction="0.5 0.1 0.01" group = "3"/>
@@ -32,6 +38,10 @@
         <light pos="0 0 3" dir="0 0 -1" directional="false"/>
 
         <include file="objects/kitchen2_body.xml"/>
+
+		<body name="floor">
+            <geom contype="1" conaffinity="2" friction=".1 0.005 0.0001" name="floor" pos="2.75 -2.3 0" size="3 2.5 .25" type="plane" material="floor_room_wall_mat" condim="3" solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/>
+		</body>
 
         <body name="reachy" pos="0.85 -1.1 0" euler="0 0 1.57">
             <freejoint name="mobile_base" />

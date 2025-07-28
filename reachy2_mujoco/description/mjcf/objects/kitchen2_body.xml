@@ -18,7 +18,7 @@
         <geom name="wall_backing_room_g0_vis" size="2.99 1.62 0.1" type="box" contype="0" conaffinity="0" group="1" mass="0" material="wall_backing_room_wall_mat"/>
         <site name="wall_backing_room_default_site" pos="0 0 0" size="0.002" rgba="1 0 0 1" group="3"/>
         </body>
-        <body name="wall_left_room_main" pos="-0.02 -1.5 1.5" quat="0.5 0.5 -0.5 -0.5">
+        <!-- <body name="wall_left_room_main" pos="-0.02 -1.5 1.5" quat="0.5 0.5 -0.5 -0.5">
         <geom name="wall_left_room_g0" size="1.54 1.5 0.02" type="box" rgba="0.5 0 0 1" group="3"/>
         <geom name="wall_left_room_g0_vis" size="1.54 1.5 0.02" type="box" contype="0" conaffinity="0" group="1" mass="0" material="wall_left_room_wall_mat"/>
         <site name="wall_left_room_default_site" pos="0 0 0" size="0.002" rgba="1 0 0 1" group="3"/>
@@ -27,7 +27,7 @@
         <geom name="wall_left_backing_room_g0" size="1.54 1.62 0.1" type="box" rgba="0.5 0 0 1" group="3"/>
         <geom name="wall_left_backing_room_g0_vis" size="1.54 1.62 0.1" type="box" contype="0" conaffinity="0" group="1" mass="0" material="wall_left_backing_room_wall_mat"/>
         <site name="wall_left_backing_room_default_site" pos="0 0 0" size="0.002" rgba="1 0 0 1" group="3"/>
-        </body>
+        </body> -->
         <body name="wall_right_room_main" pos="5.52 -1.5 1.5" quat="0.5 -0.5 -0.5 0.5">
         <geom name="wall_right_room_g0" size="1.54 1.5 0.02" type="box" rgba="0.5 0 0 1" group="3"/>
         <geom name="wall_right_room_g0_vis" size="1.54 1.5 0.02" type="box" contype="0" conaffinity="0" group="1" mass="0" material="wall_right_room_wall_mat"/>
@@ -38,7 +38,7 @@
         <geom name="wall_right_backing_room_g0_vis" size="1.54 1.62 0.1" type="box" contype="0" conaffinity="0" group="1" mass="0" material="wall_right_backing_room_wall_mat"/>
         <site name="wall_right_backing_room_default_site" pos="0 0 0" size="0.002" rgba="1 0 0 1" group="3"/>
         </body>
-        <body name="floor_room_main" pos="2.75 -1.5 -0.02" quat="0.707107 0 0 0.707107">
+        <!-- <body name="floor_room_main" pos="2.75 -1.5 0.025" quat="0.707107 0 0 0.707107">
         <geom name="floor_room_g0" size="1.54 2.79 0.02" type="box" rgba="0.5 0 0 1" group="3"/>
         <geom name="floor_room_g0_vis" size="1.54 2.79 0.02" type="box" contype="0" conaffinity="0" group="1" mass="0" material="floor_room_wall_mat"/>
         <site name="floor_room_default_site" pos="0 0 0" size="0.002" rgba="1 0 0 1" group="3"/>
@@ -47,7 +47,7 @@
         <geom name="floor_backing_room_g0" size="1.54 2.79 0.1" type="box" rgba="0.5 0 0 1" group="3"/>
         <geom name="floor_backing_room_g0_vis" size="1.54 2.79 0.1" type="box" contype="0" conaffinity="0" group="1" mass="0" material="floor_backing_room_wall_mat"/>
         <site name="floor_backing_room_default_site" pos="0 0 0" size="0.002" rgba="1 0 0 1" group="3"/>
-        </body>
+        </body> -->
         <body name="outlet_room_main" pos="4.1 0 1.2">
         <geom name="outlet_room_g0" type="mesh" contype="0" conaffinity="0" group="1" friction="0.95 0.3 0.1" solref="0.001" solimp="0.998 0.998" density="100" material="outlet_room_outlet" mesh="outlet_room_outlet_0_vis"/>
         <site name="outlet_room_default_site" pos="0 0 0" size="0.0003" rgba="1 0 0 0"/>
