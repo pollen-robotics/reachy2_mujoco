@@ -1,0 +1,80 @@
+<mujoco model="reachy2 scene">
+	<compiler angle="radian"/>
+    
+	<option impratio="5">
+		<flag multiccd="enable"/>
+	</option>
+
+	<include file="assets/reachy2_asset.xml" />
+	
+	<default>
+		<geom friction="0.1 0.005 0.0001"/>
+	</default>
+
+	<visual>
+		<headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+		<rgba haze="0.15 0.25 0.35 1" />
+		<global azimuth="150" elevation="-20" />
+	</visual>
+
+	<asset>
+		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+			height="3072" />
+		<texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+			rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+		<material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+			reflectance="0.2" />
+	</asset>
+
+	<worldbody>
+		<light pos="0 0 3" dir="0 0 -1" directional="false" />
+		<body name="floor">
+			<geom contype="1" conaffinity="2" friction=".1 0.005 0.0001" name="floor" pos="0 0 0"
+				size="0 0 .25" type="plane" material="groundplane" condim="3"
+				solimp="0 0.95 0.001 0.5 2" solref="0.02 1" margin="0"/>
+		</body>
+
+		<body name="reachy" pos="0 0 0" euler="0 0 0">
+            <freejoint name="mobile_base" />
+            <include file="objects/reachy2_body.xml"/>
+        </body>
+		
+		<body>
+			<geom name="table_top" type="box" pos="0.55 0 0.5" size="0.15 0.6 0.05"
+				rgba="0.6 0.4 0.2 1"
+				friction="3.0 0.01 0.002"
+				condim="4"
+				solref="0.005 1"
+				solimp="0.98 0.98 0.001"
+				contype="1" conaffinity="1" />
+		</body>
+		<!-- Table -->
+		<!-- <body name="table" pos="0.55 0 0.5">
+			<geom name="table_top" type="box" size="0.4 0.6 0.05"
+				rgba="0.6 0.4 0.2 1"
+				friction="3.0 0.01 0.002"
+				condim="4"
+				solref="0.005 1"
+				solimp="0.98 0.98 0.001"
+				contype="1" conaffinity="1" />
+		</body> -->
+				<!-- friction="3.0 0.01 0.002" -->
+		<body name="bottle" pos="0.43 0.1 0.8">
+			<!-- <joint name="bottle_free" type="free" /> -->
+		    <freejoint name="bottle_free"/>
+
+			<geom name="bottle_main" type="cylinder" size="0.03 0.07"
+				rgba="0.2 0.6 0.9 1"
+				mass="0.8"
+                friction="1.0 0.5 0.01"
+				condim="6"
+				solref="0.005 1"
+				solimp="0.97 0.97 0.001"
+				margin="0.002"
+				contype="1" conaffinity="1"/>
+		</body>
+
+	</worldbody>
+
+
+</mujoco>

@@ -20,7 +20,7 @@ os.environ['MUJOCO_GL'] = 'egl'
 
 class ReachyMujoco:
     def __init__(self):
-        self._scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/table_scene.xml"
+        self._scene_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/mjcf/desk_scene.xml"
         self._urdf_path = "/".join(os.path.realpath(__file__).split("/")[:-2]) + "/description/modified_urdf/reachy2.urdf"
 
         self._model = mujoco.MjModel.from_xml_path(self._scene_path)
