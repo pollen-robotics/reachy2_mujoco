@@ -79,8 +79,8 @@
         </default>
 
         <default class="tripod">
-        <joint damping="1000" frictionloss="50.0" actuatorfrcrange="-2000000 2000000" />
-        <position kp="50000" kv="1" />
+        <joint damping="1000" frictionloss="50.0" actuatorfrcrange="-20000 20000" armature="5.0"/>
+        <position kp="50000" kv="5000" />
         </default>
 
         <default class="wheel">
